@@ -3,6 +3,6 @@
     "SHORT" : "For MureGaming unturned server",
     "DESCRIPTION" : "For MureGaming unturned server",
     "DISABLED" : false,
-    "NAME" : "Mure",
-    "INSTALL_MSG" : "`[p]` for more info. `[p]help trigger set` for an explanation of the settings.\nTriggers can be annoying. Be responsible and don't abuse them."
+    "NAME" : "MureUT",
+    "INSTALL_MSG" : "For MureGaming unturned server!"
 }

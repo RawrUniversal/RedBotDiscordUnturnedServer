@@ -9,7 +9,7 @@ class unturned:
         self.bot = bot
 
     @commands.command()
-    async def unturned(self):
+    async def mure(self):
         """This does stuff!"""
 
         #Your code will go here
@@ -23,5 +23,5 @@ class unturned:
     	await self.bot.say("{score} {name}".format(**player))
 
 def setup(bot):
-    bot.add_cog(unturned(bot))
+    bot.add_cog(mure(bot))
 
