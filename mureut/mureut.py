@@ -24,4 +24,4 @@ class MureUT:
 
 
 def setup(bot):
-    bot.add_cog(mure(bot))
+    bot.add_cog(MureUT(bot))
