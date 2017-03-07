@@ -1,5 +1,6 @@
 import discord
 import valve.source.a2s
+import valve.source.master_server
 from discord.ext import commands
 SERVER_ADDRESS = ("167.114.156.67", "27037")
 
