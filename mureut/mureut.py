@@ -19,8 +19,8 @@ class MureUT:
         players = server.players()
         await self.bot.say("{player_count}/{max_players} "
                            "{server_name}".format(**info))
-        for player in sorted(players["players"] key=lambda p["score"]):
-                await self.bot.say("{score} {name}".format(**player))
+        for player in sorted(players["players"] key=lambda p: p["score"]):
+            await self.bot.say("{score} {name}".format(**player))
 
 
 def setup(bot):
