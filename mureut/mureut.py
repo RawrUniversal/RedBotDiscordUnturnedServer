@@ -1,9 +1,6 @@
 import discord
-import valve.source.a2s
-import valve.source.master_server
+import urllib.request, json
 from discord.ext import commands
-SERVER_ADDRESS = ("167.114.156.67", "27037")
-
 
 class MureUT:
 
@@ -13,16 +10,15 @@ class MureUT:
         self.bot = bot
 
     @commands.command()
-    async def mure(self):
+    async def steamstatus(self):
         """This does stuff!"""
-        server = valve.source.a2s.ServerQuerier(SERVER_ADDRESS)
-        info = server.info()
-        players = server.players()
-        await self.bot.say("{player_count}/{max_players} "
-                           "{server_name}".format(**info))
-        for player in sorted(players["players"],
-                             key=lambda p: p["score"], reverse=True):
-            await self.bot.say("{score} {name}".format(**player))
+        with urllib.request.urlopen("https://crowbar.steamstat.us/Barney") as url:
+            data = json.loads(url.read().decode())
+            if data['success'] == true
+                await self.bot.say("Total Steam Players online: " + data['services']['online']['title'])
+                await self.bot.say("Steam Store Status: " + data['services']['store']['title'])
+                await self.bot.say("Steam Community Status: " + data['services']['community']['title'])
+                await self.bot.say("Steam Database Status: " + data['services']['database']['title'])
 
 
 def setup(bot):
