@@ -14,7 +14,7 @@ class MureUT:
         """This does stuff!"""
         with urllib.request.urlopen("https://crowbar.steamstat.us/Barney") as url:
             data = json.loads(url.read().decode())
-            if data['success'] == "true"
+            if data['success'] == "true":
                 await self.bot.say("Total Steam Players online: " + data['services']['online']['title'])
                 await self.bot.say("Steam Store Status: " + data['services']['store']['title'])
                 await self.bot.say("Steam Community Status: " + data['services']['community']['title'])
