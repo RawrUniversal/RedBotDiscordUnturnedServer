@@ -14,12 +14,11 @@ class MureUT:
         """This does stuff!"""
         with urllib.request.urlopen("https://crowbar.steamstat.us/Barney") as url:
             data = simplejson.load(url)
-            await self.bot.say(data['success'])
             if data['success']:
-                await self.bot.say("Total Steam Players online: " + data['services']['online']['title'])
-                await self.bot.say("Steam Store Status: " + data['services']['store']['title'])
-                await self.bot.say("Steam Community Status: " + data['services']['community']['title'])
-                await self.bot.say("Steam Database Status: " + data['services']['database']['title'])
+                await self.bot.say("```Total Steam Players online: " + data['services']['online']['title'] +
+                "Steam Store Status: " + data['services']['store']['title'] +
+                "Steam Community Status: " + data['services']['community']['title'] +
+                "Steam Database Status: " + data['services']['database']['title'] + "```")
 
 
 def setup(bot):
