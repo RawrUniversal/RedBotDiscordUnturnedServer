@@ -1,5 +1,5 @@
 import discord
-import urllib2, simplejson
+import urllib.request, simplejson
 from discord.ext import commands
 
 class MureUT:
@@ -12,7 +12,7 @@ class MureUT:
     @commands.command()
     async def steamstatus(self):
         """This does stuff!"""
-        with urllib2.urlopen("https://crowbar.steamstat.us/Barney") as url:
+        with urllib.request.urlopen("https://crowbar.steamstat.us/Barney") as url:
             data = simplejson.load(url)
             if data['success'] == true:
                 await self.bot.say("Total Steam Players online: " + data['services']['online']['title'])
