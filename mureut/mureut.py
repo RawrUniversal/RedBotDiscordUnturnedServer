@@ -26,7 +26,7 @@ class MureUT:
                 "For more info on Steam's Status: https://steamstat.us/\n" + "```")
 
     @commands.command()
-    async def moddeditem(self, ctx, itemid):
+    async def moddeditem(self, itemid):
         """Search through the items for OPKIT Modded TurnD server!"""
         link = "http://theemeraldage.net/cost.php?id=" + itemid
         f = urlopen(link)
