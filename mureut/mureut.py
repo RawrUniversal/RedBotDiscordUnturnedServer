@@ -29,7 +29,7 @@ class MureUT:
         """Search through the items for OPKIT Modded TurnD server!"""
         link = "http://theemeraldage.net/cost.php?id=" + itemid
         f = urllib.request.urlopen(link)
-        await self.bot.say("Item ID:" + itemid + " " + f.read().decode('utf-8'))
+        await self.bot.say("Item ID:" + itemid + f.read().decode('utf-8'))
                 
                 
 def setup(bot):
