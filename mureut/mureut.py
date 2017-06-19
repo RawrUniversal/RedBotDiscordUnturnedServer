@@ -1,5 +1,6 @@
 import discord
 import urllib.request, simplejson
+import urllib
 from discord.ext import commands
 
 class MureUT:
@@ -25,11 +26,11 @@ class MureUT:
                 "For more info on Steam's Status: https://steamstat.us/\n" + "```")
 
     @commands.command()
-    async def moddeditem(self, ctx, itemid):
+    async def moddeditem(self, itemid):
         """This does stuff!"""
-	link = "http://theemeraldage.net/cost.php?id=" + itemid
-	f = urllib.urlopen(link)
-	myfile = f.read()
+        link = "http://theemeraldage.net/cost.php?id=" + itemid
+	    f = urllib.urlopen(link)
+	    myfile = f.read()
         await self.bot.say("Item ID: " + itemid + " " +myfile)
                 
                 
