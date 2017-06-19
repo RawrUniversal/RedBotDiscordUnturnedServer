@@ -1,6 +1,6 @@
 import discord
 import urllib.request, simplejson
-import urlopen
+import urllib
 from discord.ext import commands
 
 class MureUT:
@@ -29,8 +29,8 @@ class MureUT:
     async def moddeditem(self, itemid):
         """Search through the items for OPKIT Modded TurnD server!"""
         link = "http://theemeraldage.net/cost.php?id=" + itemid
-        f = urlopen(link)
-        await self.bot.say("Item ID: " + itemid + " " + f.read())
+        result = urllib.urlretrieve(link)
+        await self.bot.say("Item ID: " + itemid + " " + open(result[0]).read())
                 
                 
 def setup(bot):
