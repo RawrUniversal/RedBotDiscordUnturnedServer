@@ -28,9 +28,9 @@ class MureUT:
     @commands.command()
     async def moddeditem(self, itemid):
         """This does stuff!"""
-        link = "http://theemeraldage.net/cost.php?id=" + itemid
-	    f = urllib.urlopen(link)
-	    myfile = f.read()
+	link = "http://theemeraldage.net/cost.php?id=" + itemid
+        f = urllib.urlopen(link)
+        myfile = f.read()
         await self.bot.say("Item ID: " + itemid + " " +myfile)
                 
                 
