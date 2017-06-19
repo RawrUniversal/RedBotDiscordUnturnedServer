@@ -1,6 +1,6 @@
 import discord
 import urllib.request, simplejson
-import urllib
+import urlopen
 from discord.ext import commands
 
 class MureUT:
@@ -29,7 +29,7 @@ class MureUT:
     async def moddeditem(self, itemid):
         """This does stuff!"""
         link = "http://theemeraldage.net/cost.php?id=" + itemid
-        f = urllib.urlopen(link)
+        f = urlopen(link)
         myfile = f.read()
         await self.bot.say("Item ID: " + itemid + " " +myfile)
                 
