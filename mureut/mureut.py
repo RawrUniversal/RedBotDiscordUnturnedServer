@@ -24,6 +24,14 @@ class MureUT:
                 "CSGO Sessions Logon Status: " + data['services']['csgo_sessions']['title'] + "\n" + 
                 "For more info on Steam's Status: https://steamstat.us/\n" + "```")
 
-
+    @commands.command()
+    async def moddeditem(self, ctx, itemid):
+        """This does stuff!"""
+		link = "http://theemeraldage.net/cost.php?id=" + itemid
+		f = urllib.urlopen(link)
+		myfile = f.read()
+        await self.bot.say("Item ID: " + itemid + " " +myfile)
+                
+                
 def setup(bot):
     bot.add_cog(MureUT(bot))
