@@ -27,11 +27,10 @@ class MureUT:
 
     @commands.command()
     async def moddeditem(self, itemid):
-        """This does stuff!"""
+        """Search through the items for OPKIT Modded TurnD server!"""
         link = "http://theemeraldage.net/cost.php?id=" + itemid
         f = urlopen(link)
-        myfile = f.read()
-        await self.bot.say("Item ID: " + itemid + " " +myfile)
+        await self.bot.say("Item ID: " + itemid + " " + f.read())
                 
                 
 def setup(bot):
