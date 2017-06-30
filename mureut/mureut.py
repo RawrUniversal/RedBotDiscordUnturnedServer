@@ -27,9 +27,9 @@ class MureUT:
     @commands.command()
     async def moddeditem(self, itemid):
         """Search through the items for OPKIT Modded TurnD server!"""
-            link = "http://unturnedvegas.win/cost.php?id=" + itemid
-            f = urllib.request.urlopen(link)
-            await self.bot.say(f.read().decode('utf-8'))
+        link = "http://unturnedvegas.win/cost.php?id=" + itemid
+        f = urllib.request.urlopen(link)
+        await self.bot.say(f.read().decode('utf-8'))
                 
                 
 def setup(bot):
