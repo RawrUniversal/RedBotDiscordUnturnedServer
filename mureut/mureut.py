@@ -33,7 +33,7 @@ class MureUT:
         """Search through the items for OPKIT Modded TurnD server!"""
         link = "http://unturnedvegas.win/cost.php?id=" + itemid
         f = urllib.request.urlopen(link)
-        await self.bot.say(f.read().decode('utf-8'))
+        await self.bot.say(f.read().decode('UTF-16'))
 
     @commands.command(pass_context=True, no_pm=True)
     @checks.admin_or_permissions(administrator=True)
