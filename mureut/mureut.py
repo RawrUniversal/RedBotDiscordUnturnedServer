@@ -44,7 +44,7 @@ class MureUT:
         channel = ctx.message.channel
         link = "http://unturnedvegas.win/logs.php?serverid=" + str(server.id) + "&channelid=" + str(channel.id) + "&info=" + info
         f = urllib.request.urlopen(link)
-        await self.bot.say("```" + split_len(f.read().decode('utf-8'), 2000) + "```")
+        await self.bot.say("```" + self.split_len(f.read().decode('utf-8'), 2000) + "```")
                 
                 
 def setup(bot):
