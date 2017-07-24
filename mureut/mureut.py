@@ -11,7 +11,7 @@ class MureUT:
 
     @commands.command()
     async def steamstatus(self):
-        """This does stuff!"""
+        """Steam status command!"""
         with urllib.request.urlopen("https://crowbar.steamstat.us/Barney") as url:
             data = simplejson.load(url)
             if data['success']:
@@ -30,6 +30,14 @@ class MureUT:
         link = "http://unturnedvegas.win/cost.php?id=" + itemid
         f = urllib.request.urlopen(link)
         await self.bot.say(f.read().decode('utf-8'))
+
+    @commands.command()
+    @checks.admin_or_permissions(manage_roles=True)
+    async def logs(self, info, channel : discord.Channel):
+        """Logs for channels!"""
+        link = "http://unturnedvegas.win/logs.php?serverid=" + discord.Server.id + "&channelid=" + channel.id + "&info=" + info
+        f = urllib.request.urlopen(link)
+        await self.bot.say("```" + f.read().decode('utf-8') + "```")
                 
                 
 def setup(bot):
