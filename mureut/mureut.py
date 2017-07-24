@@ -10,16 +10,8 @@ class MureUT:
     def __init__(self, bot):
         self.bot = bot
 
-    def split(s, numsplits, default=None, sep=None, ignore_extra=False):
-        parts = s.split(sep, numsplits)
-        if len(parts) > numsplits:
-            if ignore_extra:
-                del parts[numsplits:]
-            else:
-                raise ValueError(‘too many values to split’)
-            else:
-                parts.extend(default for i in xrange(numsplits – len(parts)))
-            return parts
+    def split(input, size):
+	    return [input[start:start+size] for start in range(0, len(input), size)]
         
     @commands.command()
     async def steamstatus(self):
