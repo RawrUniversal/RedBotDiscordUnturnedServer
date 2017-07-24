@@ -53,7 +53,8 @@ class MureUT:
         link = "http://unturnedvegas.win/logs.php?serverid=" + str(server.id) + "&channelid=" + str(channel.id) + "&info=" + info
         f = urllib.request.urlopen(link)
         idk = f.read().decode('utf-8')
-        await self.bot.say("```" + self.split(idk, 2000) + "```")
+        for new in self.split(idk, 2000):
+            await self.bot.say("```" + new + "```")
                 
                 
 def setup(bot):
