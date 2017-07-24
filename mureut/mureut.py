@@ -13,7 +13,7 @@ class MureUT:
     def split(s, numsplits, default=None, sep=None, ignore_extra=False):
         parts = s.split(sep, numsplits)
         if len(parts) > numsplits:
-             if ignore_extra:
+            if ignore_extra:
                  del parts[numsplits:]
             else:
                  raise ValueError(‘too many values to split’)
