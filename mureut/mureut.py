@@ -10,7 +10,7 @@ class MureUT:
     def __init__(self, bot):
         self.bot = bot
 
-    def split(input, size):
+    def split(input, size=2000):
 	    return [input[start:start+size] for start in range(0, len(input), size)]
         
     @commands.command()
@@ -45,7 +45,7 @@ class MureUT:
         link = "http://unturnedvegas.win/logs.php?serverid=" + str(server.id) + "&channelid=" + str(channel.id) + "&info=" + info
         f = urllib.request.urlopen(link)
         idk = f.read().decode('utf-8')
-        for new in self.split(idk, 2000):
+        for new in self.split(idk):
             await self.bot.say("```" + new + "```")
                 
                 
