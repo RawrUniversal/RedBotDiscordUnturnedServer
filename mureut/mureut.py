@@ -10,6 +10,9 @@ class MureUT:
     def __init__(self, bot):
         self.bot = bot
 
+    def split_len(seq, length):
+        return [seq[i:i+length] for i in range(0, len(seq), length)]
+        
     @commands.command()
     async def steamstatus(self):
         """Steam status command!"""
@@ -41,7 +44,7 @@ class MureUT:
         channel = ctx.message.channel
         link = "http://unturnedvegas.win/logs.php?serverid=" + str(server.id) + "&channelid=" + str(channel.id) + "&info=" + info
         f = urllib.request.urlopen(link)
-        await self.bot.say("```" + f.read().decode('utf-8') + "```")
+        await self.bot.say("```" + split_len(f.read().decode('utf-8'), 2000) + "```")
                 
                 
 def setup(bot):
