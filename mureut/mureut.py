@@ -10,11 +10,16 @@ class MureUT:
     def __init__(self, bot):
         self.bot = bot
 
-    def itersplit_into_x_chunks(string,x=10): # we assume here that x is an int and > 0
-        size = len(string)
-        chunksize = size//x
-        for pos in range(0, size, chunksize):
-            yield string[pos:pos+chunksize]
+    def split(s, numsplits, default=None, sep=None, ignore_extra=False):
+        parts = s.split(sep, numsplits)
+        if len(parts) > numsplits:
+             if ignore_extra:
+                 del parts[numsplits:]
+            else:
+                 raise ValueError(‘too many values to split’)
+            else:
+                 parts.extend(default for i in xrange(numsplits – len(parts)))
+            return parts
         
     @commands.command()
     async def steamstatus(self):
@@ -48,7 +53,7 @@ class MureUT:
         link = "http://unturnedvegas.win/logs.php?serverid=" + str(server.id) + "&channelid=" + str(channel.id) + "&info=" + info
         f = urllib.request.urlopen(link)
         idk = f.read().decode('utf-8')
-        await self.bot.say("```" + self.itersplit_into_x_chunks(idk, 2000) + "```")
+        await self.bot.say("```" + self.split(idk, 2000) + "```")
                 
                 
 def setup(bot):
