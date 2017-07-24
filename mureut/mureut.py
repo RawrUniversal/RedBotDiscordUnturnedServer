@@ -10,8 +10,11 @@ class MureUT:
     def __init__(self, bot):
         self.bot = bot
 
-    def split_len(seq, length):
-        return [seq[i:i+length] for i in range(0, len(seq), length)]
+    def itersplit_into_x_chunks(string,x=10): # we assume here that x is an int and > 0
+        size = len(string)
+        chunksize = size//x
+        for pos in range(0, size, chunksize):
+            yield string[pos:pos+chunksize]
         
     @commands.command()
     async def steamstatus(self):
@@ -45,7 +48,7 @@ class MureUT:
         link = "http://unturnedvegas.win/logs.php?serverid=" + str(server.id) + "&channelid=" + str(channel.id) + "&info=" + info
         f = urllib.request.urlopen(link)
         idk = f.read().decode('utf-8')
-        await self.bot.say("```" + self.split_len(idk, 2000) + "```")
+        await self.bot.say("```" + self.itersplit_into_x_chunks(idk, x=2000) + "```")
                 
                 
 def setup(bot):
