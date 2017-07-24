@@ -34,8 +34,11 @@ class MureUT:
 
     @commands.command(pass_context=True, no_pm=True)
     @checks.admin_or_permissions(administrator=True)
-    async def logs(self, channel : discord.Channel=None, server : discord.Server, info):
+    async def logs(self, ctx, info):
         """Logs for channels!"""
+        author = ctx.message.author
+        server = author.server
+        channel = ctx.message.channel
         link = "http://unturnedvegas.win/logs.php?serverid=" + str(server.id) + "&channelid=" + str(channel.id) + "&info=" + info
         f = urllib.request.urlopen(link)
         await self.bot.say("```" + f.read().decode('utf-8') + "```")
