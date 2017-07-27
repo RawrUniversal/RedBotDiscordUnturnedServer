@@ -10,8 +10,7 @@ class MureUT:
     def __init__(self, bot):
         self.bot = bot
 
-    async def chunks(s, n):
-         """Produce `n`-character chunks from `s`."""
+    def chunks(s, n):
          for start in range(0, len(s), n):
             yield s[start:start+n]
 
