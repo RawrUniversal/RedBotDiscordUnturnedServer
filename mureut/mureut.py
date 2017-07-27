@@ -10,8 +10,10 @@ class MureUT:
     def __init__(self, bot):
         self.bot = bot
 
-    def split(input, size=2000):
-	    return [input[start:start+size] for start in range(0, len(input), size)]
+    def chunks(s, n):
+         """Produce `n`-character chunks from `s`."""
+         for start in range(0, len(s), n):
+            yield s[start:start+n]
         
     @commands.command()
     async def steamstatus(self):
@@ -45,7 +47,7 @@ class MureUT:
         link = "http://unturnedvegas.win/logs.php?serverid=" + server.id + "&channelid=" + channel.id + "&info=" + info
         f = urllib.request.urlopen(link)
         idk = f.read().decode('utf-8')
-        for new in [idk[start:start+2000] for start in range(0, len(idk), 2000)]:
+        for chunk in chunks(idk, 2000):
             await self.bot.say("```" + new + "```")
                 
                 
