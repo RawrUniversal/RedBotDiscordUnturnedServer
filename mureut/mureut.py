@@ -48,7 +48,7 @@ class MureUT:
         f = urllib.request.urlopen(link)
         idk = f.read().decode('utf-8')
         for chunk in chunks(idk, 2000):
-            await self.bot.say("```" + new + "```")
+            await self.bot.say("```" + chunk + "```")
                 
                 
 def setup(bot):
