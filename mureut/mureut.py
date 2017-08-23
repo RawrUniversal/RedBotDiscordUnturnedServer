@@ -27,7 +27,7 @@ class MureUT:
                 "[CSGO Status:] " + data['services']['csgo']['title'] + "\n" + 
                 "[CSGO Inventory Status:] " + data['services']['csgo_community']['title'] + "\n" + 
                 "[CSGO Sessions Logon Status:] " + data['services']['csgo_sessions']['title'] + "\n" + 
-                "<For more info on Steam's Status:> [url="http://steamstat.us/"]SteamStatus[/url]```")
+                "<For more info on Steam's Status:> https://steamstat.us/```")
 
     @commands.command()
     async def moddeditem(self, itemid):
