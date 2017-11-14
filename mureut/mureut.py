@@ -2,6 +2,7 @@ import discord
 import urllib.request, simplejson
 from .utils import checks
 from discord.ext import commands
+import requests
 
 class MureUT:
 
@@ -43,9 +44,12 @@ class MureUT:
         author = ctx.message.author
         server = author.server
         channel = ctx.message.channel
-        link = "http://unturnedvegas.win/logs.php?serverid=" + server.id + "&channelid=" + channel.id + "&info=" + info
-        f = urllib.request.urlopen(link)
-        idk = f.read().decode('utf-8')
+        link = "http://unturnedvegas.win/logs.php"
+        data = {'serverid':server.id,
+        'channelid':channel.id,
+        'info':info}
+        r = requests.post(url = link, data = data)
+        idk = r.text
         for chunk in MureUT.chunks(idk, 1990):
             await self.bot.say("```" + chunk + "```")
                 
