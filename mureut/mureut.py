@@ -1,10 +1,12 @@
 import discord
 import urllib.request, simplejson
+from cogs.utils.dataIO import dataIO
 from .utils import checks
 from discord.ext import commands
 from discord import Embed
 import requests
 import json
+import os
 from datetime import datetime
 from random import randint
 
@@ -16,6 +18,8 @@ class MureUT:
     config_path = os.path.join(base_dir, "items_rs.json")
     
     def __init__(self, bot):
+        self.config = dataIO.load_json(self.config_path)
+        self.config_default = {}
         self.bot = bot
 
     BASE_URL = "http://services.runescape.com/m=itemdb_rs"
