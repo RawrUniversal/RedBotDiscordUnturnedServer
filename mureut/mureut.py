@@ -12,6 +12,9 @@ class MureUT:
 
     """My custom cog that does stuff!"""
 
+    base_dir = os.path.join("data", "rs")
+    config_path = os.path.join(base_dir, "items_rs.json")
+    
     def __init__(self, bot):
         self.bot = bot
 
@@ -76,13 +79,13 @@ class MureUT:
         print(item)
 
         if item.capitalize() == 'Random':
-            with open('plugins/runescape/item_id.json') as item_ids:
+            with open(config_path+'items_rs.json') as item_ids:
                 jdata = json.load(item_ids)
                 item = jdata[randint(0, len(jdata))]['id']
                 return item
 
         if item.isdigit():
-            with open('plugins/runescape/item_id.json') as item_ids:
+            with open(config_path+'items_rs.json') as item_ids:
                 jdata = json.load(item_ids)
 
             for i in jdata:
@@ -91,7 +94,7 @@ class MureUT:
 
         else:
             item = MureUT.check_string(item)
-            with open('plugins/runescape/item_id.json') as item_ids:
+            with open(config_path+'items_rs.json') as item_ids:
                 jdata = json.load(item_ids)
 
             for i in jdata:
