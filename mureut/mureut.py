@@ -90,7 +90,7 @@ class MureUT:
                     return item
 
         else:
-            item = check_string(item)
+            item = MureUT.check_string(item)
             with open('plugins/runescape/item_id.json') as item_ids:
                 jdata = json.load(item_ids)
 
