@@ -83,13 +83,13 @@ class MureUT:
         print(item)
 
         if item.capitalize() == 'Random':
-            with open(config_path+'items_rs.json') as item_ids:
+            with open(config_path) as item_ids:
                 jdata = json.load(item_ids)
                 item = jdata[randint(0, len(jdata))]['id']
                 return item
 
         if item.isdigit():
-            with open(config_path+'items_rs.json') as item_ids:
+            with open(config_path) as item_ids:
                 jdata = json.load(item_ids)
 
             for i in jdata:
@@ -98,7 +98,7 @@ class MureUT:
 
         else:
             item = MureUT.check_string(item)
-            with open(config_path+'items_rs.json') as item_ids:
+            with open(config_path) as item_ids:
                 jdata = json.load(item_ids)
 
             for i in jdata:
