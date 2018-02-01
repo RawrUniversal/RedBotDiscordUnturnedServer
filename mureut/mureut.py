@@ -18,8 +18,6 @@ class MureUT:
     config_path = os.path.join(base_dir, "items_rs.json")
     
     def __init__(self, bot):
-        self.config = dataIO.load_json(self.config_path)
-        self.config_default = {}
         self.bot = bot
 
     BASE_URL = "http://services.runescape.com/m=itemdb_rs"
@@ -78,6 +76,8 @@ class MureUT:
 
 
     def check_item(message):
+        base_dir = os.path.join("data", "rs")
+        config_path = os.path.join(base_dir, "items_rs.json")
         space_index = message.index(" ")  # search the message for the index of first space in string
         item = message[space_index + 1:]  # grab all text starting at first letter after space
         print(item)
