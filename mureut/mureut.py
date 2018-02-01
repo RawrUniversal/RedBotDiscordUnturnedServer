@@ -19,8 +19,6 @@ class MureUT:
     
     def __init__(self, bot):
         self.bot = bot
-
-    BASE_URL = "http://services.runescape.com/m=itemdb_rs"
         
     def chunks(s, n):
         for start in range(0, len(s), n):
@@ -110,6 +108,7 @@ class MureUT:
 
 
     def request_item_json(item):
+        BASE_URL = "http://services.runescape.com/m=itemdb_rs"
         end_point = "/api/catalogue/detail.json?item={}".format(str(item))
         response = requests.get(BASE_URL + end_point)
 
