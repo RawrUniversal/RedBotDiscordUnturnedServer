@@ -73,10 +73,9 @@ class MureUT:
         return item
 
 
-    def check_item(message):
+    def check_item(item):
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
-        item = message[1:]
         print(item)
 
         if item.capitalize() == 'Random':
