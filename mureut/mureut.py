@@ -40,7 +40,7 @@ class MureUT:
                 "For more info on Steam's Status: https://steamstat.us/```")
 
     @commands.command()
-    async def rs(self, *itemid):
+    async def rs(self, itemid):
         """Search through the items for Runescape!"""
         item = MureUT.check_item(itemid)
         if item is False:
