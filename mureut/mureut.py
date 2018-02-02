@@ -76,8 +76,7 @@ class MureUT:
     def check_item(message):
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
-        space_index = message.index(" ")  # search the message for the index of first space in string
-        item = message[space_index + 1:]  # grab all text starting at first letter after space
+        item = message[1:]
         print(item)
 
         if item.capitalize() == 'Random':
