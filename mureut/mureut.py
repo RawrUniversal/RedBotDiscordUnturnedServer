@@ -42,7 +42,7 @@ class MureUT:
     @commands.command()
     async def rs(self, itemid):
         """Search through the items for Runescape!"""
-        item = MureUT.check_item(itemid)
+        item = MureUT.check_item(itemid + 1:)
         if item is False:
             await self.bot.say("That item doesn't exist!")
             return
