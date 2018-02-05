@@ -56,8 +56,9 @@ class MureUT:
         text_file = open(file, "r")
         lines = text_file.read().split('\n')
         for counter, value in enumerate(lines):
-            for chunk in MureUT.chunks(value, 200):
-                await self.bot.say("```" + chunk + "```")
+            if value == info:
+                for chunk in MureUT.chunks(value, 200):
+                    await self.bot.say("```" + chunk + "```")
                 
 
     def check_string(item):
