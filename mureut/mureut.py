@@ -50,11 +50,12 @@ class MureUT:
         author = ctx.message.author
         server = author.server
         channel = ctx.message.channel
-        base = os.path.join("data", "gnu/"+str(server))
-        text_file = open(str(channel), "r")
+        base = os.path.join("data", "gnu/"+str(server.id))
+        text_file = open(str(channel.id), "r")
         lines = text_file.read().split('\n')
-        for chunk in MureUT.chunks(lines, 200):
-            await self.bot.say("```" + chunk + "```")
+        for counter, value in enumerate(lines):
+            for chunk in MureUT.chunks(value, 200):
+                await self.bot.say("```" + chunk + "```")
                 
 
     def check_string(item):
