@@ -141,7 +141,7 @@ class MureUT:
                            "CSGO Sessions Logon Status: **{}**\n".format(
                         item_json['services']['store']['title'], item_json['services']['community']['title'],
                         item_json['services']['webapi']['title'], item_json['services']['csgo']['title'],
-                        item_json[['services']['csgo_community']['title'], item_json['services']['csgo_sessions']['title']))
+                        item_json['services']['csgo_community']['title'], item_json['services']['csgo_sessions']['title']))
 
         em.set_thumbnail(url="https://steamstore-a.akamaihd.net/public/shared/images/responsive/share_steam_logo.png")
 
