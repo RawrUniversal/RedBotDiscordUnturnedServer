@@ -53,7 +53,7 @@ class MureUT:
         base = os.path.join("data", "gnu")
         server = os.path.join(base, str(server.id))
         file = os.path.join(server, str(channel.id))
-        text_file = open(file), "r")
+        text_file = open(file, "r")
         lines = text_file.read().split('\n')
         for counter, value in enumerate(lines):
             for chunk in MureUT.chunks(value, 200):
