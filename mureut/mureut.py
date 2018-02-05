@@ -30,14 +30,7 @@ class MureUT:
         with urllib.request.urlopen("https://crowbar.steamstat.us/Barney") as url:
             data = simplejson.load(url)
             if data['success']:
-                await self.bot.say("```Total Steam Players online: " + data['services']['online']['title'] + "\n" +
-                "Steam Store Status: " + data['services']['store']['title'] + "\n" +
-                "Steam Community Status: " + data['services']['community']['title'] + "\n" + 
-                "Steam WebAPI Status: " + data['services']['webapi']['title'] + "\n" + 
-                "CSGO Status: " + data['services']['csgo']['title'] + "\n" + 
-                "CSGO Inventory Status: " + data['services']['csgo_community']['title'] + "\n" + 
-                "CSGO Sessions Logon Status: " + data['services']['csgo_sessions']['title'] + "\n" + 
-                "For more info on Steam's Status: https://steamstat.us/```")
+                await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
     async def rs(self, itemid):
@@ -132,6 +125,26 @@ class MureUT:
         em.set_thumbnail(url=item_json['item']['icon_large'])
 
         em.set_footer(text=str(datetime.now()))
+
+        return em
+    
+    
+    def embed_status(item_json):
+        em = Embed(color=0x00F4FF,
+                   title='Steam Status | {}'.format(
+                       item_json["online_info"]))
+
+        em.add_field(name="Current Steam Status: **Total Steam Players online: {}**".format(
+                        item_json['services']['online']['title']),
+                     value="Steam Store Status: **{}**\nSteam Community Status: : **{}**\nSteam WebAPI Status: **{}**"
+                           "\nCSGO Status:  **{}**\nCSGO Inventory Status: **{}**\nCSGO Sessions Logon Status: **{}**\n".format(
+                        item_json['services']['store']['title'], item_json['services']['community']['title'],
+                        item_json['services']['webapi']['title'], item_json['services']['csgo']['title'],
+                        item_json[['services']['csgo_community']['title'], item_json['services']['csgo_sessions']['title']))
+
+        em.set_thumbnail(url="https://steamstore-a.akamaihd.net/public/shared/images/responsive/share_steam_logo.png")
+
+        em.set_footer(text="For more info on Steam's Status: https://steamstat.us/")
 
         return em
 
