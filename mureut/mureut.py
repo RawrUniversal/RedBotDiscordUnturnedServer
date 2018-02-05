@@ -50,13 +50,10 @@ class MureUT:
         author = ctx.message.author
         server = author.server
         channel = ctx.message.channel
-        link = "http://unturnedvegas.win/logs.php"
-        data = {'serverid':server.id,
-        'channelid':channel.id,
-        'info':info}
-        r = requests.post(url = link, data = data)
-        idk = r.text
-        for chunk in MureUT.chunks(idk, 1990):
+        base = os.path.join("data", "gnu/"+server)
+        text_file = open(channel, "r")
+        lines = text_file.read().split('\n')
+        for chunk in MureUT.chunks(lines, 200):
             await self.bot.say("```" + chunk + "```")
                 
 
