@@ -55,6 +55,7 @@ class MureUT:
         file = os.path.join(server, str(channel.id))
         text_file = open(file, "r")
         lines = text_file.read().split('\n')
+        log = "\n"
         for counter, value in enumerate(lines):
             if value == info:
                 log += value + "\n"
