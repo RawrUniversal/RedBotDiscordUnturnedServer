@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime
 from random import randint
+import numpy
 
 class MureUT:
 
@@ -59,8 +60,9 @@ class MureUT:
         for counter, value in enumerate(lines):
             if value == info:
                 log += value + "\n"
-        for chunk in MureUT.chunks(list(log), 200):
-            await self.bot.say("```" + chunk + "```")
+        logs = numpy.array_split(numpy.array(log),100)
+        for logss in logs:
+            await self.bot.say("```" + logss + "```")
                 
 
     def check_string(item):
