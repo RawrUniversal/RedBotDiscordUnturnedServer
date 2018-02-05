@@ -137,7 +137,8 @@ class MureUT:
         em.add_field(name="Current Steam Status: **Total Steam Players online: {}**".format(
                         item_json['services']['online']['title']),
                      value="Steam Store Status: **{}**\nSteam Community Status: : **{}**\nSteam WebAPI Status: **{}**"
-                           "\nCSGO Status:  **{}**\nCSGO Inventory Status: **{}**\nCSGO Sessions Logon Status: **{}**\n".format(
+                           "\nCSGO Status:  **{}**\nCSGO Inventory Status: **{}**\n"
+                           "CSGO Sessions Logon Status: **{}**\n".format(
                         item_json['services']['store']['title'], item_json['services']['community']['title'],
                         item_json['services']['webapi']['title'], item_json['services']['csgo']['title'],
                         item_json[['services']['csgo_community']['title'], item_json['services']['csgo_sessions']['title']))
