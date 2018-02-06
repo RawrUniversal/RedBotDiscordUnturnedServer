@@ -15,9 +15,6 @@ import numpy
 class MureUT:
 
     """My custom cog that does stuff!"""
-
-    base_dir = os.path.join("data", "rs")
-    config_path = os.path.join(base_dir, "items_rs.json")
     
     def __init__(self, bot):
         self.bot = bot
@@ -61,7 +58,13 @@ class MureUT:
         for counter, value in enumerate(lines):
             if value == info:
                 log += value + "\n"
-        logs = numpy.split(numpy.array(log.split('\n')),100)
+        logs = log
+        if logs.count('\n') % 50 == 1:
+            logs = numpy.split(numpy.array(log.split('\n')),50)
+        elif logs.count('\n') % 20 == 1:
+            logs = numpy.split(numpy.array(log.split('\n')),20)
+        else
+            logs = numpy.array(log)
         for logss in logs:
             await self.bot.say("```" + str(logss) + "```")
                 
