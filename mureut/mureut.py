@@ -61,9 +61,9 @@ class MureUT:
         for counter, value in enumerate(lines):
             if value == info:
                 log += value + "\n"
-        logs = numpy.array_split(array.array(log),100)
+        logs = numpy.split(array.array(log),100)
         for logss in logs:
-            await self.bot.say("```" + logss + "```")
+            await self.bot.say("```" + str(logss) + "```")
                 
 
     def check_string(item):
