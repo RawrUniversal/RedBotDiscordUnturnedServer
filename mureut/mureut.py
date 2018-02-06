@@ -59,9 +59,9 @@ class MureUT:
             if value == info:
                 log += value + "\n"
         logs = log
-        if logs.count('\n') % 50 == 1:
+        if logs.count('\n') % 50:
             logs = numpy.split(numpy.array(log.split('\n')),50)
-        elif logs.count('\n') % 20 == 1:
+        elif logs.count('\n') % 20:
             logs = numpy.split(numpy.array(log.split('\n')),20)
         else
             logs = numpy.array(log)
