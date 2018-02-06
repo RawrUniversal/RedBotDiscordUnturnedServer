@@ -63,7 +63,7 @@ class MureUT:
             logs = numpy.split(numpy.array(log.split('\n')),50)
         elif logs.count('\n') % 20:
             logs = numpy.split(numpy.array(log.split('\n')),20)
-        else
+        else:
             logs = numpy.array(log)
         for logss in logs:
             await self.bot.say("```" + str(logss) + "```")
