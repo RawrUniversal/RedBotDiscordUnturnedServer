@@ -1,4 +1,5 @@
 import discord
+import array
 import urllib.request, simplejson
 from cogs.utils.dataIO import dataIO
 from .utils import checks
@@ -60,7 +61,7 @@ class MureUT:
         for counter, value in enumerate(lines):
             if value == info:
                 log += value + "\n"
-        logs = numpy.array_split(numpy.array(log),100)
+        logs = numpy.array_split(array.array(log),100)
         for logss in logs:
             await self.bot.say("```" + logss + "```")
                 
