@@ -58,7 +58,7 @@ class MureUT:
         for counter, value in enumerate(lines):
             if value == info:
                 log += value + "\n"
-        if log.count() == 0
+        if log.count() == 0:
             await self.bot.say("```Nothing Found!```")
         logs = numpy.split(numpy.array(log.split('\n')), log.count())
         await self.bot.say("```" + str(logss[num]) + "```")
