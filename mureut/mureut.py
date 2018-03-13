@@ -147,14 +147,15 @@ class MureUT:
                         item_json['services']['online']['title']),
                      value="Steam Store Status: **{}**\nSteam Community Status: : **{}**\nSteam WebAPI Status: **{}**"
                            "\nCSGO Status:  **{}**\nCSGO Inventory Status: **{}**\n"
-                           "CSGO Sessions Logon Status: **{}**\n".format(
+                           "CSGO Sessions Logon Status: **{}**\n"
+                           "For more info on Steam's Status: [https://steamstat.us/](https://steamstat.us/)".format(
                         item_json['services']['store']['title'], item_json['services']['community']['title'],
                         item_json['services']['webapi']['title'], item_json['services']['csgo']['title'],
                         item_json['services']['csgo_community']['title'], item_json['services']['csgo_sessions']['title']))
 
         em.set_thumbnail(url="https://steamstore-a.akamaihd.net/public/shared/images/responsive/share_steam_logo.png")
 
-        em.set_footer(text="For more info on Steam's Status: [https://steamstat.us/](https://steamstat.us/)")
+        em.set_footer(text="For more info on Steam's Status:https://steamstat.us/")
 
         return em
 
