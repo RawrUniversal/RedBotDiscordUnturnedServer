@@ -155,7 +155,7 @@ class MureUT:
 
         em.set_thumbnail(url="https://steamstore-a.akamaihd.net/public/shared/images/responsive/share_steam_logo.png")
 
-        em.set_footer(text="For more info on Steam's Status:https://steamstat.us/")
+        em.set_footer(text=str(datetime.now()))
 
         return em
 
