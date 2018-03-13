@@ -32,7 +32,7 @@ class MureUT:
                 await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
-    async def rs(self, itemid):
+    async def rs(self, *, itemid):
         """Search through the items for Runescape!"""
         item = MureUT.check_item(itemid)
         if item is False:
