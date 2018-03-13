@@ -44,7 +44,7 @@ class MureUT:
 
     @commands.command(pass_context=True, no_pm=True)
     @checks.admin_or_permissions(administrator=True)
-    async def logs(self, ctx, *, info):
+    async def logs(self, ctx, num, *, info):
         """Logs for channels!"""
         author = ctx.message.author
         server = author.server
@@ -58,9 +58,8 @@ class MureUT:
         for counter, value in enumerate(lines):
             if value == info:
                 log += value + "\n"
-        logs = numpy.split(numpy.array(log.split('\n')),log.count() % 25)
-        for logss in logs:
-            await self.bot.say("```" + str(logss) + "```")
+        logs = numpy.split(numpy.array(log.split('\n')), log.count())
+        await self.bot.say("```" + str(logss[num]) + "```")
                 
 
     def check_string(item):
