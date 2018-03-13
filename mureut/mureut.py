@@ -58,7 +58,7 @@ class MureUT:
         for counter, value in enumerate(lines):
             if value == info:
                 log += value + "\n"
-        logs = numpy.split(numpy.array(log.split('\n')),[25,50,75,100,125,150,175,200])
+        logs = numpy.split(numpy.array(log.split('\n')),log.count() % 25)
         for logss in logs:
             await self.bot.say("```" + str(logss) + "```")
                 
