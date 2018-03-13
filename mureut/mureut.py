@@ -61,7 +61,8 @@ class MureUT:
         if log.count('\n') == 0:
             await self.bot.say("```Nothing Found!```")
         logs = numpy.split(numpy.array(log.split('\n')), log.count('\n'))
-        await self.bot.say("```" + str(logs[num]) + "```")
+        if num.isisdigit():
+            await self.bot.say("```" + str(logs[int(num)]) + "```")
                 
 
     def check_string(item):
