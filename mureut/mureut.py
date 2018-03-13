@@ -60,7 +60,7 @@ class MureUT:
                 log += meh + "\n"
         if log.count('\n') == 0:
             await self.bot.say("```Nothing Found!```")
-        logs = numpy.split(numpy.array(log.split('\n')), log.count('\n'))
+        logs = numpy.split(numpy.array(log.split('\n')), [1,2,3])
         if num.isdigit():
             await self.bot.say("```" + str(logs[int(num)-1]) + "```")
                 
