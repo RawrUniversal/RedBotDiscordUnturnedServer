@@ -55,14 +55,14 @@ class MureUT:
         text_file = open(file, "r")
         lines = text_file.read().split('\n')
         log = "\n"
-        for counter, value in enumerate(lines):
-            if value == info:
-                log += value + "\n"
+        for meh in lines:
+            if info in meh:
+                log += meh + "\n"
         if log.count('\n') == 0:
             await self.bot.say("```Nothing Found!```")
         logs = numpy.split(numpy.array(log.split('\n')), log.count('\n'))
         if num.isdigit():
-            await self.bot.say("```" + str(logs[int(num)]) + "```")
+            await self.bot.say("```" + str(logs[int(num)-1]) + "```")
                 
 
     def check_string(item):
