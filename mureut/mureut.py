@@ -46,7 +46,7 @@ class MureUT:
     @checks.admin_or_permissions(administrator=True)
     async def logs(self, ctx, *, info):
         """Logs for channels!"""
-        logs_menu(ctx, info, message=None, page=1)
+        self.logs_menu(ctx, info, message=None, page=1)
                 
 
     def check_string(item):
