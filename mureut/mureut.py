@@ -46,7 +46,7 @@ class MureUT:
     @checks.admin_or_permissions(administrator=True)
     async def logs(self, ctx, *, info):
         """Logs for channels!"""
-        self.logs_menu(ctx, info, message=None, page=1)
+        return await self.logs_menu(ctx, info, message=None, page=0)
                 
 
     def check_string(item):
@@ -161,7 +161,7 @@ class MureUT:
         logs = numpy.split(numpy.array(log.split('\n')), [1,2,3])
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
-        em.add_field(name="Logs", value=str(logs[int(page)-1]))
+        em.add_field(name="Logs", value=str(logs[int(page)]))
         if not message:
             message =\
                 await self.bot.send_message(ctx.message.channel, embed=em)
