@@ -12,6 +12,14 @@ from datetime import datetime
 from random import randint
 import numpy
 
+
+numbs = {
+    "next": "➡",
+    "back": "⬅",
+    "exit": "❌"
+}
+
+
 class MureUT:
 
     """My custom cog that does stuff!"""
