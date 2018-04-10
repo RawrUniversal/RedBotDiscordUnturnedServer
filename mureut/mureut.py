@@ -139,7 +139,7 @@ class MureUT:
 
         return em
     
-    async def logs_menu(self, ctx, log,
+    async def logs_menu(self, ctx, info,
                            message: discord.Message=None,
                            page=0, timeout: int=30):
         """menu control logic for this taken from
