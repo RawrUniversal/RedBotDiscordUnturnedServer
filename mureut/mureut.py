@@ -157,7 +157,7 @@ class MureUT:
             if info in meh:
                 log += meh + "\n"
         if log.count('\n') == 0:
-            await self.bot.say("```Nothing Found!```")
+            await self.bot.say("Nothing Found!")
         logs = numpy.split(numpy.array(log.split('\n')), [1,2,3])
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
