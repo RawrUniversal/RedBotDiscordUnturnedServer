@@ -195,7 +195,7 @@ class MureUT:
                 next_page = 0  # Loop around to the first item
             else:
                 next_page = page + 1
-            return await self.logs_menu(ctx, log, message=message,
+            return await self.logs_menu(ctx, info, message=message,
                                            page=next_page, timeout=timeout)
         elif react == "back":
             next_page = 0
@@ -203,7 +203,7 @@ class MureUT:
                 next_page = log.count('\n') - 1  # Loop around to the last item
             else:
                 next_page = page - 1
-            return await self.logs_menu(ctx, log, message=message,
+            return await self.logs_menu(ctx, info, message=message,
                                            page=next_page, timeout=timeout)
         else:
             return await\
