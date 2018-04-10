@@ -144,7 +144,7 @@ class MureUT:
                            num=0, timeout: int=30):
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
-                author = ctx.message.author
+        author = ctx.message.author
         server = author.server
         channel = ctx.message.channel
         base = os.path.join("data", "gnu")
