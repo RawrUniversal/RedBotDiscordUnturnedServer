@@ -141,7 +141,7 @@ class MureUT:
     
     async def logs_menu(self, ctx, log,
                            message: discord.Message=None,
-                           num=0, timeout: int=30):
+                           page=0, timeout: int=30):
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
         author = ctx.message.author
@@ -162,7 +162,7 @@ class MureUT:
         logs = numpy.split(numpy.array(log.split('\n')), [1,2,3])
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
-        em.add_field(name="Logs", value=str(logs[int(num)-1]))
+        em.add_field(name="Logs", value=str(logs[int(page)-1]))
         if not message:
             message =\
                 await self.bot.send_message(ctx.message.channel, embed=em)
@@ -189,7 +189,7 @@ class MureUT:
             else:
                 next_page = page + 1
             return await self.logs_menu(ctx, log, message=message,
-                                           num=next_page, timeout=timeout)
+                                           page=next_page, timeout=timeout)
         elif react == "back":
             next_page = 0
             if page == 0:
@@ -197,7 +197,7 @@ class MureUT:
             else:
                 next_page = page - 1
             return await self.logs_menu(ctx, log, message=message,
-                                           num=next_page, timeout=timeout)
+                                           page=next_page, timeout=timeout)
         else:
             return await\
                 self.bot.delete_message(message)
