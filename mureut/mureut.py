@@ -44,25 +44,9 @@ class MureUT:
 
     @commands.command(pass_context=True, no_pm=True)
     @checks.admin_or_permissions(administrator=True)
-    async def logs(self, ctx, num, *, info):
+    async def logs(self, ctx, *, info):
         """Logs for channels!"""
-        author = ctx.message.author
-        server = author.server
-        channel = ctx.message.channel
-        base = os.path.join("data", "gnu")
-        server = os.path.join(base, str(server.id))
-        file = os.path.join(server, str(channel.id))
-        text_file = open(file, "r")
-        lines = text_file.read().split('\n')
-        log = ""
-        for meh in lines:
-            if info in meh:
-                log += meh + "\n"
-        if log.count('\n') == 0:
-            await self.bot.say("```Nothing Found!```")
-        logs = numpy.split(numpy.array(log.split('\n')), [1,2,3])
-        if num.isdigit():
-            await self.bot.say("```" + str(logs[int(num)-1]) + "```")
+        logs_menu(ctx, info, message=None, page=1)
                 
 
     def check_string(item):
@@ -154,6 +138,68 @@ class MureUT:
         em.set_footer(text=str(datetime.now()))
 
         return em
+    
+    async def logs_menu(self, ctx, log: info,
+                           message: discord.Message=None,
+                           num=0, timeout: int=30):
+        """menu control logic for this taken from
+           https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
+                author = ctx.message.author
+        server = author.server
+        channel = ctx.message.channel
+        base = os.path.join("data", "gnu")
+        server = os.path.join(base, str(server.id))
+        file = os.path.join(server, str(channel.id))
+        text_file = open(file, "r")
+        lines = text_file.read().split('\n')
+        log = ""
+        for meh in lines:
+            if info in meh:
+                log += meh + "\n"
+        if log.count('\n') == 0:
+            await self.bot.say("```Nothing Found!```")
+        logs = numpy.split(numpy.array(log.split('\n')), [1,2,3])
+        em = Embed(color=0x00F4FF,
+                   title='Logs for {}'.format(info))
+        em.add_field(name="Logs", value=str(logs[int(num)-1]))
+        if not message:
+            message =\
+                await self.bot.send_message(ctx.message.channel, embed=em)
+            await self.bot.add_reaction(message, "⬅")
+            await self.bot.add_reaction(message, "❌")
+            await self.bot.add_reaction(message, "➡")
+        else:
+            message = await self.bot.edit_message(message, embed=em)
+        react = await self.bot.wait_for_reaction(
+            message=message, user=ctx.message.author, timeout=timeout,
+            emoji=["➡", "⬅", "❌"]
+        )
+        if react is None:
+            await self.bot.remove_reaction(message, "⬅", self.bot.user)
+            await self.bot.remove_reaction(message, "❌", self.bot.user)
+            await self.bot.remove_reaction(message, "➡", self.bot.user)
+            return None
+        reacts = {v: k for k, v in numbs.items()}
+        react = reacts[react.reaction.emoji]
+        if react == "next":
+            next_page = 0
+            if page == log.count('\n') - 1:
+                next_page = 0  # Loop around to the first item
+            else:
+                next_page = page + 1
+            return await self.logs_menu(ctx, log, message=message,
+                                           num=next_page, timeout=timeout)
+        elif react == "back":
+            next_page = 0
+            if page == 0:
+                next_page = log.count('\n') - 1  # Loop around to the last item
+            else:
+                next_page = page - 1
+            return await self.logs_menu(ctx, log, message=message,
+                                           num=next_page, timeout=timeout)
+        else:
+            return await\
+                self.bot.delete_message(message)
 
 
 
