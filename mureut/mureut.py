@@ -51,7 +51,7 @@ class MureUT:
             jdata = json.load(ids)
             key = jdata['key']
             wows = wargaming.WoWS(jdata['key'], region='na', language='en')
-        aid = wows.account.list(search=name, limit=1)['data']['account_id']
+        aid = wows.account.list(search=name, limit=1)[0]['account_id']
         pdata = wows.account.info(application_id=key,account_id=aid,language="en")
         em = Embed(color=0x00F4FF,
                title='WOWS Stats | {}'.format(
