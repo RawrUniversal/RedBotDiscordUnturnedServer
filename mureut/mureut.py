@@ -41,7 +41,7 @@ class MureUT:
                 await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
-    async def wows(self, name, stats):
+    async def wows(self, name):
         """World Of Warships stats command!"""
         base_dir = os.path.join("data", "wows")
         config_path = os.path.join(base_dir, "wows.json")
