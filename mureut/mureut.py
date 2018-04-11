@@ -58,7 +58,7 @@ class MureUT:
                    pdata[aid]['nickname']))
         em.add_field(name="{}'s stats for War of Warships".format(pdata[aid]['nickname']),
                      value="Leveling Points: **{}**\nLeveling Tier: **{}**\nBattle fought: **{}**\n"
-                     "Distance travelled: **{} miles**\nWins: **{}**\nLosses: **{}**\nDraws: **{}**"
+                     "Distance travelled: **{} miles**\nWins: **{}**\nLosses: **{}**\nDraws: **{}**\n"
                      "Total Damage Dealt: **{}**\nMax Damage Dealt: **{}**"
                      .format(pdata[aid]['leveling_points'],pdata[aid]['leveling_tier'],
                      pdata[aid]['statistics']['battles'],pdata[aid]['statistics']['distance'],
