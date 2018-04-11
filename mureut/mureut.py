@@ -51,16 +51,16 @@ class MureUT:
             jdata = json.load(ids)
             key = jdata['key']
             wows = wargaming.WoWS(jdata['key'], region='na', language='en')
-        aid = wows.account.list(search=name, limit=1)['account_id']
+        aid = wows.account.list(search=name, limit=1)['data']['account_id']
         pdata = wows.account.info(application_id=key,account_id=aid,language="en")
         em = Embed(color=0x00F4FF,
                title='WOWS Stats | {}'.format(
                    pdata['nickname']))
-        em.add_field(name="{}'s stats for War of Warships".format(pdata['nickname']),
+        em.add_field(name="{}'s stats for War of Warships".format(pdata['data']['nickname']),
                      value="Leveling Points: **{}**\nLeveling Tier: **{}**\nBattle fought: **{}**\n"
-                     "Distance travelled: **{}**\nMore to come!".format(pdata['leveling_points'],
-                     pdata['leveling_tier'],pdata['statistics']['battles'],pdata['statistics']['distance']))
-        em.set_footer(text=str(pdata['stats_updated_at']))
+                     "Distance travelled: **{}**\nMore to come!".format(pdata['data']['leveling_points'],
+                     pdata['data']['leveling_tier'],pdata['data']['statistics']['battles'],pdata['data']['statistics']['distance']))
+        em.set_footer(text=str(datetime.fromtimestamp(pdata['data']['stats_updated_at'])))
         await self.bot.say(embed=em)
         
 
