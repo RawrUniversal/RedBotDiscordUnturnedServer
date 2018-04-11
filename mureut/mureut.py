@@ -59,10 +59,12 @@ class MureUT:
         em.add_field(name="{}'s stats for War of Warships".format(pdata[aid]['nickname']),
                      value="Leveling Points: **{}**\nLeveling Tier: **{}**\nBattle fought: **{}**\n"
                      "Distance travelled: **{} miles**\nWins: **{}**\nLosses: **{}**\nDraws: **{}**"
+                     "Total Damage Dealt: **{}**\nMax Damage Dealt: **{}**"
                      .format(pdata[aid]['leveling_points'],pdata[aid]['leveling_tier'],
                      pdata[aid]['statistics']['battles'],pdata[aid]['statistics']['distance'],
                      pdata[aid]['statistics']['pvp']['wins'],pdata[aid]['statistics']['pvp']['losses'],
-                     pdata[aid]['statistics']['pvp']['draws']))
+                     pdata[aid]['statistics']['pvp']['draws'], pdata[aid]['statistics']['pvp']['damage_dealt'],
+                     pdata[aid]['statistics']['pvp']['max_damage_dealt']))
         em.set_footer(text=str(datetime.fromtimestamp(pdata[aid]['stats_updated_at'])))
         await self.bot.say(embed=em)
         
