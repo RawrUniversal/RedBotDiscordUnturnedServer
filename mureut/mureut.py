@@ -185,8 +185,6 @@ class MureUT:
         author = ctx.message.author
         server = author.server
         channel = cid
-        if cid == 0:
-            channel = ctx.message.channel.id
         base = os.path.join("data", "gnu")
         server = os.path.join(base, str(server.id))
         file = os.path.join(server, str(channel))
@@ -227,7 +225,7 @@ class MureUT:
                 next_page = 0  # Loop around to the first item
             else:
                 next_page = page + 1
-            return await self.logs_menu(ctx, info, message=message,
+            return await self.logs_menu(ctx, info, cid=chanel, message=message,
                                            page=next_page, timeout=timeout)
         elif react == "back":
             next_page = 0
@@ -235,7 +233,7 @@ class MureUT:
                 next_page = log.count('\n') - 1  # Loop around to the last item
             else:
                 next_page = page - 1
-            return await self.logs_menu(ctx, info, message=message,
+            return await self.logs_menu(ctx, info, cid=chanel, message=message,
                                            page=next_page, timeout=timeout)
         else:
             return await\
