@@ -61,8 +61,8 @@ class MureUT:
                      "Distance travelled: **{} miles**\nWins: **{}**\nLosses: **{}**\nDraws: **{}**"
                      .format(pdata[aid]['leveling_points'],pdata[aid]['leveling_tier'],
                      pdata[aid]['statistics']['battles'],pdata[aid]['statistics']['distance'],
-                     pdata[aid]['statistics']['club']['wins'],pdata[aid]['statistics']['club']['losses'],
-                     pdata[aid]['statistics']['club']['draws']))
+                     pdata[aid]['statistics']['pvp']['wins'],pdata[aid]['statistics']['pvp']['losses'],
+                     pdata[aid]['statistics']['pvp']['draws']))
         em.set_footer(text=str(datetime.fromtimestamp(pdata[aid]['stats_updated_at'])))
         await self.bot.say(embed=em)
         
