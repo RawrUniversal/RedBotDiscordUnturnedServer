@@ -55,7 +55,7 @@ class MureUT:
         pdata = wows.account.info(application_id=key,account_id=aid,language="en")
         em = Embed(color=0x00F4FF,
                title='WOWS Stats | {}'.format(
-                   pdata['nickname']))
+                   pdata[0]['nickname']))
         em.add_field(name="{}'s stats for War of Warships".format(pdata[0]['nickname']),
                      value="Leveling Points: **{}**\nLeveling Tier: **{}**\nBattle fought: **{}**\n"
                      "Distance travelled: **{}**\nMore to come!".format(pdata[0]['leveling_points'],
