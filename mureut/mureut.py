@@ -84,7 +84,7 @@ class MureUT:
     @checks.admin_or_permissions(administrator=True)
     async def logs(self, ctx, channel, *, info):
         """Logs for channels!"""
-        if channel == 0:
+        if channel == '0':
             return await self.logs_menu(ctx, info)
         return await self.logs_menu(ctx, info, cid=channel)
                 
