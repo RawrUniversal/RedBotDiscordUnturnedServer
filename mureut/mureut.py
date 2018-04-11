@@ -52,9 +52,7 @@ class MureUT:
             key = jdata['key']
             wows = wargaming.WoWS(jdata['key'], region='na', language='en')
         aid = wows.account.list(search=name, limit=1)[0]['account_id']
-        await self.bot.say(aid)
         pdata = wows.account.info(application_id=key,account_id=aid,language="en")
-        
         em = Embed(color=0x00F4FF,
                title='WOWS Stats | {}'.format(
                    pdata[aid]['nickname']))
@@ -63,7 +61,7 @@ class MureUT:
                      "Distance travelled: **{}**\nMore to come!".format(pdata[aid]['leveling_points'],
                      pdata[aid]['leveling_tier'],pdata[aid]['statistics']['battles'],
                      pdata[aid]['statistics']['distance']))
-        em.set_footer(text=str(datetime.fromtimestamp(pdata['stats_updated_at'])))
+        em.set_footer(text=str(datetime.fromtimestamp(pdata[aid]['stats_updated_at'])))
         await self.bot.say(embed=em)
         
 
