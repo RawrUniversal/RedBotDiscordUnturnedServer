@@ -177,17 +177,18 @@ class MureUT:
 
         return em
     
-    async def logs_menu(self, ctx, info,
+    async def logs_menu(self, ctx, info, cid=0,
                            message: discord.Message=None,
                            page=0, timeout: int=30):
         """menu control logic for this taken from
-           https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
-        author = ctx.message.author
-        server = author.server
-        channel = ctx.message.channel
+           https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""\
+        server = ctx.message.author.server.id
+        channel = cid
+        if cid == 0:
+            channel = ctx.message.channel.id
         base = os.path.join("data", "gnu")
-        server = os.path.join(base, str(server.id))
-        file = os.path.join(server, str(channel.id))
+        server = os.path.join(base, str(server))
+        file = os.path.join(server, str(channel))
         text_file = open(file, "r")
         lines = text_file.read().split('\n')
         log = ""
