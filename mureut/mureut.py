@@ -65,7 +65,7 @@ class MureUT:
                      pdata[aid]['statistics']['pvp']['wins'],pdata[aid]['statistics']['pvp']['losses'],
                      pdata[aid]['statistics']['pvp']['draws'], pdata[aid]['statistics']['pvp']['damage_dealt'],
                      pdata[aid]['statistics']['pvp']['max_damage_dealt']))
-        em.set_footer(text=str(datetime.fromtimestamp(pdata[aid]['stats_updated_at'])))
+        em.set_footer(text="Stats last updated: {}".format(str(datetime.fromtimestamp(pdata[aid]['stats_updated_at']))))
         await self.bot.say(embed=em)
         
 
