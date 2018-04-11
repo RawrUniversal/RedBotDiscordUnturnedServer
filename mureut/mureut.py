@@ -183,9 +183,8 @@ class MureUT:
                            message: discord.Message=None,
                            page=0, timeout: int=30):
         """menu control logic for this taken from
-        https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""\
-        author = ctx.message.author
-        server = author.server.id
+            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""\
+        server = ctx.message.author.server.id
         channel = cid
         if cid == 0:
             channel = ctx.message.channel.id
