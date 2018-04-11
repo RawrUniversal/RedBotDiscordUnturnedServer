@@ -55,11 +55,12 @@ class MureUT:
         pdata = wows.account.info(application_id=key,account_id=aid,language="en")
         em = Embed(color=0x00F4FF,
                title='WOWS Stats | {}'.format(
-                   pdata[0]['nickname']))
-        em.add_field(name="{}'s stats for War of Warships".format(pdata[0]['nickname']),
+                   pdata[0][aid]['nickname']))
+        em.add_field(name="{}'s stats for War of Warships".format(pdata[0][aid]['nickname']),
                      value="Leveling Points: **{}**\nLeveling Tier: **{}**\nBattle fought: **{}**\n"
-                     "Distance travelled: **{}**\nMore to come!".format(pdata[0]['leveling_points'],
-                     pdata[0]['leveling_tier'],pdata[0]['statistics']['battles'],pdata[0]['statistics']['distance']))
+                     "Distance travelled: **{}**\nMore to come!".format(pdata[0][aid]['leveling_points'],
+                     pdata[0][aid]['leveling_tier'],pdata[0][aid]['statistics']['battles'],
+                     pdata[0][aid]['statistics']['distance']))
         em.set_footer(text=str(datetime.fromtimestamp(pdata[0]['stats_updated_at'])))
         await self.bot.say(embed=em)
         
