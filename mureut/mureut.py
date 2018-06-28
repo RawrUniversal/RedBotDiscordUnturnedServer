@@ -159,7 +159,7 @@ class MureUT:
     def embed_status(item_json):
         em = Embed(color=0x00F4FF,
                    title='Steam Status | {}'.format(
-                       item_json["online_info"]))
+                       item_json['services']['cms']['title']))
 
         em.add_field(name="Current Steam Status: **Total Steam Players online: {}**".format(
                         item_json['services']['online']['title']),
