@@ -54,7 +54,7 @@ class MureUT:
         aid = wows.account.list(search=name, limit=1)[0]['account_id']
         pdata = wows.account.info(application_id=key,account_id=aid,language="en")
         em = Embed(color=0x00F4FF,
-               title='WOWS Stats | {}'.format(
+               title='WoWS Stats | {}'.format(
                    pdata[aid]['nickname']))
         em.add_field(name="{}'s stats for War of Warships".format(pdata[aid]['nickname']),
                      value="Leveling Points: **{}**\nLeveling Tier: **{}**\nBattle fought: **{}**\n"
@@ -70,8 +70,8 @@ class MureUT:
         
 
     @commands.command()
-    async def rs(self, *, itemid):
-        """Search through the items for Runescape!"""
+    async def rs3(self, *, itemid):
+        """Search through the items for Runescape 3!"""
         item = MureUT.check_item(itemid)
         if item is False:
             await self.bot.say("That item doesn't exist!")
