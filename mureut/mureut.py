@@ -108,9 +108,22 @@ class MureUT:
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
         if v == 2:
-            config_path = os.path.join(base_dir, "items_rs2.json")
+            with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as url:
+                jdata = simplejson.load(url)
+                    if item.capitalize() == 'Random':
+                        item = jdata[randint(0, len(jdata))]['id']
+                        return item
+                    if item.isdigit():
+                        for i in jdata:
+                            if i['id'] == int(item):
+                                return item
+                     else:
+                         item = MureUT.check_string(item)
+                         for i in jdata:
+                            if item == i['name']:
+                                return i['id']
         print(item)
-
+        
         if item.capitalize() == 'Random':
             with open(config_path) as item_ids:
                 jdata = json.load(item_ids)
@@ -139,9 +152,8 @@ class MureUT:
 
 
     def request_item2_json(item):
-        BASE_URL = "http://services.runescape.com/m=itemdb_oldschool"
-        end_point = "/api/catalogue/detail.json?item={}".format(str(item))
-        response = requests.get(BASE_URL + end_point)
+        BASE_URL = "https://api.rsbuddy.com/grandExchange?a=graph&g=30&i={}".format(str(item))
+        response = requests.get(BASE_URL)
 
         item_info = json.loads(response.content.decode("utf-8"))
         return item_info
@@ -155,7 +167,31 @@ class MureUT:
         item_info = json.loads(response.content.decode("utf-8"))
         return item_info
 
+    def generate_embed2(item_json):
+        print(item_json)
+        with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as url:
+            response = simplejson.load(url)
+            itemid = 0
+            item = MureUT.check_string(item)
+                for i in jdata:
+                    if item == i['name']:
+                        itemid = i['id']
+            em = Embed(color=0x00F4FF,
+                   title='{} ({})'.format(
+                       response[itemid]["name"].title(),
+                       response[itemid]["id"]))
+            
+            em.add_field(name="Current Price Guide: **{}**".format(item_json[1]['buyingPrice']),
+                     value="Buy price: **{}**\nSell price: **{}**\nAmount Bought: **{}**\nAmount sold: **{}**"
+                           "\n\nMembers Only?  **{}**\n".format(
+                        item_json[1]['buyingPrice'], item_json[1]['sellingPrice'],
+                        item_json[1]['buyingCompleted'], item_json[1]['sellingCompleted'],
+                        response[itemid]['members'].capitalize()))
 
+            em.set_footer(text=item_json['ts'])
+            return em
+        return null
+    
     def generate_embed(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
