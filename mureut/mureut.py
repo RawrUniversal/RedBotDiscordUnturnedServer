@@ -72,12 +72,23 @@ class MureUT:
     @commands.command()
     async def rs3(self, *, itemid):
         """Search through the items for Runescape 3!"""
-        item = MureUT.check_item(itemid)
+        item = MureUT.check_item(itemid, 3)
         if item is False:
             await self.bot.say("That item doesn't exist!")
             return
 
         data = MureUT.request_item_json(item)
+        await self.bot.say(embed=MureUT.generate_embed(data))
+        
+    @commands.command()
+    async def osrs(self, *, itemid):
+        """Search through the items for OldSchool Runescape!"""
+        item = MureUT.check_item(itemid, 2)
+        if item is False:
+            await self.bot.say("That item doesn't exist!")
+            return
+
+        data = MureUT.request_item2_json(item)
         await self.bot.say(embed=MureUT.generate_embed(data))
 
     @commands.command(pass_context=True, no_pm=True)
@@ -93,9 +104,11 @@ class MureUT:
         return item
 
 
-    def check_item(item):
+    def check_item(item, v):
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
+        if v == 2:
+            config_path = os.path.join(base_dir, "items_rs2.json")
         print(item)
 
         if item.capitalize() == 'Random':
@@ -125,6 +138,15 @@ class MureUT:
         return item
 
 
+    def request_item2_json(item):
+        BASE_URL = "http://services.runescape.com/m=itemdb_oldschool"
+        end_point = "/api/catalogue/detail.json?item={}".format(str(item))
+        response = requests.get(BASE_URL + end_point)
+
+        item_info = json.loads(response.content.decode("utf-8"))
+        return item_info
+    
+    
     def request_item_json(item):
         BASE_URL = "http://services.runescape.com/m=itemdb_rs"
         end_point = "/api/catalogue/detail.json?item={}".format(str(item))
