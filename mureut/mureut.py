@@ -156,7 +156,7 @@ class MureUT:
 
 
     def request_item2_json(item):
-        with urllib.request.urlopen("https://api.rsbuddy.com/grandExchange?a=graph&g=30&i={}".format(str(item)) as url:
+        with urllib.request.urlopen("https://api.rsbuddy.com/grandExchange?a=graph&g=30&i={}".format(str(item))) as url:
             item_info = simplejson.load(url)
             return item_info
         return False
