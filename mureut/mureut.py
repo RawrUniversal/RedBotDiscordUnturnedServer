@@ -117,11 +117,11 @@ class MureUT:
                     for i in jdata:
                         if i['id'] == int(item):
                             return item
-                 else:
-                     item = MureUT.check_string(item)
-                     for i in jdata:
-                         if item == i['name']:
-                            return i['id']
+                else:
+                    item = MureUT.check_string(item)
+                    for i in jdata:
+                        if item == i['name']:
+                           return i['id']
         print(item)
         
         if item.capitalize() == 'Random':
