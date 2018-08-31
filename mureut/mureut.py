@@ -114,7 +114,7 @@ class MureUT:
                     value = str(randint(0, len(jdata)))
                     if value not in jdata:
                         return false
-                    item = jdata[]
+                    item = jdata[value]
                     return item
                 if item.isdigit():
                     for i in jdata:
