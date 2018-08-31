@@ -113,7 +113,8 @@ class MureUT:
                 if item.capitalize() == 'Random':
                     value = str(randint(0, len(jdata)))
                     if value not in jdata:
-                        return false
+                        item = False
+                        return item
                     item = jdata[value]
                     return item
                 if item.isdigit():
