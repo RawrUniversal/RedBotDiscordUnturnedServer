@@ -155,7 +155,7 @@ class MureUT:
         BASE_URL = "https://api.rsbuddy.com/grandExchange?a=graph&g=30&i={}".format(str(item))
         response = requests.get(BASE_URL)
 
-        item_info = json.loads(response.content.decode("utf-8"))
+        item_info = json.loads(response)
         return item_info
     
     
