@@ -173,9 +173,9 @@ class MureUT:
             response = simplejson.load(url)
             itemid = 0
             item = MureUT.check_string(item)
-                for i in jdata:
-                    if item == i['name']:
-                        itemid = i['id']
+            for i in jdata:
+                if item == i['name']:
+                    itemid = i['id']
             em = Embed(color=0x00F4FF,
                    title='{} ({})'.format(
                        response[itemid]["name"].title(),
