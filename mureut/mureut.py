@@ -111,17 +111,17 @@ class MureUT:
             with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as url:
                 jdata = simplejson.load(url)
                 if item.capitalize() == 'Random':
-                    item = jdata[randint(0, len(jdata))]['id']
+                    item = jdata[randint(0, len(jdata))]
                     return item
                 if item.isdigit():
                     for i in jdata:
-                        if i['id'] == int(item):
+                        if i == int(item):
                             return item
                 else:
                     item = MureUT.check_string(item)
                     for i in jdata:
                         if item == i['name']:
-                           return i['id']
+                           return i
         print(item)
         
         if item.capitalize() == 'Random':
