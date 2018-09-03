@@ -8,7 +8,7 @@ from discord import Embed
 import requests
 import json
 import os
-import os.path
+import sys
 from datetime import datetime
 from random import randint
 import numpy
@@ -308,4 +308,6 @@ class MureUT:
 
 
 def setup(bot):
+    reload(sys) 
+    sys.setdefaultencoding('utf8')
     bot.add_cog(MureUT(bot))
