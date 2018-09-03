@@ -259,6 +259,9 @@ class MureUT:
         linen = 0
         mehh = 1
         for meh in lines:
+            if info in meh:
+                log += meh + "\n"
+                linen += 1
             if log.count('\n') < 10:
                 if lines[mehh].count('\n') == log.count('\n'):
                     if info in meh:
@@ -267,9 +270,6 @@ class MureUT:
             elif linen is 10:
                 linen = 0
                 log += log + "...n"
-            elif info in meh:
-                log += meh + "\n"
-                linen += 1
         if log.count('...n') == 0:
             return await self.bot.say("Nothing Found!")
         logs = numpy.split(numpy.array(log.split('...n')), 1)
