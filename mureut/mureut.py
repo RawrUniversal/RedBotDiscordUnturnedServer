@@ -248,7 +248,7 @@ class MureUT:
         channel = cid
         base = os.path.join("data", "gnu")
         server = os.path.join(base, str(server.id))
-        if server is null:
+        if server is Null:
             return await self.bot.say("You need to enable logging with '!clog on'!")
         file = os.path.join(server, str(channel))
         if cid == 0:
