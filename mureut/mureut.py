@@ -270,7 +270,7 @@ class MureUT:
             elif linen is 10:
                 linen = 0
                 log += log + "...n"
-        if log.count('...n') == 0:
+        if log.count('\n') == 0:
             return await self.bot.say("Nothing Found!")
         logs = numpy.split(numpy.array(log.split('...n')), 1)
         em = Embed(color=0x00F4FF,
