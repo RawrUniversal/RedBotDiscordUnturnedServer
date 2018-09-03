@@ -8,7 +8,6 @@ from discord import Embed
 import requests
 import json
 import os
-import sys
 from datetime import datetime
 from random import randint
 import numpy
@@ -255,14 +254,14 @@ class MureUT:
         if cid == 0:
             return await self.bot.say("You need to enable logging with '!clog on'!")
         text_file = open(file, "r")
-        lines = text_file.read().decode('utf-8').split('\n')
+        lines = text_file.read().decode('utf-8').split()
         log = ""
         for meh in lines:
             if info in meh:
                 log += meh + "\n"
         if log.count('\n') == 0:
             return await self.bot.say("Nothing Found!")
-        logs = numpy.split(numpy.array(log.split('\n')), 1)
+        logs = numpy.split(numpy.array(log.split()), 1)
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         em.add_field(name="Logs", value=str(logs[int(page)]))
@@ -308,5 +307,4 @@ class MureUT:
 
 
 def setup(bot):
-    sys.setdefaultencoding('utf8')
     bot.add_cog(MureUT(bot))
