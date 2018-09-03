@@ -255,7 +255,7 @@ class MureUT:
         if cid == 0:
             return await self.bot.say("You need to enable logging with '!clog on'!")
         text_file = open(file, "r")
-        lines = text_file.read().split('\n')
+        lines = text_file.read().decode('utf-8').split('\n')
         log = ""
         for meh in lines:
             if info in meh:
