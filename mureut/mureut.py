@@ -275,7 +275,10 @@ class MureUT:
         logs = numpy.split(numpy.array(log.split('...n')), 1)
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
-        em.add_field(name="Logs", value=str(logs[int(page)]))
+        try:
+            em.add_field(name="Logs", value=str(logs[int(page)]))
+        except IndexError:
+            return await self.bot.say("Nothing Found!")
         if not message:
             message =\
                 await self.bot.send_message(ctx.message.channel, embed=em)
