@@ -8,6 +8,7 @@ from discord import Embed
 import requests
 import json
 import os
+import os.path
 from datetime import datetime
 from random import randint
 import numpy
@@ -248,7 +249,7 @@ class MureUT:
         channel = cid
         base = os.path.join("data", "gnu")
         server = os.path.join(base, str(server.id))
-        if server is Null:
+        if not os.path.exists(server):
             return await self.bot.say("You need to enable logging with '!clog on'!")
         file = os.path.join(server, str(channel))
         if cid == 0:
