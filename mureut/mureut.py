@@ -308,6 +308,5 @@ class MureUT:
 
 
 def setup(bot):
-    reload(sys) 
     sys.setdefaultencoding('utf8')
     bot.add_cog(MureUT(bot))
