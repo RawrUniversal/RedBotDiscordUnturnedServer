@@ -254,14 +254,14 @@ class MureUT:
         if cid == 0:
             return await self.bot.say("You need to enable logging with '!clog on'!")
         text_file = open(file, "r", encoding="utf8")
-        lines = text_file.read().split()
+        lines = text_file.read().split('\n')
         log = ""
         for meh in lines:
             if info in meh:
                 log += meh + "\n"
         if log.count('\n') == 0:
             return await self.bot.say("Nothing Found!")
-        logs = numpy.split(numpy.array(log.split()), 1)
+        logs = numpy.split(numpy.array(log.split('\n')), 1)
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         em.add_field(name="Logs", value=str(logs[int(page)]))
