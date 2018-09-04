@@ -257,7 +257,7 @@ class MureUT:
         lines = text_file.read().split('\n')
         log = ""
         linen = 0
-        mehh = 1
+        mehh = 0
         log1 = ""
         for meh in lines:
             if info in meh:
@@ -269,7 +269,7 @@ class MureUT:
                     linen = 0
                     mehh += 1
                 elif linen < 10:
-                    if lines[mehh].count('\n') == log1.count('\n'):
+                    if lines[page].count('\n') == log1.count('\n'):
                         log += log1 + "|"
                         log1 = ""
                         linen = 0
@@ -280,7 +280,7 @@ class MureUT:
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         try:
-            em.add_field(name="Logs: ", value=''.join(logs[page]))
+            em.add_field(name="Logs: ", value=''.join(logs[0]))
         except IndexError:
             return await self.bot.say("Nothing more found!")
         if not message:
