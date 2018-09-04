@@ -263,19 +263,17 @@ class MureUT:
             if info in meh:
                 log1 += meh + '\n'
                 linen += 1
-            if linen >= 10:
-                log += log1 + "|"
-                log1 = ""
-                linen = 0
-                mehh += 1
-                continue
-            elif log1.count('\n') < 10:
-                if lines[mehh].count('\n') == log1.count('\n'):
+                if linen >= 10:
                     log += log1 + "|"
                     log1 = ""
                     linen = 0
                     mehh += 1
-                    continue
+                elif log1.count('\n') < 10:
+                    if lines[mehh].count('\n') == log1.count('\n'):
+                        log += log1 + "|"
+                        log1 = ""
+                        linen = 0
+                        mehh += 1
         if log.count('\n') == 0:
             return await self.bot.say("Nothing found!")
         logs = list(MureUT.chunks(log.split('|'), 1))
