@@ -263,7 +263,7 @@ class MureUT:
             return await self.bot.say("Nothing found!")
         logs = list(MureUT.chunks(log.split('|'), 10))
         em = Embed(color=0x00F4FF,
-                   title='Logs for {}'.format(info))
+                   title='Logs page number: {}'.format(page + 1))
         em.add_field(name="Logs: ", value=''.join(logs[int(page)]))
         if not message:
             message =\
