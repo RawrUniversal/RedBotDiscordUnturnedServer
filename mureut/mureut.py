@@ -266,13 +266,13 @@ class MureUT:
                 if lines[mehh].count('\n') == log.count('\n'):
                     if info in meh:
                         linen = 0
-                        log += log + "...n"
+                        log += log + ".,."
             elif linen is 10:
                 linen = 0
-                log += log + "...n"
+                log += log + ".,."
         if log.count('\n') == 0:
             return await self.bot.say("Nothing Found!")
-        logs = numpy.split(numpy.array(log.split('...n')), 1)
+        logs = numpy.split(numpy.array(log.split('.,.')), 1)
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         try:
