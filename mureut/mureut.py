@@ -277,7 +277,7 @@ class MureUT:
                         log1 = ""
         if log.count('\n') == 0:
             return await self.bot.say("Nothing found!")
-        logs = list(self.chunks(log.split('|'), 1))
+        logs = list(MureUT.chunks(log.split('|'), 1))
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         try:
