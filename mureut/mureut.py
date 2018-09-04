@@ -260,7 +260,7 @@ class MureUT:
         mehh = 1
         for meh in lines:
             if info in meh:
-                log += meh + ' \n'
+                log += meh + '\n'
                 linen += 1
             if log.count('\n') < 10:
                 if lines[mehh].count('\n') == log.count('\n'):
