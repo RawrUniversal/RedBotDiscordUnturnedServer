@@ -256,31 +256,16 @@ class MureUT:
         text_file = open(file, "r", encoding="utf8")
         lines = text_file.read().split('\n')
         log = ""
-        linen = 0
-        mehh = 0
-        log1 = ""
         for meh in lines:
             if info in meh:
-                log += meh + '\n'
-                linen = 1
-                if linen >= 10:
-                    log += log1 + "|"
-                    log1 = ""
-                    linen = 0
-                    mehh += 1
-                elif linen < 10:
-                    if lines[page].count('\n') == log1.count('\n'):
-                        log += log1 + "|"
-                        log1 = ""
-                        linen = 0
-                        mehh += 1
+                log += meh + "\n"
         if log.count('\n') == 0:
             return await self.bot.say("Nothing found!")
         logs = list(MureUT.chunks(log.split('\n'), 10))
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         try:
-            em.add_field(name="Logs: ", value=''.join(logs[1]))
+            em.add_field(name="Logs: ", value=''.join(logs[page]))
         except IndexError:
             return await self.bot.say("Nothing more found!")
         if not message:
