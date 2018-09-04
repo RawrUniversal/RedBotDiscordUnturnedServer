@@ -276,7 +276,7 @@ class MureUT:
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         try:
-            em.add_field(name="Logs:", value=logs[page][1])
+            em.add_field(name="Logs: ", value=''.join(logs[page]))
         except IndexError:
             return await self.bot.say("Nothing Found!")
         if not message:
