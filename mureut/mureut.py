@@ -260,7 +260,7 @@ class MureUT:
         mehh = 1
         for meh in lines:
             if info in meh:
-                log += meh + '\n'
+                log += meh + os.linesep
                 linen += 1
             if log.count('\n') < 10:
                 if lines[mehh].count('\n') == log.count('\n'):
@@ -276,7 +276,7 @@ class MureUT:
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         try:
-            em.add_field(name="Logs", value=logs[int(page)], inline=True)
+            em.add_field(name="Logs:", value=logs[int(page)])
         except IndexError:
             return await self.bot.say("Nothing Found!")
         if not message:
