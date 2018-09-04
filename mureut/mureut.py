@@ -257,17 +257,20 @@ class MureUT:
         lines = text_file.read().split('\n')
         log = ""
         linen = 0
+        mehh = 1
         for meh in lines:
             if info in meh:
                 log += meh + '\n'
                 linen += 1
             if linen >= 10:
                 linen = 0
+                mehh += 1
                 log += log + ".,."
             elif log.count('\n') < 10:
                 if info in meh:
-                    if log.count('\n') == meh:
+                    if lines[mehh].count('\n') == log.count('\n'):
                         linen = 0
+                        mehh += 1
                         log += log + ".,."
         if log.count('\n') == 0:
             return await self.bot.say("Nothing Found!")
