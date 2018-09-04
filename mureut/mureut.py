@@ -286,7 +286,7 @@ class MureUT:
         react = reacts[react.reaction.emoji]
         if react == "next":
             next_page = 0
-            if page == log.count('\n') - 1:
+            if page == log.count('|') - 1:
                 next_page = 0  # Loop around to the first item
             else:
                 next_page = page + 1
@@ -295,7 +295,7 @@ class MureUT:
         elif react == "back":
             next_page = 0
             if page == 0:
-                next_page = log.count('\n') - 1  # Loop around to the last item
+                next_page = log.count('|') - 1  # Loop around to the last item
             else:
                 next_page = page - 1
             return await self.logs_menu(ctx, info, cid=channel, message=message,
