@@ -264,7 +264,7 @@ class MureUT:
         logs = list(MureUT.chunks(log.split('|'), 10))
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
-        em.add_field(name="Logs: ", value=''.join(logs[page]))
+        em.add_field(name="Logs: ", value=''.join(logs[int(page)]))
         if not message:
             message =\
                 await self.bot.send_message(ctx.message.channel, embed=em)
