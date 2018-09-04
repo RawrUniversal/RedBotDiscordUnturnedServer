@@ -267,8 +267,8 @@ class MureUT:
                 mehh += 1
                 log += log + ".,."
             elif log.count('\n') < 10:
-                if info in meh:
-                    if lines[mehh].count('\n') == log.count('\n'):
+                if lines[mehh].count('\n') == log.count('\n'):
+                    if info in meh:
                         linen = 0
                         mehh += 1
                         log += log + ".,."
