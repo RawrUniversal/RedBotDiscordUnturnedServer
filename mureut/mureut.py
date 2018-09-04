@@ -257,7 +257,7 @@ class MureUT:
         lines = text_file.read().split('\n')
         log = ""
         linen = 0
-        mehh = 1
+        mehh = 0
         log1 = ""
         for meh in lines:
             if info in meh:
@@ -268,7 +268,7 @@ class MureUT:
                 log += log1 + "|"
                 log1 = ""
                 mehh += 1
-            elif log1.count('\n') <= 9:
+            elif log1.count('\n') < 10:
                 if lines[mehh].count('\n') == log1.count('\n'):
                     if info in meh:
                         linen = 0
