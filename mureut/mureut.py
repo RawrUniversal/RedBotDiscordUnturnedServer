@@ -263,11 +263,10 @@ class MureUT:
                 log += meh + os.linesep
                 linen += 1
             if log.count('\n') < 10:
-                if lines[mehh].count('\n') == log.count('\n'):
-                    if info in meh:
-                        linen = 0
-                        log += log + ".,."
-            elif linen is 10:
+                if info in meh:
+                    linen = 0
+                    log += log + ".,."
+            elif linen > 10:
                 linen = 0
                 log += log + ".,."
         if log.count('\n') == 0:
