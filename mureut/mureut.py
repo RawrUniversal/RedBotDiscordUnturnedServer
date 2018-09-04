@@ -266,13 +266,13 @@ class MureUT:
                 linen = 0
                 log += log1 + ".,."
                 log1 = ""
-            elif log.count('\n') < 10:
-                if lines[page].count('\n') == log.count('\n'):
+            elif log1.count('\n') <= 9:
+                if lines[page].count('\n') == log1.count('\n'):
                     if info in meh:
                         linen = 0
                         log += log1 + ".,."
                         log1 = ""
-        if log.count('\n') == 0:
+        if log.count('.,.') == 0:
             return await self.bot.say("Nothing Found!")
         logs = numpy.split(numpy.array(log.split('.,.')), 1)
         em = Embed(color=0x00F4FF,
