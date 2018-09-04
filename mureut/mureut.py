@@ -257,6 +257,7 @@ class MureUT:
         lines = text_file.read().split('\n')
         log = ""
         linen = 0
+        mehh = 1
         log1 = ""
         for meh in lines:
             if info in meh:
@@ -266,21 +267,23 @@ class MureUT:
                 linen = 0
                 log += log1 + ".,."
                 log1 = ""
+                mehh += 1
             elif log1.count('\n') <= 9:
-                if lines[page].count('\n') == log1.count('\n'):
+                if lines[mehh].count('\n') == log1.count('\n'):
                     if info in meh:
                         linen = 0
+                        mehh += 1
                         log += log1 + ".,."
                         log1 = ""
-        if log.count('.,.') == 0:
-            return await self.bot.say("Nothing Found!")
+        if log.count('\n') == 0:
+            return await self.bot.say("Nothing found!")
         logs = numpy.split(numpy.array(log.split('.,.')), 1)
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         try:
             em.add_field(name="Logs: ", value=''.join(logs[page]))
         except IndexError:
-            return await self.bot.say("Nothing Found!")
+            return await self.bot.say("Nothing more found!")
         if not message:
             message =\
                 await self.bot.send_message(ctx.message.channel, embed=em)
