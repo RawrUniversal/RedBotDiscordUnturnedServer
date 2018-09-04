@@ -265,7 +265,7 @@ class MureUT:
                 linen += 1
             if linen >= 10:
                 linen = 0
-                log += log1 + ".,."
+                log += log1 + "|"
                 log1 = ""
                 mehh += 1
             elif log1.count('\n') <= 9:
@@ -273,11 +273,11 @@ class MureUT:
                     if info in meh:
                         linen = 0
                         mehh += 1
-                        log += log1 + ".,."
+                        log += log1 + "|"
                         log1 = ""
         if log.count('\n') == 0:
             return await self.bot.say("Nothing found!")
-        logs = numpy.split(numpy.array(log.split('.,.')), 1)
+        logs = list(self.chunks(log.split('|')), 1)
         em = Embed(color=0x00F4FF,
                    title='Logs for {}'.format(info))
         try:
