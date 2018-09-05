@@ -263,8 +263,11 @@ class MureUT:
             return await self.bot.say("Nothing found!")
         logs = list(MureUT.chunks(log.split('|'), 10))
         em = Embed(color=0x00F4FF,
-                   title='Logs page number: {}'.format(page + 1))
-        em.add_field(name="Logs: ", value=''.join(logs[int(page)]))
+                   title="Logs page number: {} | Don't go too far foward or back!".format(page + 1))
+        try:
+            em.add_field(name="Logs: ", value=''.join(logs[int(page)]))
+        except IndexError:
+            return await self.bot.say("Nothing more found! | Don't go too far foward or back!")
         if not message:
             message =\
                 await self.bot.send_message(ctx.message.channel, embed=em)
