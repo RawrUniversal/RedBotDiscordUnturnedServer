@@ -83,11 +83,11 @@ class MureUT:
 
     @commands.command(pass_context=True, no_pm=True)
     @checks.admin_or_permissions(administrator=True)
-    async def logs(self, ctx, channelid, *, info):
+    async def logs(self, ctx, channelname, *, info):
         """Logs for channels!"""
         author = ctx.message.author
         server = author.server
-        channel = discord.utils.get(server.channels, name=channelid)
+        channel = discord.utils.get(server.channels, mention=channelname)
         return await self.logs_menu(ctx, info, cid=channel.id)
                 
 
