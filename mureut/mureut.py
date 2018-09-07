@@ -80,7 +80,6 @@ class MureUT:
         data = MureUT.request_item_json(item)
         await self.bot.say(embed=MureUT.generate_embed(data))
         
-    @commands.command()
     async def osrs(self, *, itemid):
         """Search through the items for OldSchool Runescape!"""
         item = MureUT.check_item(itemid, 2)
@@ -156,7 +155,7 @@ class MureUT:
 
 
     def request_item2_json(item):
-        with urllib.request.urlopen("https://api.rsbuddy.com/grandExchange?a=graph&g=30&i=" + str(item)) as url:
+        with urllib.request.urlopen("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=" + str(item)) as url:
             item_info = simplejson.load(url)
             return item_info
         return False
@@ -172,13 +171,13 @@ class MureUT:
 
     def generate_embed2(item_json):
         print(item_json)
-        with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as url:
+        with urllib.request.urlopen("https://rsbuddy.com/exchange/summary.json") as url:
             response = simplejson.load(url)
             itemid = 0
             item = MureUT.check_string(item)
             for i in jdata:
-                if item == i['name']:
-                    itemid = i['id']
+                if item == i[u'name']:
+                    itemid = i[u]
             em = Embed(color=0x00F4FF,
                    title='{} ({})'.format(
                        response[itemid]["name"].title(),
@@ -263,11 +262,11 @@ class MureUT:
             return await self.bot.say("Nothing found!")
         logs = list(MureUT.chunks(log.split('|'), 10))
         em = Embed(color=0x00F4FF,
-                   title="Logs page number: {} | Don't go too far foward or back!".format(page + 1))
+                   title="Logs pages: {}/{} | Don't go too far foward or back!".format(page + 1, logs.count()))
         try:
             em.add_field(name="Logs: ", value=''.join(logs[int(page)]))
         except IndexError:
-            return await self.bot.say("Nothing more found! | Don't go too far foward or back!")
+            return await self.bot.say("Nothing more found! | Don't go too far foward or back!" )
         if not message:
             message =\
                 await self.bot.send_message(ctx.message.channel, embed=em)
