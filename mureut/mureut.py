@@ -80,15 +80,6 @@ class MureUT:
         data = MureUT.request_item_json(item)
         await self.bot.say(embed=MureUT.generate_embed(data))
         
-    async def osrs(self, *, itemid):
-        """Search through the items for OldSchool Runescape!"""
-        item = MureUT.check_item(itemid, 2)
-        if item is False:
-            await self.bot.say("That item doesn't exist!")
-            return
-
-        data = MureUT.request_item2_json(item)
-        await self.bot.say(embed=MureUT.generate_embed(data))
 
     @commands.command(pass_context=True, no_pm=True)
     @checks.admin_or_permissions(administrator=True)
@@ -262,7 +253,7 @@ class MureUT:
             return await self.bot.say("Nothing found!")
         logs = list(MureUT.chunks(log.split('|'), 10))
         em = Embed(color=0x00F4FF,
-                   title="Logs pages: {}/{} | Don't go too far foward or back!".format(page + 1, logs.count()))
+                   title="Logs pages: {}/{} | Don't go too far foward or back!".format(page + 1, len(logs)))
         try:
             em.add_field(name="Logs: ", value=''.join(logs[int(page)]))
         except IndexError:
