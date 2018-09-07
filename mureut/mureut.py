@@ -85,7 +85,10 @@ class MureUT:
     @checks.admin_or_permissions(administrator=True)
     async def logs(self, ctx, channelid, *, info):
         """Logs for channels!"""
-        return await self.logs_menu(ctx, info, cid=channelid)
+        author = ctx.message.author
+        server = author.server
+        channel = discord.utils.get(server.channels, name=channelid)
+        return await self.logs_menu(ctx, info, cid=channel.id)
                 
 
     def check_string(item):
