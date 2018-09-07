@@ -84,7 +84,8 @@ class MureUT:
     @commands.command(pass_context=True, no_pm=True)
     @checks.admin_or_permissions(administrator=True)
     async def logs(self, ctx, channelname, *, info):
-        """Logs for channels!"""
+        """Logs for channels!
+        example: !logs #general test"""
         author = ctx.message.author
         server = author.server
         channel = discord.utils.get(server.channels, mention=channelname)
