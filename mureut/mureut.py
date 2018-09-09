@@ -2,6 +2,7 @@ import discord
 import array
 import dbl
 import logging
+import aiohttp
 import urllib.request, simplejson
 from cogs.utils.dataIO import dataIO
 from .utils import checks
