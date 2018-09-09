@@ -46,14 +46,15 @@ class MureUT:
             yield s[start:start+n]
            
     @commands.command()
-    async def steamstatus(self):
+    @asyncio.coroutine
+    def steamstatus(self):
         """Steam status command!"""
         async with aiohttp.ClientSession() as session:
             async with session.get('https://crowbar.steamstat.us/Barney') as r:
                 if r.status == 200:
-                    data = await r.json()
+                    data = yield from r.json()
                     if data['success']:
-                         return await self.bot.say(embed=MureUT.embed_status(data))
+                         yield from self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
     async def wows(self, name):
@@ -84,15 +85,16 @@ class MureUT:
         await self.bot.say(embed=em)
         
     @commands.command()
-    async def rs3(self, *, itemid):
+    @asyncio.coroutine
+    def rs3(self, *, itemid):
         """Search through the items for Runescape 3!"""
         item = MureUT.check_item(itemid, 3)
         if item is False:
-            await self.bot.say("That item doesn't exist!")
+            yield from self.bot.say("That item doesn't exist!")
             return
 
         data = MureUT.request_item_json(item)
-        return await self.bot.say(embed=MureUT.generate_embed(data))
+        yield from self.bot.say(embed=MureUT.generate_embed(data))
         
 
     @commands.command(pass_context=True, no_pm=True)
