@@ -45,7 +45,7 @@ class MureUT:
         for start in range(0, len(s), n):
             yield s[start:start+n]
            
-            
+    @asyncio.coroutine
     @commands.command()
     async def steamstatus(self):
         """Steam status command!"""
@@ -54,7 +54,7 @@ class MureUT:
                 if r.status == 200:
                     data = await r.json()
                     if data['success']:
-                         coroutine await self.bot.say(embed=MureUT.embed_status(data))
+                         await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
     async def wows(self, name):
@@ -84,7 +84,7 @@ class MureUT:
         em.set_footer(text="Stats last updated: {}".format(str(datetime.fromtimestamp(pdata[aid]['stats_updated_at']))))
         await self.bot.say(embed=em)
         
-
+    @asyncio.coroutine
     @commands.command()
     async def rs3(self, *, itemid):
         """Search through the items for Runescape 3!"""
