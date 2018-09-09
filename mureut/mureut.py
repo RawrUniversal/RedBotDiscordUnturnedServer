@@ -172,10 +172,9 @@ class MureUT:
     
     
     async def request_item_json(item):
-        BASE_URL = "http://services.runescape.com/m=itemdb_rs"
-        end_point = "/api/catalogue/detail.json?item={}".format(str(item))
+        BASE_URL = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item={}".format(str(item))
         async with aiohttp.ClientSession() as session:
-            async with session.get(BASE_URL + end_point) as r:
+            async with session.get(BASE_URL) as r:
                  if r.status == 200:
                      item_info = r.json()
                      return item_info
@@ -209,9 +208,9 @@ class MureUT:
         print(item_json)
         em = Embed(color=0x00F4FF,
                    title='{} ({}) | {}'.format(
-                       item_json["item"]["name"].title(),
+                       item_json["item"]["name"],
                        item_json["item"]["id"],
-                       item_json["item"]["description"].title()))
+                       item_json["item"]["description"]))
 
         em.add_field(name="Current Price Guide: **{}**".format(item_json['item']['current']['price']),
                      value="Today's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
