@@ -52,7 +52,7 @@ class MureUT:
         async with aiohttp.ClientSession() as session:
             async with session.get('https://crowbar.steamstat.us/Barney') as r:
                 if r.status == 200:
-                    data = simplejson.load(r)
+                    data = simplejson.load(r.text())
                     if await data['success']:
                          await self.bot.say(embed=MureUT.embed_status(data))
 
@@ -177,7 +177,7 @@ class MureUT:
         async with aiohttp.ClientSession() as session:
             async with session.get(BASE_URL) as r:
                 if r.status == 200:
-                    item_info = simplejson.load(r.json())
+                    item_info = simplejson.load(r.text())
                     return item_info
 
     def generate_embed2(item_json):
