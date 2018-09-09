@@ -203,7 +203,8 @@ class MureUT:
             return em
         return null
     
-    async def generate_embed(item_json):
+    @asyncio.coroutine
+    def generate_embed(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
                    title='{} ({}) | {}'.format(
@@ -224,8 +225,8 @@ class MureUT:
 
         return em
     
-    
-    async def embed_status(item_json):
+    @asyncio.coroutine
+    def embed_status(item_json):
         em = Embed(color=0x00F4FF,
                    title='Steam Status | {}'.format(
                        item_json['services']['cms']['title']))
