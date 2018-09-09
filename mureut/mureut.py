@@ -175,7 +175,7 @@ class MureUT:
     async def request_item_json(item):
         BASE_URL = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item={}".format(str(item))
         async with aiohttp.ClientSession() as session:
-            coroutine async with session.get(BASE_URL) as r:
+            async with session.get(BASE_URL) as r:
                 if r.status == 200:
                     item_info = simplejson.load(r.json())
                     return item_info
