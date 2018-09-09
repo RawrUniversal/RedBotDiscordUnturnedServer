@@ -94,7 +94,7 @@ class MureUT:
             return
 
         data = MureUT.request_item_json(item)
-        coroutine await self.bot.say(embed=MureUT.generate_embed(data))
+        await self.bot.say(embed=MureUT.generate_embed(data))
         
 
     @commands.command(pass_context=True, no_pm=True)
