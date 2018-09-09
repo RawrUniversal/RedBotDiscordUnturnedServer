@@ -53,7 +53,7 @@ class MureUT:
                 if r.status == 200:
                     data = await r.json()
                     if data['success']:
-                         yield from self.bot.say(embed=MureUT.embed_status(data))
+                         return await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
     async def wows(self, name):
@@ -92,7 +92,7 @@ class MureUT:
             return
 
         data = MureUT.request_item_json(item)
-        await self.bot.say(embed=MureUT.generate_embed(data))
+        return await self.bot.say(embed=MureUT.generate_embed(data))
         
 
     @commands.command(pass_context=True, no_pm=True)
