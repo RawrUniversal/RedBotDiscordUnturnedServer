@@ -45,8 +45,8 @@ class MureUT:
         for start in range(0, len(s), n):
             yield s[start:start+n]
            
-    @asyncio.coroutine
     @commands.command()
+    @asyncio.coroutine
     async def steamstatus(self):
         """Steam status command!"""
         async with aiohttp.ClientSession() as session:
@@ -84,8 +84,8 @@ class MureUT:
         em.set_footer(text="Stats last updated: {}".format(str(datetime.fromtimestamp(pdata[aid]['stats_updated_at']))))
         await self.bot.say(embed=em)
         
-    @asyncio.coroutine
     @commands.command()
+    @asyncio.coroutine
     async def rs3(self, *, itemid):
         """Search through the items for Runescape 3!"""
         item = MureUT.check_item(itemid, 3)
