@@ -2,8 +2,6 @@ import discord
 import array
 import dbl
 import logging
-import aiohttp
-from asyncio import coroutine
 import asyncio
 import urllib.request, simplejson
 from cogs.utils.dataIO import dataIO
@@ -167,13 +165,12 @@ class MureUT:
         return False
     
     
-    async def request_item_json(item):
-        BASE_URL = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item={}".format(str(item))
-        async with aiohttp.ClientSession() as session:
-            async with session.get(BASE_URL) as r:
-                if r.status == 200:
-                    item_info = await r.json()
-                    return item_info
+    def request_item_json(item):
+        BASE_URL = "http://services.runescape.com/m=itemdb_rs"
+        end_point = "/api/catalogue/detail.json?item={}".format(str(item))
+        with urllib.request.urlopen(BASE_URL + end_point) as response:
+            item_info = simplejson.load(response)
+            return item_info
 
     def generate_embed2(item_json):
         print(item_json)
@@ -200,7 +197,6 @@ class MureUT:
             return em
         return null
     
-    @asyncio.coroutine
     def generate_embed(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
@@ -222,7 +218,6 @@ class MureUT:
 
         return em
     
-    @asyncio.coroutine
     def embed_status(item_json):
         em = Embed(color=0x00F4FF,
                    title='Steam Status | {}'.format(
