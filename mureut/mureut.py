@@ -53,7 +53,7 @@ class MureUT:
             async with session.get('https://crowbar.steamstat.us/Barney') as r:
                 if r.status == 200:
                     data = await r.json()
-                    if await data['success']:
+                    if data['success']:
                          await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
