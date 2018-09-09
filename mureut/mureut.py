@@ -171,7 +171,7 @@ class MureUT:
         return False
     
     
-    def request_item_json(item):
+    async def request_item_json(item):
         BASE_URL = "http://services.runescape.com/m=itemdb_rs"
         end_point = "/api/catalogue/detail.json?item={}".format(str(item))
         async with aiohttp.ClientSession() as session:
