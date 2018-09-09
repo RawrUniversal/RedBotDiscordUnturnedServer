@@ -3,6 +3,7 @@ import array
 import dbl
 import logging
 import aiohttp
+from asyncio import coroutine
 import asyncio
 import urllib.request, simplejson
 from cogs.utils.dataIO import dataIO
@@ -204,6 +205,7 @@ class MureUT:
             return em
         return null
     
+    @coroutine
     def generate_embed(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
