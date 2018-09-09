@@ -205,7 +205,7 @@ class MureUT:
             return em
         return null
     
-    def generate_embed(item_json):
+    async def generate_embed(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
                    title='{} ({}) | {}'.format(
@@ -227,7 +227,7 @@ class MureUT:
         return em
     
     
-    def embed_status(item_json):
+    async def embed_status(item_json):
         em = Embed(color=0x00F4FF,
                    title='Steam Status | {}'.format(
                        item_json['services']['cms']['title']))
