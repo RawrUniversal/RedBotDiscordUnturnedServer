@@ -48,12 +48,13 @@ class MureUT:
             
     @commands.command()
     async def steamstatus(self):
-        """Steam status command!"""
-        async with client_session.get('https://crowbar.steamstat.us/Barney') as r:
-            if r.status == 200:
-                data = await r.json()
-                if data['success']:
-                    await self.bot.say(embed=MureUT.embed_status(data))
+        """Steam status command!"""0
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://crowbar.steamstat.us/Barney') as r:
+                if r.status == 200:
+                    data = simplejson.load(r.json())
+                    if data['success']:
+                         await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
     async def wows(self, name):
@@ -173,10 +174,11 @@ class MureUT:
     
     async def request_item_json(item):
         BASE_URL = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item={}".format(str(item))
-        async with client_session.get(BASE_URL) as r:
-             if r.status == 200:
-                item_info = simplejson.load(r)
-                return item_info
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://crowbar.steamstat.us/Barney') as r:
+                if r.status == 200:
+                    item_info = simplejson.load(r.json())
+                    return item_info
 
     def generate_embed2(item_json):
         print(item_json)
