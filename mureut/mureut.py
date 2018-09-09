@@ -52,8 +52,8 @@ class MureUT:
         async with aiohttp.ClientSession() as session:
             async with session.get('https://crowbar.steamstat.us/Barney') as r:
                 if r.status == 200:
-                    data = simplejson.load(r.json())
-                    if data['success']:
+                    data = simplejson.load(r)
+                    if await data['success']:
                          await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
@@ -207,7 +207,7 @@ class MureUT:
     
     async def generate_embed(item_json):
         print(item_json)
-        em = Embed(color=0x00F4FF,
+        await em = Embed(color=0x00F4FF,
                    title='{} ({}) | {}'.format(
                        item_json["item"]["name"],
                        item_json["item"]["id"],
@@ -224,11 +224,11 @@ class MureUT:
 
         em.set_footer(text=str(datetime.now()))
 
-        return em
+        return await em
     
     
     async def embed_status(item_json):
-        em = Embed(color=0x00F4FF,
+        await em = Embed(color=0x00F4FF,
                    title='Steam Status | {}'.format(
                        item_json['services']['cms']['title']))
 
@@ -246,7 +246,7 @@ class MureUT:
 
         em.set_footer(text=str(datetime.now()))
 
-        return em
+        return await em
     
     async def logs_menu(self, ctx, info, cid=0,
                            message: discord.Message=None,
