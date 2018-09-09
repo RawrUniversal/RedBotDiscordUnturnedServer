@@ -177,7 +177,7 @@ class MureUT:
         async with aiohttp.ClientSession() as session:
             async with session.get(BASE_URL) as r:
                  if r.status == 200:
-                     item_info = r.json()
+                     item_info = simplejson.load(r)
                      return item_info
 
     def generate_embed2(item_json):
@@ -205,7 +205,6 @@ class MureUT:
             return em
         return null
     
-    @coroutine
     def generate_embed(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
