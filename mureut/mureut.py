@@ -50,7 +50,7 @@ class MureUT:
     async def steamstatus(self):
         """Steam status command!"""
         async with aiohttp.ClientSession() as session:
-            coroutine async with session.get('https://crowbar.steamstat.us/Barney') as r:
+            async with session.get('https://crowbar.steamstat.us/Barney') as r:
                 if r.status == 200:
                     data = simplejson.load(r)
                     if await data['success']:
