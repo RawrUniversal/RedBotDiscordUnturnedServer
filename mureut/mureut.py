@@ -177,7 +177,7 @@ class MureUT:
         async with aiohttp.ClientSession() as session:
             async with session.get(BASE_URL + end_point) as r:
                  if r.status == 200:
-                     item_info = await r.json()
+                     item_info = r.json()
                      return item_info
 
     def generate_embed2(item_json):
