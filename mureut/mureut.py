@@ -29,6 +29,7 @@ class MureUT:
     """My custom cog that does stuff!"""
     
     def __init__(self, bot):
+        self.bot = bot
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
         key = None
