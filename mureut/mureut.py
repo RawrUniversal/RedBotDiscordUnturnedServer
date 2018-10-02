@@ -15,7 +15,7 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
-import OSRSGrandExchangeAPI as api
+import API as api
 
 
 numbs = {
