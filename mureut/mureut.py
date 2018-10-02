@@ -137,7 +137,7 @@ class MureUT:
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
         if v == 2:
-            with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as url:
+            with urllib.request.urlopen("https://canyourcode.com/assets/download/list.json") as url:
                 jdata = simplejson.load(url)
                 if item.capitalize() == 'Random':
                     value = str(randint(0, len(jdata)))
@@ -146,15 +146,16 @@ class MureUT:
                         return item
                     item = jdata[value]
                     return item
-                if item.isdigit():
-                    oapi = api.OfficialAPI()
-                    if oapi.get_price(item) is not None:
-                        return item
+               if item.isdigit():
+                    for i in jdata:
+                        if i['id'] == int(item):
+                            return item
+
                 else:
                     item = MureUT.check_string(item)
-                    oapi = api.OfficialAPI()
-                    if oapi.get_price(item) is not None:
-                        return item
+                    for i in jdata:
+                        if item == i['name']:
+                            return i['id']
         print(item)
         
         if item.capitalize() == 'Random':
@@ -185,8 +186,9 @@ class MureUT:
 
 
     def request_item2_json(item):
-        oapi = api.OfficialAPI()
-        return oapi.get_raw_dict(item)
+        with urllib.request.urlopen("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={}".format(str(item))) as response:
+            item_info = simplejson.load(response)
+            return item_info
     
     def request_item_json(item):
         BASE_URL = "http://services.runescape.com/m=itemdb_rs"
