@@ -1,6 +1,7 @@
 import discord
 import array
 import dbl
+import OSRSGrandExchangeAPI as api
 import logging
 import asyncio
 import urllib.request, simplejson
@@ -92,6 +93,18 @@ class MureUT:
         em.set_footer(text="Stats last updated: {}".format(str(datetime.fromtimestamp(pdata[aid]['stats_updated_at']))))
         await self.bot.say(embed=em)
         
+        
+    @commands.command()
+    async def osrs(self, *, itemid):
+        """Search through the items for Runescape 3!"""
+        item = MureUT.check_item(itemid, 2)
+        if item is False:
+            await self.bot.say("That item doesn't exist!")
+            return
+        data = MureUT.request_item2_json(item)
+        await self.bot.say(embed=MureUT.generate_embed2(data))
+        
+        
     @commands.command()
     async def rs3(self, *, itemid):
         """Search through the items for Runescape 3!"""
@@ -134,14 +147,14 @@ class MureUT:
                     item = jdata[value]
                     return item
                 if item.isdigit():
-                    for i in jdata:
-                        if i == item:
+                    oapi = api.OfficialAPI()
+                        if is oapi.get_price(item):
                             return item
                 else:
                     item = MureUT.check_string(item)
-                    for i in jdata:
-                        if item == i['name']:
-                           return i
+                    oapi = api.OfficialAPI()
+                        if is oapi.get_price(item):
+                           return item
         print(item)
         
         if item.capitalize() == 'Random':
@@ -172,11 +185,8 @@ class MureUT:
 
 
     def request_item2_json(item):
-        with urllib.request.urlopen("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=" + str(item)) as url:
-            item_info = simplejson.load(url)
-            return item_info
-        return False
-    
+        oapi = api.OfficialAPI()
+        return oapi.get_raw_dict(item)
     
     def request_item_json(item):
         BASE_URL = "http://services.runescape.com/m=itemdb_rs"
@@ -187,28 +197,20 @@ class MureUT:
 
     def generate_embed2(item_json):
         print(item_json)
-        with urllib.request.urlopen("https://rsbuddy.com/exchange/summary.json") as url:
-            response = simplejson.load(url)
-            itemid = 0
-            item = MureUT.check_string(item)
-            for i in jdata:
-                if item == i[u'name']:
-                    itemid = i[u]
-            em = Embed(color=0x00F4FF,
-                   title='{} ({})'.format(
-                       response[itemid]["name"].title(),
-                       response[itemid]["id"]))
-            
-            em.add_field(name="Current Price Guide: **{}**".format(item_json[1]['buyingPrice']),
-                     value="Buy price: **{}**\nSell price: **{}**\nAmount Bought: **{}**\nAmount sold: **{}**"
+        em = Embed(color=0x00F4FF,
+                   title='{} ({}) | {}'.format(
+                       item_json["item"]["name"],
+                       item_json["item"]["id"],
+                       item_json["item"]["description"]))
+        em.add_field(name="Current Price Guide: **{}**".format(item_json['item']['current']['price']),
+                     value="Today's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
                            "\n\nMembers Only?  **{}**\n".format(
-                        item_json[1]['buyingPrice'], item_json[1]['sellingPrice'],
-                        item_json[1]['buyingCompleted'], item_json[1]['sellingCompleted'],
-                        response[itemid]['members'].capitalize()))
-
-            em.set_footer(text=item_json['ts'])
-            return em
-        return null
+                        item_json['item']['today']['price'], item_json['item']['day30']['change'],
+                        item_json['item']['day90']['change'], item_json['item']['day180']['change'],
+                        item_json['item']['members'].capitalize()))
+        em.set_thumbnail(url=item_json['item']['icon_large'])
+        em.set_footer(text=str(datetime.now()))
+        return em
     
     def generate_embed(item_json):
         print(item_json)
