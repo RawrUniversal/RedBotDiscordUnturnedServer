@@ -1,7 +1,7 @@
 import discord
 import array
 import dbl
-import API as api
+import OSRSGrandExchangeAPI.API as api
 import logging
 import asyncio
 import urllib.request, simplejson
