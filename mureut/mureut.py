@@ -148,13 +148,13 @@ class MureUT:
                     return item
                 if item.isdigit():
                     oapi = api.OfficialAPI()
-                        if is oapi.get_price(item):
-                            return item
+                    if is oapi.get_price(item):
+                        return item
                 else:
                     item = MureUT.check_string(item)
                     oapi = api.OfficialAPI()
-                        if is oapi.get_price(item):
-                           return item
+                    if is oapi.get_price(item):
+                        return item
         print(item)
         
         if item.capitalize() == 'Random':
