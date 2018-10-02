@@ -139,7 +139,7 @@ class MureUT:
             with urllib.request.urlopen("https://canyourcode.com/assets/download/list.json") as url:
                 jdata = simplejson.load(url)
                 if item.capitalize() == 'Random':
-                    value = str(randint(0, len(jdata)))
+                    value = str(randint(2, len(jdata)))
                     if value not in jdata:
                         item = False
                         return item
