@@ -15,7 +15,6 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
-import API as api
 
 
 numbs = {
