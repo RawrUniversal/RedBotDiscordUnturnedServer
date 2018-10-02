@@ -148,12 +148,12 @@ class MureUT:
                     return item
                 if item.isdigit():
                     oapi = api.OfficialAPI()
-                    if is oapi.get_price(item):
+                    if oapi.get_price(item) is not None:
                         return item
                 else:
                     item = MureUT.check_string(item)
                     oapi = api.OfficialAPI()
-                    if is oapi.get_price(item):
+                    if oapi.get_price(item) is not None:
                         return item
         print(item)
         
