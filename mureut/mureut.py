@@ -1,7 +1,6 @@
 import discord
 import array
 import dbl
-from OSRSGrandExchangeAPI import API as api
 import logging
 import asyncio
 import urllib.request, simplejson
@@ -16,6 +15,7 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
+from OSRSGrandExchangeAPI.clients import API as api
 
 
 numbs = {
