@@ -145,11 +145,10 @@ class MureUT:
                         return item
                     item = jdata[value]
                     return item
-               if item.isdigit():
-                    for i in jdata:
-                        if i['id'] == int(item):
-                            return item
-
+                if item.isdigit():
+                     for i in jdata:
+                         if i['id'] == int(item):
+                             return item
                 else:
                     item = MureUT.check_string(item)
                     for i in jdata:
