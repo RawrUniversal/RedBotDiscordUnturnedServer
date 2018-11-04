@@ -140,7 +140,7 @@ class MureUT:
         path = os.path.join(base_dir, "items.json")
         if v == 2:
             with open(path) as itemids:
-                jdata = json.load(itemids.read().decode('utf-8'))
+                jdata = json.load(unicode(itemids.read(), 'utf-8'))
                 if item.capitalize() == 'Random':
                     value = str(randint(0, len(jdata)))
                     if value not in jdata:
