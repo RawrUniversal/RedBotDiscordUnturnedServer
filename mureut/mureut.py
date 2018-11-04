@@ -216,7 +216,7 @@ class MureUT:
                        item_json["name"],
                        item_json["id"],
                        item_json2["item"]["description"]))
-        em.add_field(name="Current Price Guide: **{}**".format(item_json['item']['current']['price']),
+        em.add_field(name="Current Price Guide: **{}**".format(item_json2['item']['current']['price']),
                      value="OSBuddy Buy Price: **{}**\nOSBuddy Sell Price: **{}**\nToday's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
                            "\n\nMembers Only?  **{}**\n".format(item_json['buy_average'],item_json['sell_average'],
                         item_json2['item']['today']['price'], item_json2['item']['day30']['change'],
