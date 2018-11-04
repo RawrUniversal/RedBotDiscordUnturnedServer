@@ -95,7 +95,8 @@ class MureUT:
         
     @commands.command()
     async def osrs(self, *, itemid):
-        """Search through the items for Runescape 3!"""
+        """Search through the items for Old School Runescape!
+        Example: '!osrs yew logs' You can use name or id."""
         item = MureUT.check_item(itemid, 2)
         if item is False:
             await self.bot.say("That item doesn't exist!")
@@ -106,7 +107,8 @@ class MureUT:
         
     @commands.command()
     async def rs3(self, *, itemid):
-        """Search through the items for Runescape 3!"""
+        """Search through the items for Runescape 3!
+        Example: '!rs3 yew logs' You can use name or id."""
         item = MureUT.check_item(itemid, 3)
         if item is False:
             await self.bot.say("That item doesn't exist!")
@@ -136,24 +138,24 @@ class MureUT:
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
         if v == 2:
-            with urllib.request.urlopen("https://canyourcode.com/assets/download/list.json") as url:
+            with urllib.request.urlopen("https://theemeraldage.com/items.json") as url:
                 jdata = simplejson.load(url)
                 if item.capitalize() == 'Random':
-                    value = str(randint(2, len(jdata)))
+                    value = str(randint(0, len(jdata)))
                     if value not in jdata:
                         item = False
                         return item
-                    item = jdata[value]
+                    item = value
                     return item
                 if item.isdigit():
                      for i in jdata:
-                         if i['id'] == int(item):
+                         if i == int(item):
                              return item
                 else:
                     item = MureUT.check_string(item)
                     for i in jdata:
                         if item == i['name']:
-                            return i['id']
+                            return i
         print(item)
         
         if item.capitalize() == 'Random':
