@@ -3,7 +3,6 @@ import array
 import dbl
 import logging
 import asyncio
-import sys
 import urllib.request, simplejson
 from cogs.utils.dataIO import dataIO
 from .utils import checks
@@ -31,8 +30,6 @@ class MureUT:
     
     def __init__(self, bot):
         self.bot = bot
-        reload(sys)
-        sys.setdefaultencoding('utf8')
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
         key = None
