@@ -138,8 +138,8 @@ class MureUT:
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
         if v == 2:
-            with urllib.request.urlopen("https://theemeraldage.com/items.json", encoding="utf-8") as url:
-                jdata = simplejson.load(url)
+            with urllib.request.urlopen("https://theemeraldage.com/items.json") as url:
+                jdata = simplejson.load(url.decode("utf-8"))
                 if item.capitalize() == 'Random':
                     value = str(randint(0, len(jdata)))
                     if value not in jdata:
