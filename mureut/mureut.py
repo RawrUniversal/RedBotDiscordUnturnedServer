@@ -143,20 +143,23 @@ class MureUT:
                 jdata = json.load(itemids)
                 if item.capitalize() == 'Random':
                     value = str(randint(0, len(jdata)))
-                    if value not in jdata:
+                    if value not in jdata['id']:
                         item = False
                         return item
-                    item = value
+                    item = value['id']
+                    if value['tradeable'] is false:
+                        item = False
+                        return item
                     return item
                 if item.isdigit():
                      for i in jdata:
-                         if i == int(item):
+                         if i['id'] == int(item):
                              return item
                 else:
                     item = MureUT.check_string(item)
                     for i in jdata:
                         if item == i['name']:
-                            return i
+                            return i['id']
         print(item)
         
         if item.capitalize() == 'Random':
