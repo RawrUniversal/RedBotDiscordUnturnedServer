@@ -104,6 +104,20 @@ class MureUT:
         data = MureUT.request_item2_json(item)
         await self.bot.say(embed=MureUT.generate_embed2(data))
         
+       
+    @commands.command()
+    async def osbuddy(self, *, itemid):
+        """Search through the items for Old School Runescape!
+        This one uses OSBuddy for prices!
+        Example: '!osbuddy yew logs' You can use name or id."""
+        item = MureUT.check_item(itemid, 2)
+        if item is False:
+            await self.bot.say("That item doesn't exist!")
+            return
+        data = MureUT.request_item_json_osbuddy(item)
+        data2 = MureUT.request_item2_json(item)
+        await self.bot.say(embed=MureUT.generate_embed_osbuddy(data, data2))
+        
         
     @commands.command()
     async def rs3(self, *, itemid):
@@ -178,7 +192,11 @@ class MureUT:
         item = False
         return item
 
-
+    def request_item_json_osbuddy(item):
+        with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
+            item_info = simplejson.load(response)[item]
+            return item_info
+    
     def request_item2_json(item):
         with urllib.request.urlopen("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={}".format(str(item))) as response:
             item_info = simplejson.load(response)
@@ -190,7 +208,24 @@ class MureUT:
         with urllib.request.urlopen(BASE_URL + end_point) as response:
             item_info = simplejson.load(response)
             return item_info
-
+        
+    def generate_embed_osbuddy(item_json, item_json2):
+        print(item_json)
+        em = Embed(color=0x00F4FF,
+                   title='{} ({}) | {}'.format(
+                       item_json["name"],
+                       item_json["id"],
+                       item_json2["item"]["description"]))
+        em.add_field(name="Current Price Guide: **{}**".format(item_json['item']['current']['price']),
+                     value="OSBuddy Buy Price: **{}**\nOSBuddy Sell Price: **{}**\nToday's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
+                           "\n\nMembers Only?  **{}**\n".format(item_json['buy_average'],item_json['sell_average'],
+                        item_json2['item']['today']['price'], item_json2['item']['day30']['change'],
+                        item_json2['item']['day90']['change'], item_json2['item']['day180']['change'],
+                        item_json2['item']['members'].capitalize()))
+        em.set_thumbnail(url=item_json2['item']['icon_large'])
+        em.set_footer(text=str(datetime.now()))
+        return em
+    
     def generate_embed2(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
