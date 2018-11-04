@@ -139,7 +139,7 @@ class MureUT:
         config_path = os.path.join(base_dir, "items_rs.json")
         path = os.path.join(base_dir, "items.json")
         if v == 2:
-            with open(path).read().decode("utf-8") as itemids:
+            with open(path) as itemids:
                 jdata = json.load(itemids)
                 if item.capitalize() == 'Random':
                     value = str(randint(0, len(jdata)))
