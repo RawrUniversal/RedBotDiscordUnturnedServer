@@ -142,12 +142,12 @@ class MureUT:
             with open(path, encoding = "ISO-8859-1") as itemids:
                 jdata = json.load(itemids)
                 if item.capitalize() == 'Random':
-                    value = str(randint(0, len(jdata)))
+                    value = jdata[randint(0, len(jdata))]
                     if value not in jdata['id']:
                         item = False
                         return item
-                    item = value['id']
-                    if value['tradeable'] is false:
+                    item = value
+                    if jdata['tradeable'] is false:
                         item = False
                         return item
                     return item
