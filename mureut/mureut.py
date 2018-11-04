@@ -92,24 +92,12 @@ class MureUT:
         em.set_footer(text="Stats last updated: {}".format(str(datetime.fromtimestamp(pdata[aid]['stats_updated_at']))))
         await self.bot.say(embed=em)
         
-        
+       
     @commands.command()
     async def osrs(self, *, itemid):
         """Search through the items for Old School Runescape!
-        Example: '!osrs yew logs' You can use name or id."""
-        item = MureUT.check_item(itemid, 2)
-        if item is False:
-            await self.bot.say("That item doesn't exist!")
-            return
-        data = MureUT.request_item2_json(item)
-        await self.bot.say(embed=MureUT.generate_embed2(data))
-        
-       
-    @commands.command()
-    async def osbuddy(self, *, itemid):
-        """Search through the items for Old School Runescape!
-        This one uses OSBuddy for prices!
-        Example: '!osbuddy yew logs' You can use name or id."""
+        Uses OSBuddy for prices! You can use name or id.
+        Example: !osbuddy yew logs"""
         item = MureUT.check_item(itemid, 2)
         if item is False:
             await self.bot.say("That item doesn't exist!")
@@ -218,7 +206,7 @@ class MureUT:
                        item_json2["item"]["description"]))
         em.add_field(name="Current Price Guide: **{}**".format(item_json2['item']['current']['price']),
                      value="OSBuddy Buy Price: **{}**\nOSBuddy Sell Price: **{}**\nOSBuddy Buy Quantity: **{}**\nOSBuddy Sell Quantity: **{}**"
-                           "\nToday's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
+                           "\n\nToday's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
                            "\n\nMembers Only?  **{}**\n".format(item_json['buy_average'],item_json['sell_average'],
                         item_json['buy_quantity'],item_json['sell_quantity'], item_json2['item']['today']['price'],
                         item_json2['item']['day30']['change'], item_json2['item']['day90']['change'],
