@@ -143,9 +143,6 @@ class MureUT:
                 jdata = json.load(itemids)
                 if item.capitalize() == 'Random':
                     value = jdata[randint(0, len(jdata))]
-                    if value not in jdata['id']:
-                        item = False
-                        return item
                     item = value
                     if jdata['tradeable'] is false:
                         item = False
