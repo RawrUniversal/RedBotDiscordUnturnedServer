@@ -3,6 +3,7 @@ import array
 import dbl
 import logging
 import asyncio
+import sys
 import urllib.request, simplejson
 from cogs.utils.dataIO import dataIO
 from .utils import checks
@@ -30,6 +31,8 @@ class MureUT:
     
     def __init__(self, bot):
         self.bot = bot
+        reload(sys)
+        sys.setdefaultencoding('utf8')
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
         key = None
@@ -139,8 +142,8 @@ class MureUT:
         config_path = os.path.join(base_dir, "items_rs.json")
         path = os.path.join(base_dir, "items.json")
         if v == 2:
-            with open(path) as itemids:
-                jdata = json.load(unicode(itemids.read(), 'utf-8'))
+            with open(path, encoding="utf-8") as itemids:
+                jdata = json.load(itemids)
                 if item.capitalize() == 'Random':
                     value = str(randint(0, len(jdata)))
                     if value not in jdata:
