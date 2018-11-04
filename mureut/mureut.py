@@ -141,13 +141,6 @@ class MureUT:
         if v == 2:
             with open(path, encoding = "ISO-8859-1") as itemids:
                 jdata = json.load(itemids)
-                if item.capitalize() == 'Random':
-                    value = jdata[randint(0, len(jdata))]
-                    item = value
-                    if jdata['tradeable'] is false:
-                        item = False
-                        return item
-                    return item
                 if item.isdigit():
                      for i in jdata:
                          if i['id'] == int(item):
