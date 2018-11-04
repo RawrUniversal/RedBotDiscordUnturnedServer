@@ -217,11 +217,12 @@ class MureUT:
                        item_json["id"],
                        item_json2["item"]["description"]))
         em.add_field(name="Current Price Guide: **{}**".format(item_json2['item']['current']['price']),
-                     value="OSBuddy Buy Price: **{}**\nOSBuddy Sell Price: **{}**\nToday's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
+                     value="OSBuddy Buy Price: **{}**\nOSBuddy Sell Price: **{}**\nOSBuddy Buy Quantity: **{}**\nOSBuddy Sell Quantity: **{}**"
+                           "\nToday's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
                            "\n\nMembers Only?  **{}**\n".format(item_json['buy_average'],item_json['sell_average'],
-                        item_json2['item']['today']['price'], item_json2['item']['day30']['change'],
-                        item_json2['item']['day90']['change'], item_json2['item']['day180']['change'],
-                        item_json2['item']['members'].capitalize()))
+                        item_json['buy_quantity'],item_json['sell_quantity'], item_json2['item']['today']['price'],
+                        item_json2['item']['day30']['change'], item_json2['item']['day90']['change'],
+                        item_json2['item']['day180']['change'], item_json2['item']['members'].capitalize()))
         em.set_thumbnail(url=item_json2['item']['icon_large'])
         em.set_footer(text=str(datetime.now()))
         return em
