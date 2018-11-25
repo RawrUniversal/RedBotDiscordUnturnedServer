@@ -1,8 +1,8 @@
 import discord
 import array
-import dbl
 import logging
 import asyncio
+import MySQLdb
 import urllib.request, simplejson
 from cogs.utils.dataIO import dataIO
 from .utils import checks
@@ -15,7 +15,6 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
-
 
 numbs = {
     "next": "➡",
@@ -30,32 +29,27 @@ class MureUT:
     
     def __init__(self, bot):
         self.bot = bot
+        
+    def chunks(s, n):
+        for start in range(0, len(s), n):
+            yield s[start:start+n]
+           
+    async def on_server_join(self, server):
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
         key = None
         with open(config_path) as ids:
             jdata = json.load(ids)
             key = jdata['key']
-        self.token = key  #  set this to your DBL token
-        self.dblpy = dbl.Client(self.bot, self.token)
-        self.bot.loop.create_task(self.update_stats())
-        
-    def chunks(s, n):
-        for start in range(0, len(s), n):
-            yield s[start:start+n]
+        db = MySQLdb.connect(host="localhost",
+                     user="root",
+                     passwd=key,
+                     db="DiscordBans")
+        cur = db.cursor()
+        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID={}".format(server.owner.id))
+        for row in cur.fetchall():
+            
 
-    async def update_stats(self):
-        """This function runs every 30 minutes to automatically update your server count"""
-
-        while True:
-            logger.info('attempting to post server count')
-            try:
-                await self.dblpy.post_server_count()
-                logger.info('posted server count ({})'.format(len(self.bot.guilds)))
-            except Exception as e:
-                logger.exception('Failed to post server count\n{}: {}'.format(type(e).__name__, e))
-            await asyncio.sleep(1800)
-           
     @commands.command()
     async def steamstatus(self):
         """Steam status command!"""
