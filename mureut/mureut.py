@@ -41,10 +41,12 @@ class MureUT:
         with open(config_path) as ids:
             jdata = json.load(ids)
             key = jdata['key']
+        await self.bot.say("You may not use this bot! Reason: " + key)
         db = MySQLdb.connect(host="localhost",
                      user="root",
                      passwd=key,
-                     db="DiscordBans")
+                     db="DiscordBans",
+                     port=3306)
         cur = db.cursor()
         cur.execute("SELECT * FROM DiscordBans WHERE DiscordID='{}'".format(server.owner.id))
         for row in cur.fetchall():
