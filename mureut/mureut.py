@@ -46,7 +46,7 @@ class MureUT:
                      passwd=key,
                      db="DiscordBans")
         cur = db.cursor()
-        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID={}".format(server.owner.id))
+        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID='{}'".format(server.owner.id))
         for row in cur.fetchall():
             if row[1] == '1':
                 await self.bot.say("You may not use this bot! Reason: " + row[3])
