@@ -48,7 +48,10 @@ class MureUT:
         cur = db.cursor()
         cur.execute("SELECT * FROM DiscordBans WHERE DiscordID={}".format(server.owner.id))
         for row in cur.fetchall():
-            
+            if row[1] == True:
+                await self.bot.say("You may not use this bot! Reason: " + row[3])
+                await leave_server(server)
+                return            
 
     @commands.command()
     async def steamstatus(self):
