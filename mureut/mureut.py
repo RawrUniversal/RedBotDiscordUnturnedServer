@@ -183,7 +183,9 @@ class MureUT:
 
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
-            item_info = simplejson.load(response)[item]
+            data = response.read()
+            encoding = response.info().get_content_charset('utf-8')
+            item_info = json.loads(data.decode(encoding))[item]
             return item_info
     
     def request_item2_json(item):
