@@ -145,12 +145,13 @@ class MureUT:
                 encoding = response.info().get_content_charset('utf-8')
                 jdata = json.loads(data.decode(encoding))
                 if item.capitalize() == 'Random':
-                    item = jdata[randint(0, len(jdata))]
-                    if item['tradeable'] == "true":
-                        return item
-                    else:
-                        item = False
-                        return item
+                    for i in jdata:
+                        rnd = randint(0, len(jdata))
+                        if i[rnd]['tradeable'] == "true":
+                            item = i[rnd]
+                            return item
+                        else:
+                            continue
                 if item.isdigit():
                      for i in jdata:
                          if i['id'] == int(item):
