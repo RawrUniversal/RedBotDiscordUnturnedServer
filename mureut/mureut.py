@@ -152,12 +152,12 @@ class MureUT:
                 elif item.isdigit():
                      for i in jdata:
                          if i == int(item):
-                             return item[str(int(i))]
+                             return item[int(i)]
                 else:
                     item = MureUT.check_string(item)
                     for i in jdata:
-                        if item == i[str(int(i))]['name']:
-                            return i[str(int(i))]
+                        if item == i[int(i)]['name']:
+                            return i[int(i)]
         print(item)
         
         if item.capitalize() == 'Random':
@@ -189,7 +189,7 @@ class MureUT:
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
             item_info = simplejson.load(response)
-            return jitem_info
+            return item_info
     
     def request_item2_json(item):
         with urllib.request.urlopen("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={}".format(str(item))) as response:
