@@ -148,7 +148,7 @@ class MureUT:
                     rnd = randint(0, len(jdata))
                     for i in jdata:
                         if i == str(rnd):
-                            return i[str(rnd)]['id']
+                            return i[rnd]['id']
                 elif item.isdigit():
                      for i in jdata:
                          if i == int(item):
