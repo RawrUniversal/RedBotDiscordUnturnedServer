@@ -149,15 +149,15 @@ class MureUT:
                     for i in jdata:
                         if i == rnd:
                             return i[rnd]
-                if item.isdigit():
+                elif item.isdigit():
                      for i in jdata:
                          if i == int(item):
-                             return item[int(i)]
+                             return item[str(int(i))]
                 else:
                     item = MureUT.check_string(item)
                     for i in jdata:
-                        if item == i[int(i)]['name']:
-                            return i
+                        if item == i[str(int(i))]['name']:
+                            return i[str(int(i))]
         print(item)
         
         if item.capitalize() == 'Random':
