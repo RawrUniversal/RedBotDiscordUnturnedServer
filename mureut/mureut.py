@@ -145,10 +145,8 @@ class MureUT:
                 encoding = response.info().get_content_charset('utf-8')
                 jdata = json.loads(data.decode(encoding))
                 if item.capitalize() == 'Random':
-                    with open(config_path) as item_ids:
-                        jdata = json.load(item_ids)
-                        item = jdata[randint(0, len(jdata))]['id']
-                        return item
+                    item = jdata[randint(0, len(jdata))]['id']
+                    return item
                 if item.isdigit():
                      for i in jdata:
                          if i['id'] == int(item):
