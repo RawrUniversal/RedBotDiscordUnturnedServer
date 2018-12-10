@@ -192,7 +192,7 @@ class MureUT:
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
             item_info = simplejson.load(response)
-            return item_info[item]
+            return simplejson.load(item_info[item])
     
     def request_item2_json(item):
         with urllib.request.urlopen("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={}".format(str(item))) as response:
