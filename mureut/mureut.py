@@ -191,7 +191,6 @@ class MureUT:
 
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
-            await self.bot.say(str(simplejson.load(response)[item]))
             item_info = simplejson.load(response)
             return item_info[item]
     
