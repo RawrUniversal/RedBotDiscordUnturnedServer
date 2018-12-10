@@ -143,7 +143,7 @@ class MureUT:
             with urllib.request.urlopen("https://raw.githubusercontent.com/tanlines/powerbot-scripts/master/items_useful_data.json") as response:
                 data = response.read()
                 encoding = response.info().get_content_charset('utf-8')
-                jdata = json.load(data.decode(encoding))
+                jdata = json.loads(data.decode(encoding))
                 if item.isdigit():
                      for i in jdata:
                          if i['id'] == int(item):
