@@ -140,27 +140,24 @@ class MureUT:
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
         if v == 2:
-            with urllib.request.urlopen("https://raw.githubusercontent.com/tanlines/powerbot-scripts/master/items_useful_data.json") as response:
+            with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
                 data = response.read()
                 encoding = response.info().get_content_charset('utf-8')
                 jdata = json.loads(data.decode(encoding))
                 if item.capitalize() == 'Random':
                     for i in jdata:
                         rnd = randint(0, len(jdata))
-                        if i['id'] == rnd:
-                            if i['tradeable'] == 'true':
-                                return i['id']
-                            else:
-                                continue
+                        if i == rnd:
+                            return i
                 if item.isdigit():
                      for i in jdata:
-                         if i['id'] == int(item):
+                         if i == int(item):
                              return item
                 else:
                     item = MureUT.check_string(item)
                     for i in jdata:
-                        if item == i['name']:
-                            return i['id']
+                        if item == i[i]['name']:
+                            return i
         print(item)
         
         if item.capitalize() == 'Random':
@@ -192,7 +189,7 @@ class MureUT:
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
             item_info = simplejson.load(response)
-            return json.loads(item_info[item])
+            return jitem_info
     
     def request_item2_json(item):
         with urllib.request.urlopen("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={}".format(str(item))) as response:
