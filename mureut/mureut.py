@@ -156,7 +156,7 @@ class MureUT:
                 else:
                     item = MureUT.check_string(item)
                     for i in jdata:
-                        if item == i[i]['name']:
+                        if item == i[str(i)]['name']:
                             return i
         print(item)
         
