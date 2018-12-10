@@ -139,10 +139,9 @@ class MureUT:
     def check_item(item, v):
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
-        path = os.path.join(base_dir, "items.json")
         if v == 2:
-            with open(path, encoding = "ISO-8859-1") as itemids:
-                jdata = json.load(itemids)
+            with urllib.request.urlopen("https://raw.githubusercontent.com/tanlines/powerbot-scripts/master/items_useful_data.json") as response:
+                jdata = json.load(response)
                 if item.isdigit():
                      for i in jdata:
                          if i['id'] == int(item):
