@@ -147,7 +147,7 @@ class MureUT:
                 if item.capitalize() == 'Random':
                     for i in jdata:
                         rnd = randint(0, len(jdata))
-                        if i[rnd]['tradeable'] == "true":
+                        if i[rnd]['tradeable'] == 'true':
                             item = i[rnd]
                             return item
                         else:
