@@ -149,7 +149,7 @@ class MureUT:
                         rnd = randint(0, len(jdata))
                         if i['id'] == rnd:
                             if i['tradeable'] == 'true':
-                                item = i[rnd]
+                                item = i['id']
                                 return item
                             else:
                                 continue
