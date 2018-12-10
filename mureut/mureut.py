@@ -147,8 +147,8 @@ class MureUT:
                 if item.capitalize() == 'Random':
                     rnd = randint(0, len(jdata))
                     for i in jdata:
-                        if i == rnd:
-                            return i[rnd]['id']
+                        if i == str(rnd):
+                            return i[str(rnd)]['id']
                 elif item.isdigit():
                      for i in jdata:
                          if i == int(item):
