@@ -141,7 +141,7 @@ class MureUT:
         config_path = os.path.join(base_dir, "items_rs.json")
         if v == 2:
             with urllib.request.urlopen("https://raw.githubusercontent.com/tanlines/powerbot-scripts/master/items_useful_data.json") as response:
-                jdata = json.load(response)
+                jdata = json.load(response.content.decode('utf-8'))
                 if item.isdigit():
                      for i in jdata:
                          if i['id'] == int(item):
