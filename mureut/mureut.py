@@ -48,7 +48,7 @@ class MureUT:
                      db="DiscordBans",
                      port=3306)
         cur = db.cursor()
-        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID='{}'".format(server.owner.id))
+        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.owner.id)
         for row in cur.fetchall():
             await self.bot.say("You may not use this bot! Reason: " + row[1])
             if row[1] == 'true':
@@ -144,15 +144,7 @@ class MureUT:
                 data = response.read()
                 encoding = response.info().get_content_charset('utf-8')
                 jdata = json.loads(data.decode(encoding))
-                if item.capitalize() == 'Random':
-                    rnd = randint(0, len(jdata))
-                    for i in jdata:
-                        if rnd != jdata[str(i)]['id']:
-                            rnd = randint(0, len(jdata))
-                            continue
-                        if i == rnd:
-                            return jdata[i]['id']
-                elif item.isdigit():
+                if item.isdigit():
                      for i in jdata:
                          if i == int(item):
                              return jdata[i]['id']
