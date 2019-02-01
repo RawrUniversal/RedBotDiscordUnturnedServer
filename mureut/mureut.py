@@ -184,10 +184,10 @@ class MureUT:
     async def listener(self, message):
         channel = message.channel
         if message.author.id != self.bot.user.id:
-            if 'thot' in message.content.lower():
-                await self.bot.send_message(message.channel, 'thot-bot*')
             if message.content.lower().startswith('you a thot') or 'thot-bot' in message.content.lower():
                 await self.bot.send_message(message.channel, 'no! you a thot!')
+            elif 'thot' in message.content.lower():
+                await self.bot.send_message(message.channel, 'thot-bot*')
     
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
