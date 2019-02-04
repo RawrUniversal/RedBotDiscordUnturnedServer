@@ -35,6 +35,7 @@ class MureUT:
             yield s[start:start+n]
            
     async def on_server_join(self, server):
+        await client.send_message(server.owner, "TEST")
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
         key = None
@@ -47,9 +48,10 @@ class MureUT:
                      db="DiscordBans",
                      port=3306)
         cur = db.cursor()
+        await client.send_message(server.owner, "TEST")
         cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.id)
         for row in cur.fetchall():
-            client.send_message(server.owner, row[1])
+            await client.send_message(server.owner, "TEST" + row[1])
             if row[1] == '1':
                 await client.send_message(server.owner, "You may not use this bot! Reason: " + row[3])
                 await leave_server(server)
