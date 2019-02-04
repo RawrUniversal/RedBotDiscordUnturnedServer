@@ -34,7 +34,6 @@ class MureUT:
         for start in range(0, len(s), n):
             yield s[start:start+n]
            
-    @asyncio.coroutine
     async def on_server_join(self, server):
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
@@ -360,4 +359,5 @@ def setup(bot):
     logger = logging.getLogger('bot')
     n = MureUT(bot)
     bot.add_listener(n.listener, "on_message")
+    bot.add_listener(n.on_server_join, "on_server_join")
     bot.add_cog(n)
