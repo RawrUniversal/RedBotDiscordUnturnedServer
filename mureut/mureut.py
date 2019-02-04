@@ -15,8 +15,6 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
-from discord.ext.commands import Bot
-bot = Bot(command_prefix="!")
 
 numbs = {
     "next": "➡",
@@ -36,9 +34,8 @@ class MureUT:
         for start in range(0, len(s), n):
             yield s[start:start+n]
     
-    @bot.event
     async def on_server_join(self, server):
-        await client.send_message(server.owner, "TEST")
+        await self.bot.send_message(server.default_channel, "TEST")
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
         key = None
@@ -54,7 +51,7 @@ class MureUT:
         await client.send_message(server.owner, "TEST")
         cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.id)
         for row in cur.fetchall():
-            await client.send_message(server.owner, "TEST" + row[1])
+            await self.bot.send_message(server.default_channel, "TEST" + row[1])
             if row[1] == '1':
                 await client.send_message(server.owner, "You may not use this bot! Reason: " + row[3])
                 await leave_server(server)
@@ -365,5 +362,4 @@ def setup(bot):
     logger = logging.getLogger('bot')
     n = MureUT(bot)
     bot.add_listener(n.listener, "on_message")
-    bot.add_listener(n.on_server_join, "on_server_join")
     bot.add_cog(n)
