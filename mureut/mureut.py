@@ -42,16 +42,14 @@ class MureUT:
         with open(config_path) as ids:
             jdata = json.load(ids)
             key = jdata['key']
-        await self.bot.say("You may not use this bot! Reason: " + key)
         db = MySQLdb.connect(host="localhost",
                      user="root",
                      passwd=key,
                      db="DiscordBans",
                      port=3306)
         cur = db.cursor()
-        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.owner.id)
+        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.id)
         for row in cur.fetchall():
-            await self.bot.say("You may not use this bot! Reason: " + row[1])
             if row[1] == 'true':
                 await self.bot.say("You may not use this bot! Reason: " + row[3])
                 await leave_server(server)
