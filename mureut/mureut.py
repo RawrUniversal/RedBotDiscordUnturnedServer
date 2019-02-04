@@ -15,6 +15,8 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
+from discord.ext.commands import Bot
+bot = Bot(command_prefix="!")
 
 numbs = {
     "next": "➡",
