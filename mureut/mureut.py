@@ -34,7 +34,7 @@ class MureUT:
         for start in range(0, len(s), n):
             yield s[start:start+n]
     
-    @client.event
+    @bot.event
     async def discordban(self, server):
         await client.send_message(server.owner, "TEST")
         base_dir = os.path.join("data", "red")
