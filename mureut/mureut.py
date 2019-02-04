@@ -49,6 +49,7 @@ class MureUT:
         cur = db.cursor()
         cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.id)
         for row in cur.fetchall():
+            client.send_message(server.owner, row[1])
             if row[1] == '1':
                 await client.send_message(server.owner, "You may not use this bot! Reason: " + row[3])
                 await leave_server(server)
