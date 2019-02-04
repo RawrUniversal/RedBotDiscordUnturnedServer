@@ -32,30 +32,7 @@ class MureUT:
         
     def chunks(s, n):
         for start in range(0, len(s), n):
-            yield s[start:start+n]
-    
-    async def on_server_join(self, server):
-        await self.bot.send_message(server.default_channel, "TEST")
-        base_dir = os.path.join("data", "red")
-        config_path = os.path.join(base_dir, "key.json")
-        key = None
-        with open(config_path) as ids:
-            jdata = json.load(ids)
-            key = jdata['key']
-        db = MySQLdb.connect(host="localhost",
-                     user="root",
-                     passwd=key,
-                     db="DiscordBans",
-                     port=3306)
-        cur = db.cursor()
-        await client.send_message(server.owner, "TEST")
-        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.id)
-        for row in cur.fetchall():
-            await self.bot.send_message(server.default_channel, "TEST" + row[1])
-            if row[1] == '1':
-                await client.send_message(server.owner, "You may not use this bot! Reason: " + row[3])
-                await leave_server(server)
-                return            
+            yield s[start:start+n]          
 
     @commands.command()
     async def steamstatus(self):
@@ -191,6 +168,29 @@ class MureUT:
                 await self.bot.send_message(message.channel, 'no! you a thot!')
             elif 'thot' in message.content.lower():
                 await self.bot.send_message(message.channel, 'thot-bot*')
+                
+    async def on_server_join(self, server):
+        await self.bot.send_message(server.default_channel, "TEST")
+        base_dir = os.path.join("data", "red")
+        config_path = os.path.join(base_dir, "key.json")
+        key = None
+        with open(config_path) as ids:
+            jdata = json.load(ids)
+            key = jdata['key']
+        db = MySQLdb.connect(host="localhost",
+                     user="root",
+                     passwd=key,
+                     db="DiscordBans",
+                     port=3306)
+        cur = db.cursor()
+        await client.send_message(server.owner, "TEST")
+        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.id)
+        for row in cur.fetchall():
+            await self.bot.send_message(server.default_channel, "TEST" + row[1])
+            if row[1] == '1':
+                await client.send_message(server.owner, "You may not use this bot! Reason: " + row[3])
+                await leave_server(server)
+                return              
     
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
