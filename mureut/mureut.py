@@ -170,7 +170,7 @@ class MureUT:
                 await self.bot.send_message(message.channel, 'thot-bot*')
                 
     async def on_server_join(self, server):
-        await self.bot.send_message(server.default_channel, "TEST")
+        print('joining {0}'.format(server.name))
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
         key = None
@@ -183,7 +183,6 @@ class MureUT:
                      db="DiscordBans",
                      port=3306)
         cur = db.cursor()
-        await client.send_message(server.owner, "TEST")
         cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.id)
         for row in cur.fetchall():
             await self.bot.send_message(server.default_channel, "TEST" + row[1])
