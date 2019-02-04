@@ -34,6 +34,7 @@ class MureUT:
         for start in range(0, len(s), n):
             yield s[start:start+n]
            
+    @asyncio.coroutine
     async def on_server_join(self, server):
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "key.json")
@@ -183,6 +184,8 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
+        if channel.id != 148002091011407872:
+            return
         if message.author.id != self.bot.user.id:
             if message.content.lower().startswith('you a thot') or 'thot-bot' in message.content.lower():
                 await self.bot.send_message(message.channel, 'no! you a thot!')
