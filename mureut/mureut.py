@@ -48,8 +48,8 @@ class MureUT:
         config_path = os.path.join(base_dir, "items.json")
         if itemorveh == "item":
             if idorname.isdigit():
-                with open(config_path) as item_ids:
-                    jdata = json.load(item_ids.decode('utf-8'))
+                with open(config_path, encoding="utf-8") as item_ids:
+                    jdata = json.load(item_ids)
                     for i in jdata:
                         if i['Id'] == int(idorname):
                             em = Embed(color=0x00F4FF,
