@@ -59,10 +59,10 @@ class MureUT:
                             em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i[idorname]["Buy"],i[idorname]["Sell"]),
                                                  value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
                                                     i[idorname]["Name"], i[idorname]["Id"], i[idorname]["Rarity"]))
-                            if i[idorname]['gInfo'] !== null:
+                            if i[idorname]['gInfo'] != null:
                                 em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i[idorname]['gInfo']['Firerate'],
                                 i[idorname]['gInfo']['Calibers']))
-                            if i[idorname]['cInfo'] !== null:
+                            if i[idorname]['cInfo'] != null:
                                 em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i[idorname]['cInfo']['Armor'],
                                 i[idorname]['cInfo']['ExArmor'], int(i[idorname]['cInfo']['Height']) * int(i[idorname]['cInfo']['Width'])))
                             em.set_footer(text=str(datetime.now()))
