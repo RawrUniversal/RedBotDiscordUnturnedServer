@@ -49,7 +49,7 @@ class MureUT:
         if itemorveh == "item":
             if idorname.isdigit():
                 with open(config_path) as item_ids:
-                    jdata = json.load(item_ids.get_content_charset('utf-8'))
+                    jdata = json.load(item_ids.decode('utf-8'))
                     for i in jdata:
                         if i['Id'] == int(idorname):
                             em = Embed(color=0x00F4FF,
