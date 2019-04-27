@@ -2,7 +2,6 @@ import discord
 import array
 import logging
 import asyncio
-import MySQLdb
 import urllib.request, simplejson
 from cogs.utils.dataIO import dataIO
 from .utils import checks
@@ -26,13 +25,13 @@ numbs = {
 class MureUT:
 
     """My custom cog that does stuff!"""
-    
+
     def __init__(self, bot):
         self.bot = bot
-        
+
     def chunks(s, n):
         for start in range(0, len(s), n):
-            yield s[start:start+n]          
+            yield s[start:start+n]
 
     @commands.command()
     async def steamstatus(self):
@@ -41,6 +40,32 @@ class MureUT:
             data = simplejson.load(url)
             if data['success']:
                 await self.bot.say(embed=MureUT.embed_status(data))
+
+    @commands.command()
+    async def unturned(self, itemorveh, *, idorname):
+        """unturned items/vehicle command!"""
+        base_dir = os.path.join("data", "red")
+        config_path = os.path.join(base_dir, "items.json")
+        if itemorveh == "item":
+            if idorname.isdigit():
+                with open(config_path) as item_ids:
+                    jdata = json.load(item_ids)
+                    for i in jdata:
+                        if i['Id'] == int(idorname):
+                            em = Embed(color=0x00F4FF,
+                                               title='{} ({})'.format(
+                                                   i[idorname]["Name"],
+                                                   i[idorname]["Id"]))
+                            em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i[idorname]["Buy"],i[idorname]["Sell"]),
+                                                 value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
+                                                    i[idorname]["Name"], i[idorname]["Id"], i[idorname]["Rarity"]))
+                            if i[idorname]['gInfo'] !== null:
+                                em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i[idorname]['gInfo']['Firerate'],
+                                i[idorname]['gInfo']['Calibers']))
+                            if i[idorname]['cInfo'] !== null:
+                                em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i[idorname]['cInfo']['Armor'],
+                                i[idorname]['cInfo']['ExArmor'], int(i[idorname]['cInfo']['Height']) * int(i[idorname]['cInfo']['Width'])))
+                            em.set_footer(text=str(datetime.now()))
 
     @commands.command()
     async def wows(self, name):
@@ -69,8 +94,8 @@ class MureUT:
                      pdata[aid]['statistics']['pvp']['max_damage_dealt']))
         em.set_footer(text="Stats last updated: {}".format(str(datetime.fromtimestamp(pdata[aid]['stats_updated_at']))))
         await self.bot.say(embed=em)
-        
-       
+
+
     @commands.command()
     async def osrs(self, *, itemid):
         """Search through the items for Old School Runescape!
@@ -83,8 +108,8 @@ class MureUT:
         data = MureUT.request_item_json_osbuddy(item)
         data2 = MureUT.request_item2_json(item)
         await self.bot.say(embed=MureUT.generate_embed_osbuddy(data, data2))
-        
-        
+
+
     @commands.command()
     async def rs3(self, *, itemid):
         """Search through the items for Runescape 3!
@@ -95,7 +120,7 @@ class MureUT:
             return
         data = MureUT.request_item_json(item)
         await self.bot.say(embed=MureUT.generate_embed(data))
-        
+
 
     @commands.command(pass_context=True, no_pm=True)
     @checks.admin_or_permissions(administrator=True)
@@ -106,7 +131,7 @@ class MureUT:
         server = author.server
         channel = discord.utils.get(server.channels, mention=channelname)
         return await self.logs_menu(ctx, info, cid=channel.id)
-                
+
 
     def check_string(item):
         item = item.lower()  # set all characters of item string to lowercase
@@ -132,7 +157,7 @@ class MureUT:
                         if item == jdata[i]['name']:
                             return jdata[i]['id']
         print(item)
-        
+
         if item.capitalize() == 'Random':
             with open(config_path) as item_ids:
                 jdata = json.load(item_ids)
@@ -168,46 +193,24 @@ class MureUT:
                 await self.bot.send_message(message.channel, 'no! you a thot!')
             elif 'thot' in message.content.lower():
                 await self.bot.send_message(message.channel, 'thot-bot*')
-                
-    async def on_server_join(self, server):
-        print('joining {0}'.format(server.name))
-        base_dir = os.path.join("data", "red")
-        config_path = os.path.join(base_dir, "key.json")
-        key = None
-        with open(config_path) as ids:
-            jdata = json.load(ids)
-            key = jdata['key']
-        db = MySQLdb.connect(host="localhost",
-                     user="root",
-                     passwd=key,
-                     db="DiscordBans",
-                     port=3306)
-        cur = db.cursor()
-        cur.execute("SELECT * FROM DiscordBans WHERE DiscordID=" + server.id)
-        for row in cur.fetchall():
-            await self.bot.send_message(server.default_channel, "TEST" + row[1])
-            if row[1] == '1':
-                await client.send_message(server.owner, "You may not use this bot! Reason: " + row[3])
-                await leave_server(server)
-                return              
-    
+
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
             item_info = simplejson.load(response)
             return item_info[str(item)]
-    
+
     def request_item2_json(item):
         with urllib.request.urlopen("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={}".format(str(item))) as response:
             item_info = simplejson.load(response)
             return item_info
-    
+
     def request_item_json(item):
         BASE_URL = "http://services.runescape.com/m=itemdb_rs"
         end_point = "/api/catalogue/detail.json?item={}".format(str(item))
         with urllib.request.urlopen(BASE_URL + end_point) as response:
             item_info = simplejson.load(response)
             return item_info
-        
+
     def generate_embed_osbuddy(item_json, item_json2):
         print(item_json)
         em = Embed(color=0x00F4FF,
@@ -225,7 +228,7 @@ class MureUT:
         em.set_thumbnail(url=item_json2['item']['icon_large'])
         em.set_footer(text=str(datetime.now()))
         return em
-    
+
     def generate_embed2(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
@@ -242,7 +245,7 @@ class MureUT:
         em.set_thumbnail(url=item_json['item']['icon_large'])
         em.set_footer(text=str(datetime.now()))
         return em
-    
+
     def generate_embed(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
@@ -263,7 +266,7 @@ class MureUT:
         em.set_footer(text=str(datetime.now()))
 
         return em
-    
+
     def embed_status(item_json):
         em = Embed(color=0x00F4FF,
                    title='Steam Status | {}'.format(
@@ -284,7 +287,7 @@ class MureUT:
         em.set_footer(text=str(datetime.now()))
 
         return em
-    
+
     async def logs_menu(self, ctx, info, cid=0,
                            message: discord.Message=None,
                            page=0, timeout: int=30):
@@ -360,5 +363,4 @@ def setup(bot):
     global logger
     logger = logging.getLogger('bot')
     n = MureUT(bot)
-    bot.add_listener(n.listener, "on_message")
     bot.add_cog(n)
