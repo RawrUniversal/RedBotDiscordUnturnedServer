@@ -60,10 +60,10 @@ class MureUT:
                                                  value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
                                                     i["Name"], i["Id"], i["Rarity"]))
                             if i['gInfo'] != None:
-                                em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i['gInfo']['Firerate'],
+                                em.add_field(name="\nExtra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i['gInfo']['Firerate'],
                                 i['gInfo']['Calibers']))
                             if i['cInfo'] != None:
-                                em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i['cInfo']['Armor'],
+                                em.add_field(name="\nExtra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i['cInfo']['Armor'],
                                 i['cInfo']['ExArmor'], int(i['cInfo']['Height']) * int(i['cInfo']['Width'])))
                             em.set_footer(text=str(datetime.now()))
                             await self.bot.say(embed=em)
