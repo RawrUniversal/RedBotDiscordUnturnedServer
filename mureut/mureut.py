@@ -51,7 +51,6 @@ class MureUT:
                 with open(config_path, encoding="utf-8") as item_ids:
                     jdata = json.load(item_ids)
                     for i in jdata:
-                        if int(i[idorname]['Id']) == idorname:
                             em = Embed(color=0x00F4FF,
                                                title='{} ({})'.format(
                                                    i[idorname]["Name"],
