@@ -47,26 +47,15 @@ class MureUT:
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "items.json")
         if itemorveh == "item":
-            if idorname.isdigit():
-                with open(config_path, encoding="utf-8") as item_ids:
-                    jdata = json.load(item_ids)
-                    for key, i in jdata.items():
+            with open(config_path, encoding="utf-8") as item_ids:
+                jdata = json.load(item_ids)
+                for key, i in jdata.items():
+                    if idorname.isdigit():
                         if key == idorname:
-                            em = Embed(color=0x00F4FF,
-                                               title='{} ({})'.format(
-                                                   i["Name"],
-                                                   i["Id"]))
-                            em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Buy"],i["Sell"]),
-                                                 value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
-                                                    i["Name"], i["Id"], i["Rarity"]))
-                            if i['gInfo'] != None:
-                                em.add_field(name="\nExtra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i['gInfo']['Firerate'],
-                                i['gInfo']['Calibers']))
-                            if i['cInfo'] != None:
-                                em.add_field(name="\nExtra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i['cInfo']['Armor'],
-                                i['cInfo']['ExArmor'], int(i['cInfo']['Height']) * int(i['cInfo']['Width'])))
-                            em.set_footer(text=str(datetime.now()))
-                            await self.bot.say(embed=em)
+                            await self.bot.say(embed=unturnedjson(i))
+                    else:
+                        if i['Name'] == idorname:
+                            await self.bot.say(embed=unturnedjson(i))
 
     @commands.command()
     async def wows(self, name):
@@ -230,6 +219,23 @@ class MureUT:
         em.set_footer(text=str(datetime.now()))
         return em
 
+    def unturnedjson(i):
+        em = Embed(color=0x00F4FF,
+                   title='{} ({})'.format(
+                   i["Name"],
+                   i["Id"]))
+         em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Buy"],i["Sell"]),
+            value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
+            i["Name"], i["Id"], i["Rarity"]))
+         if i['gInfo'] != None:
+             em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i['gInfo']['Firerate'],
+             i['gInfo']['Calibers']))
+         if i['cInfo'] != None:
+             em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i['cInfo']['Armor'],
+             i['cInfo']['ExArmor'], int(i['cInfo']['Height']) * int(i['cInfo']['Width'])))
+        em.set_footer(text=str(datetime.now()))
+        return em
+    
     def generate_embed2(item_json):
         print(item_json)
         em = Embed(color=0x00F4FF,
