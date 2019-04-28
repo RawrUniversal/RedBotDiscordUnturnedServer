@@ -52,7 +52,7 @@ class MureUT:
                     jdata = json.load(item_ids)
                     for i in jdata:
                         itemid = int(idorname)
-                        if i[itemid]['Id'] == itemid:
+                        if int(i[itemid]['Id']) == itemid:
                             em = Embed(color=0x00F4FF,
                                                title='{} ({})'.format(
                                                    i[itemid]["Name"],
@@ -67,6 +67,7 @@ class MureUT:
                                 em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i[itemid]['cInfo']['Armor'],
                                 i[itemid]['cInfo']['ExArmor'], int(i[itemid]['cInfo']['Height']) * int(i[itemid]['cInfo']['Width'])))
                             em.set_footer(text=str(datetime.now()))
+                            await self.bot.say(embed=em)
 
     @commands.command()
     async def wows(self, name):
