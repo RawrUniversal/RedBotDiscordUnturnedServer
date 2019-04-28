@@ -50,16 +50,16 @@ class MureUT:
             if idorname.isdigit():
                 with open(config_path, encoding="utf-8") as item_ids:
                     jdata = json.load(item_ids)
-                    for i in jdata:
+                    for key, i in jdata.items():
                         itemid = int(idorname)
-                        if int(i[itemid]['Id']) == itemid:
+                        if key == itemid:
                             em = Embed(color=0x00F4FF,
                                                title='{} ({})'.format(
-                                                   i[itemid]["Name"],
-                                                   i[itemid]["Id"]))
-                            em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i[itemid]["Buy"],i[itemid]["Sell"]),
+                                                   i["Name"],
+                                                   i["Id"]))
+                            em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Buy"],i["Sell"]),
                                                  value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
-                                                    i[itemid]["Name"], i[itemid]["Id"], i[itemid]["Rarity"]))
+                                                    i["Name"], i["Id"], i["Rarity"]))
                             if i[itemid]['gInfo'] != null:
                                 em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i[itemid]['gInfo']['Firerate'],
                                 i[itemid]['gInfo']['Calibers']))
