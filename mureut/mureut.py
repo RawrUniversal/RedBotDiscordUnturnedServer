@@ -52,10 +52,10 @@ class MureUT:
                 for key, i in jdata.items():
                     if idorname.isdigit():
                         if key == idorname:
-                            await self.bot.say(embed=unturnedjson(i))
+                            await self.bot.say(embed=MureUT.unturnedjson(i))
                     else:
                         if i['Name'] == idorname:
-                            await self.bot.say(embed=unturnedjson(i))
+                            await self.bot.say(embed=MureUT.unturnedjson(i))
 
     @commands.command()
     async def wows(self, name):
