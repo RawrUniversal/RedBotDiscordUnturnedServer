@@ -51,19 +51,21 @@ class MureUT:
                 with open(config_path, encoding="utf-8") as item_ids:
                     jdata = json.load(item_ids)
                     for i in jdata:
+                        itemid = int(idorname)
+                        if i[itemid]['Id'] == itemid:
                             em = Embed(color=0x00F4FF,
                                                title='{} ({})'.format(
-                                                   i[idorname]["Name"],
-                                                   i[idorname]["Id"]))
-                            em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i[idorname]["Buy"],i[idorname]["Sell"]),
+                                                   i[itemid]["Name"],
+                                                   i[itemid]["Id"]))
+                            em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i[itemid]["Buy"],i[itemid]["Sell"]),
                                                  value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
-                                                    i[idorname]["Name"], i[idorname]["Id"], i[idorname]["Rarity"]))
-                            if i[idorname]['gInfo'] != null:
-                                em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i[idorname]['gInfo']['Firerate'],
-                                i[idorname]['gInfo']['Calibers']))
-                            if i[idorname]['cInfo'] != null:
-                                em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i[idorname]['cInfo']['Armor'],
-                                i[idorname]['cInfo']['ExArmor'], int(i[idorname]['cInfo']['Height']) * int(i[idorname]['cInfo']['Width'])))
+                                                    i[itemid]["Name"], i[itemid]["Id"], i[itemid]["Rarity"]))
+                            if i[itemid]['gInfo'] != null:
+                                em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i[itemid]['gInfo']['Firerate'],
+                                i[itemid]['gInfo']['Calibers']))
+                            if i[itemid]['cInfo'] != null:
+                                em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i[itemid]['cInfo']['Armor'],
+                                i[itemid]['cInfo']['ExArmor'], int(i[itemid]['cInfo']['Height']) * int(i[itemid]['cInfo']['Width'])))
                             em.set_footer(text=str(datetime.now()))
 
     @commands.command()
