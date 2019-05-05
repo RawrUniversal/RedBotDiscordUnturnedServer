@@ -133,10 +133,10 @@ class MureUT:
              if idorname.isdigit():
                  if key == idorname:
                       item = i
-                 elif i['Name'].lower() == idorname.lower():
+                 elif i['Name'] == idorname:
                      item = i
                  else:
-                     if i['Name'].lower() in idorname.lower():
+                     if i['Name'] in idorname:
                          item = i
         item = False
         return item
