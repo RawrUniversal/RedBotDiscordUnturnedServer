@@ -49,7 +49,7 @@ class MureUT:
         if itemorveh == "item":
             with open(config_path, encoding="utf-8") as item_ids:
                 jdata = json.load(item_ids)
-                item = MureUT.check_unturned(json, self)
+                item = MureUT.check_unturned(json)
                 if item is False:
                     await self.bot.say("That item doesn't exist!")
                     return
