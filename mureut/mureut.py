@@ -55,10 +55,10 @@ class MureUT:
                             await self.bot.say(embed=MureUT.unturnedjson(i))
                     elif str(i['Name']).lower() == str(idorname).lower():
                         await self.bot.say(embed=MureUT.unturnedjson(i))
-                    elif str(i['Name']).lower() in str(idorname).lower():
-                        await self.bot.say(embed=MureUT.unturnedjson(i))
                     else:
                         await self.bot.say("That item doesn't exist!")
+                        return
+                        
 
     @commands.command()
     async def wows(self, name):
