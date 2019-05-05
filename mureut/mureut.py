@@ -136,7 +136,7 @@ class MureUT:
                  elif i['Name'] == idorname:
                      item = i
                  else:
-                     if i['Name'] in idorname:
+                     if i['Name'] in str(idorname):
                          item = i
         item = False
         return item
