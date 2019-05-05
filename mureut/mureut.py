@@ -53,6 +53,8 @@ class MureUT:
                 if item is False:
                     await self.bot.say("That item doesn't exist!")
                     return
+                else:
+                    await self.bot.say(embed=MureUT.unturnedjson(i))
 
     @commands.command()
     async def wows(self, name):
@@ -125,20 +127,18 @@ class MureUT:
         item = item.capitalize()  # capitalize the first letter of the string
         return item
 
-    def check_unturned(json, self):
+    def check_unturned(json):
         for key, i in jdata.items():
              if idorname.isdigit():
                  if key == idorname:
-                      await self.bot.say(embed=MureUT.unturnedjson(i))
-                      return True
+                      return i
                  elif i['Name'].lower() == str(idorname).lower():
-                     await self.bot.say(embed=MureUT.unturnedjson(i))
-                     return True
+                     return i
                  else:
                      if i['Name'].lower() in str(idorname).lower():
-                         await self.bot.say(embed=MureUT.unturnedjson(i))
-                         return True
-          return False
+                         return i
+          json = False
+          return json
     
     
     def check_item(item, v):
