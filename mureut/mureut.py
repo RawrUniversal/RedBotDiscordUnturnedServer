@@ -232,7 +232,7 @@ class MureUT:
 
     def unturnedjson(i):
         em = Embed(color=0x00F4FF,title='{} ({})'.format(i["Name"],i["Id"]))
-        em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Buy"],i["Sell"]),
+        em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Sell"],i["Buy"]),
                       value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
                       i["Name"], i["Id"], i["Rarity"]))
         if i['gInfo'] != None:
