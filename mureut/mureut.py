@@ -128,16 +128,18 @@ class MureUT:
         return item
 
     def check_unturned(json):
+        item = False
         for key, i in jdata.items():
              if idorname.isdigit():
                  if key == idorname:
-                      return i
+                      item = i
                  elif i['Name'].lower() == str(idorname).lower():
-                     return i
+                     item = i
                  else:
                      if i['Name'].lower() in str(idorname).lower():
-                         return i
-          return False
+                         item = i
+        item = False
+        return item
     
     
     def check_item(item, v):
