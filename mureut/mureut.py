@@ -53,7 +53,7 @@ class MureUT:
                     if idorname.isdigit():
                         if key == idorname:
                             await self.bot.say(embed=MureUT.unturnedjson(i))
-                    elif str(i['Name']).lower() == str(idorname).lower():
+                    elif i['Name'].lower() == str(idorname).lower():
                         await self.bot.say(embed=MureUT.unturnedjson(i))
                     else:
                         await self.bot.say("That item doesn't exist!")
