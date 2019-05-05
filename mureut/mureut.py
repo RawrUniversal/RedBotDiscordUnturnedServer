@@ -49,7 +49,7 @@ class MureUT:
         if itemorveh == "item":
             with open(config_path, encoding="utf-8") as item_ids:
                 jdata = json.load(item_ids)
-                item = MureUT.check_unturned(jdata)
+                item = MureUT.check_unturned(jdata, idorname)
                 if item is False:
                     await self.bot.say("That item doesn't exist!")
                     return
@@ -127,7 +127,7 @@ class MureUT:
         item = item.capitalize()  # capitalize the first letter of the string
         return item
 
-    def check_unturned(jdata):
+    def check_unturned(jdata, idorname):
         item = False
         for key, i in jdata.items():
              if idorname.isdigit():
