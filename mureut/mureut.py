@@ -54,7 +54,7 @@ class MureUT:
                         if key == idorname:
                             await self.bot.say(embed=MureUT.unturnedjson(i))
                     else:
-                        if i['Name'] == idorname:
+                        if i['Name'].lower() == idorname.lower():
                             await self.bot.say(embed=MureUT.unturnedjson(i))
 
     @commands.command()
