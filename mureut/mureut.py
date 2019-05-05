@@ -53,9 +53,12 @@ class MureUT:
                     if idorname.isdigit():
                         if key == idorname:
                             await self.bot.say(embed=MureUT.unturnedjson(i))
+                    elif str(i['Name']).lower() == str(idorname).lower():
+                        await self.bot.say(embed=MureUT.unturnedjson(i))
+                    elif str(i['Name']).lower() in str(idorname).lower():
+                        await self.bot.say(embed=MureUT.unturnedjson(i))
                     else:
-                        if i['Name'].lower() == idorname.lower():
-                            await self.bot.say(embed=MureUT.unturnedjson(i))
+                        await self.bot.say("That item doesn't exist!")
 
     @commands.command()
     async def wows(self, name):
