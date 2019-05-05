@@ -49,16 +49,10 @@ class MureUT:
         if itemorveh == "item":
             with open(config_path, encoding="utf-8") as item_ids:
                 jdata = json.load(item_ids)
-                for key, i in jdata.items():
-                    if idorname.isdigit():
-                        if key == idorname:
-                            await self.bot.say(embed=MureUT.unturnedjson(i))
-                    elif i['Name'].lower() == str(idorname).lower():
-                        await self.bot.say(embed=MureUT.unturnedjson(i))
-                    else:
-                        await self.bot.say("That item doesn't exist!")
-                        return
-                        
+                item = MureUT.check_unturned(json)
+                if item is False:
+                    await self.bot.say("That item doesn't exist!")
+                    return
 
     @commands.command()
     async def wows(self, name):
@@ -131,7 +125,22 @@ class MureUT:
         item = item.capitalize()  # capitalize the first letter of the string
         return item
 
-
+    def check_unturned(json):
+        for key, i in jdata.items():
+             if idorname.isdigit():
+                 if key == idorname:
+                      await self.bot.say(embed=MureUT.unturnedjson(i))
+                      return True
+                 elif i['Name'].lower() == str(idorname).lower():
+                     await self.bot.say(embed=MureUT.unturnedjson(i))
+                     return True
+                 else:
+                     if i['Name'].lower() in str(idorname).lower():
+                         await self.bot.say(embed=MureUT.unturnedjson(i))
+                         return True
+          return False
+    
+    
     def check_item(item, v):
         base_dir = os.path.join("data", "rs")
         config_path = os.path.join(base_dir, "items_rs.json")
