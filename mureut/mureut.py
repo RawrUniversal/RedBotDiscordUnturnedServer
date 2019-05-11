@@ -251,7 +251,7 @@ class MureUT:
     
     def unturnedjson(i):
         em = Embed(color=MureUT.getraritycolor(MureUT.check_string(i["Rarity"])),title='{} ({})'.format(i["Name"],i["Id"]), timestamp=datetime.now())
-        em.add_field(name="Current Buy/Sell price: **{}/{}**".format(MuteUT.nocost(i["Buy"]),MuteUT.nocost(i["Sell"])),
+        em.add_field(name="Current Buy/Sell price: **{}/{}**".format(MureUT.nocost(i["Buy"]),MureUT.nocost(i["Sell"])),
                       value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
                       i["Name"], i["Id"], MureUT.check_string(i["Rarity"])))
         if i['gInfo'] != None:
@@ -266,6 +266,7 @@ class MureUT:
         if i['mInfo'] != None:
             em.add_field(name="Extra Info about the item: ", value="Calibers: **{}**\nExplodes?: **{}**"
                          .format(i['mInfo']['Calibers'], i['mInfo']['Explode']), inline=False)
+        em.set_thumbnail(url="https://i.imgur.com/pVJXblM.png")
         return em
     
     def generate_embed2(item_json):
