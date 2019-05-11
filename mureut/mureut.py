@@ -229,17 +229,38 @@ class MureUT:
         em.set_thumbnail(url=item_json2['item']['icon_large'])
         return em
 
+    def getraritycolor(item):
+        if item == "Uncommon":
+            item = 0x1f8b4c
+        elif item == "Rare":
+            item = 0x206694
+        elif item == "Epic":
+            item = 0x71368a
+        elif item == "Legendary":
+            item = 0xc832fa
+        elif item == "Mythical":
+            item = 0xfa3219
+        else:
+            item = 0
+        return item
+    
     def unturnedjson(i):
-        em = Embed(color=0x00F4FF,title='{} ({})'.format(i["Name"],i["Id"]), timestamp=datetime.now())
+        em = Embed(color=MureUT.getraritycolor(i["Rarity"].capitalize()),title='{} ({})'.format(i["Name"],i["Id"]), timestamp=datetime.now())
         em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Buy"],i["Sell"]),
                       value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
-                      i["Name"], i["Id"], i["Rarity"]))
+                      i["Name"], i["Id"], i["Rarity"].capitalize()))
         if i['gInfo'] != None:
-            em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\nRange **{}**\nHeadShot **{}**\nBodyShot **{}**"
-                         .format(i['gInfo']['Firerate'],i['gInfo']['Calibers'],i['gInfo']['Range'],i['gInfo']['Head'],i['gInfo']['Body']))
+            em.add_field(name="Extra Info about the item: ", value="Firerate **{}**\nCalibers **{}**\nRange **{}**\nHeadShot **{}**\nBodyShot **{}**"
+                         .format(i['gInfo']['Firerate'],i['gInfo']['Calibers'],i['gInfo']['Range'],i['gInfo']['Head'],i['gInfo']['Body']), inline=False)
         if i['cInfo'] != None:
             em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i['cInfo']['Armor'],
-                          i['cInfo']['ExArmor'], int(i['cInfo']['Height']) * int(i['cInfo']['Width'])))
+                          i['cInfo']['ExArmor'], int(i['cInfo']['Height']) * int(i['cInfo']['Width'])), inline=False)
+        if i['fInfo'] != None:
+            em.add_field(name="Extra Info about the item: ", value="Heath: **{}**\nFood: **{}**\nWater **{}**\nVirus **{}**\nEnergy **{}**".format(i['fInfo']['Health'],
+                          i['fInfo']['Food'], i['fInfo']['Water'], i['fInfo']['Virus'], i['fInfo']['Energy']), inline=False)
+        if i['mInfo'] != None:
+            em.add_field(name="Extra Info about the item: ", value="Firerate: **{}**\nCalibers: **{}**\nRange: **{}**\nExplodes?: **{}**".format(i['mInfo']['Firerate'],
+                          i['mInfo']['Calibers'], i['mInfo']['Range'], i['mInfo']['Explode']), inline=False)
         return em
     
     def generate_embed2(item_json):
