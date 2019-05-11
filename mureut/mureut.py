@@ -137,7 +137,7 @@ class MureUT:
                 if key == idorname:
                     return i
             else:
-                if MureUT.check_name(i['Name']) == MureUT.check_name(idorname):
+                if MureUT.check_name(i["Name"]) == MureUT.check_name(idorname):
                     return i
         item = False
         return item
