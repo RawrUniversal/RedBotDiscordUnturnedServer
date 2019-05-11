@@ -266,10 +266,10 @@ class MureUT:
             em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i['cInfo']['Armor'],
                           i['cInfo']['ExArmor'], int(i['cInfo']['Height']) * int(i['cInfo']['Width'])), inline=False)
         if i['fInfo'] != None:
-            em.add_field(name="Extra Info about the item: ", value="Heath: **{}**\nFood: **{}**\nWater **{}**\nVirus **{}**\nEnergy **{}**".format(i['fInfo']['Health'],
+            em.add_field(name="Extra Info about the item: ", value="Heath: **{}**\nFood: **{}**\nWater: **{}**\nVirus: **{}**\nEnergy: **{}**".format(i['fInfo']['Health'],
                           i['fInfo']['Food'], i['fInfo']['Water'], i['fInfo']['Virus'], i['fInfo']['Energy']), inline=False)
         if i['mInfo'] != None:
-            em.add_field(name="Extra Info about the item: ", value="Calibers: **{}**\nExplodes?: **{}**"
+            em.add_field(name="Extra Info about the item: ", value="Calibers: **{}**\nExplodes: **{}**"
                          .format(i['mInfo']['Calibers'], i['mInfo']['Explode']), inline=False)
         em.set_thumbnail(url="https://i.imgur.com/pVJXblM.png")
         return em
