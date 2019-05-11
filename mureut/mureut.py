@@ -42,19 +42,18 @@ class MureUT:
                 await self.bot.say(embed=MureUT.embed_status(data))
 
     @commands.command()
-    async def unturned(self, itemorveh, *, idorname):
+    async def unturned(self, *, idorname):
         """unturned items/vehicle command!"""
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "items.json")
-        if itemorveh == "item":
-            with open(config_path, encoding="utf-8") as item_ids:
-                jdata = json.load(item_ids)
-                item = MureUT.check_unturned(jdata, idorname)
-                if item is False:
-                    await self.bot.say("That item doesn't exist!")
-                    return
-                else:
-                    await self.bot.say(embed=MureUT.unturnedjson(item))
+        with open(config_path, encoding="utf-8") as item_ids:
+            jdata = json.load(item_ids)
+            item = MureUT.check_unturned(jdata, idorname)
+            if item is False:
+                await self.bot.say("That item doesn't exist!")
+                return
+            else:
+                await self.bot.say(embed=MureUT.unturnedjson(item))
 
     @commands.command()
     async def wows(self, name):
