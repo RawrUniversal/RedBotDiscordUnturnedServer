@@ -244,9 +244,14 @@ class MureUT:
             item = 0
         return item
     
+    def nocost(item):
+        if item == 0.0:
+            item = "N/A"
+        return item
+    
     def unturnedjson(i):
         em = Embed(color=MureUT.getraritycolor(MureUT.check_string(i["Rarity"])),title='{} ({})'.format(i["Name"],i["Id"]), timestamp=datetime.now())
-        em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Buy"],i["Sell"]),
+        em.add_field(name="Current Buy/Sell price: **{}/{}**".format(MuteUT.nocost(i["Buy"]),MuteUT.nocost(i["Sell"])),
                       value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
                       i["Name"], i["Id"], MureUT.check_string(i["Rarity"])))
         if i['gInfo'] != None:
