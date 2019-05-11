@@ -250,7 +250,7 @@ class MureUT:
                       value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
                       i["Name"], i["Id"], MureUT.check_string(i["Rarity"])))
         if i['gInfo'] != None:
-            em.add_field(name="Extra Info about the item: ", value="Firerate **{}**\nCalibers **{}**\nRange **{}**\nHeadShot **{}**\nBodyShot **{}**"
+            em.add_field(name="Extra Info about the item: ", value="Firerate: **{}**\nCalibers: **{}**\nRange: **{}**\nHeadShot: **{}**\nBodyShot: **{}**"
                          .format(i['gInfo']['Firerate'],i['gInfo']['Calibers'],i['gInfo']['Range'],i['gInfo']['Head'],i['gInfo']['Body']), inline=False)
         if i['cInfo'] != None:
             em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i['cInfo']['Armor'],
