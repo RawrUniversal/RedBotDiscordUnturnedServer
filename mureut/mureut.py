@@ -120,10 +120,14 @@ class MureUT:
         channel = discord.utils.get(server.channels, mention=channelname)
         return await self.logs_menu(ctx, info, cid=channel.id)
 
-
+    
+    def check_name(item):
+        item = item.lower()
+        return item
+    
     def check_string(item):
-        item = item.lower()  # set all characters of item string to lowercase
-        item = item.capitalize()  # capitalize the first letter of the string
+        item = item.lower()
+        item = item.capitalize()
         return item
 
     def check_unturned(jdata, idorname):
@@ -133,7 +137,7 @@ class MureUT:
                 if key == idorname:
                     return i
             else:
-                if i['Name'] == idorname:
+                if MureUT.check_name(i['Name']) == MureUT.check_name(idorname):
                     return i
         item = False
         return item
