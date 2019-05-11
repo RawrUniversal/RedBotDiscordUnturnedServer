@@ -218,7 +218,7 @@ class MureUT:
                    title='{} ({}) | {}'.format(
                        item_json["name"],
                        item_json["id"],
-                       item_json2["item"]["description"]))
+                       item_json2["item"]["description"]), timestamp=datetime.now())
         em.add_field(name="Current Price Guide: **{}**".format(item_json2['item']['current']['price']),
                      value="OSBuddy Buy Price: **{}**\nOSBuddy Sell Price: **{}**\nOSBuddy Buy Quantity: **{}**\nOSBuddy Sell Quantity: **{}**"
                            "\n\nToday's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
@@ -227,21 +227,19 @@ class MureUT:
                         item_json2['item']['day30']['change'], item_json2['item']['day90']['change'],
                         item_json2['item']['day180']['change'], item_json2['item']['members'].capitalize()))
         em.set_thumbnail(url=item_json2['item']['icon_large'])
-        em.set_footer(text=str(datetime.now()))
         return em
 
     def unturnedjson(i):
-        em = Embed(color=0x00F4FF,title='{} ({})'.format(i["Name"],i["Id"]))
-        em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Sell"],i["Buy"]),
+        em = Embed(color=0x00F4FF,title='{} ({})'.format(i["Name"],i["Id"]), timestamp=datetime.now())
+        em.add_field(name="Current Buy/Sell price: **{}/{}**".format(i["Buy"],i["Sell"]),
                       value="Item Name: **{}**\nItem ID: **{}**\nRarity: **{}**\n".format(
                       i["Name"], i["Id"], i["Rarity"]))
         if i['gInfo'] != None:
-            em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\n".format(i['gInfo']['Firerate'],
-                          i['gInfo']['Calibers']))
+            em.add_field(name="Extra Info about the item: ", value="FireRate **{}**\nCalibers **{}**\nRange **{}**\nHeadShot **{}**\nBodyShot **{}**"
+                         .format(i['gInfo']['Firerate'],i['gInfo']['Calibers'],i['gInfo']['Range'],i['gInfo']['Head'],i['gInfo']['Body']))
         if i['cInfo'] != None:
             em.add_field(name="Extra Info about the item: ", value="Armor: **{}**\nExplosion Armor: **{}**\nTotal Space: **{}**".format(i['cInfo']['Armor'],
                           i['cInfo']['ExArmor'], int(i['cInfo']['Height']) * int(i['cInfo']['Width'])))
-        em.set_footer(text=str(datetime.now()))
         return em
     
     def generate_embed2(item_json):
@@ -250,7 +248,7 @@ class MureUT:
                    title='{} ({}) | {}'.format(
                        item_json["item"]["name"],
                        item_json["item"]["id"],
-                       item_json["item"]["description"]))
+                       item_json["item"]["description"]), timestamp=datetime.now())
         em.add_field(name="Current Price Guide: **{}**".format(item_json['item']['current']['price']),
                      value="Today's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
                            "\n\nMembers Only?  **{}**\n".format(
@@ -258,7 +256,6 @@ class MureUT:
                         item_json['item']['day90']['change'], item_json['item']['day180']['change'],
                         item_json['item']['members'].capitalize()))
         em.set_thumbnail(url=item_json['item']['icon_large'])
-        em.set_footer(text=str(datetime.now()))
         return em
 
     def generate_embed(item_json):
@@ -267,7 +264,7 @@ class MureUT:
                    title='{} ({}) | {}'.format(
                        item_json["item"]["name"],
                        item_json["item"]["id"],
-                       item_json["item"]["description"]))
+                       item_json["item"]["description"]), timestamp=datetime.now())
 
         em.add_field(name="Current Price Guide: **{}**".format(item_json['item']['current']['price']),
                      value="Today's Change: **{}**\n30 Day: **{}**\n90 Day: **{}**\n180 Day: **{}**"
@@ -277,15 +274,12 @@ class MureUT:
                         item_json['item']['members'].capitalize()))
 
         em.set_thumbnail(url=item_json['item']['icon_large'])
-
-        em.set_footer(text=str(datetime.now()))
-
         return em
 
     def embed_status(item_json):
         em = Embed(color=0x00F4FF,
                    title='Steam Status | {}'.format(
-                       item_json['services']['cms']['title']))
+                       item_json['services']['cms']['title']), timestamp=datetime.now())
 
         em.add_field(name="Current Steam Status: **Total Steam Players online: {}**".format(
                         item_json['services']['online']['title']),
@@ -298,8 +292,6 @@ class MureUT:
                         item_json['services']['csgo_community']['title'], item_json['services']['csgo_sessions']['title']))
 
         em.set_thumbnail(url="https://steamstore-a.akamaihd.net/public/shared/images/responsive/share_steam_logo.png")
-
-        em.set_footer(text=str(datetime.now()))
 
         return em
 
@@ -328,7 +320,7 @@ class MureUT:
             return await self.bot.say("Nothing found!")
         logs = list(MureUT.chunks(log.split('|'), 10))
         em = Embed(color=0x00F4FF,
-                   title="Logs pages: {}/{} | Don't go too far foward or back!".format(page + 1, len(logs)))
+                   title="Logs pages: {}/{} | Don't go too far foward or back!".format(page + 1, len(logs)), timestamp=datetime.now())
         try:
             em.add_field(name="Logs: ", value=''.join(logs[int(page)]))
         except IndexError:
