@@ -246,7 +246,7 @@ class MureUT:
         elif item == "Mythical":
             item = 0xfa3219
         else:
-            item = 0
+            item = 0xffffff
         return item
     
     def nocost(item):
