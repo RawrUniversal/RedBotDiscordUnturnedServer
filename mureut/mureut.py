@@ -121,7 +121,8 @@ class MureUT:
         return await self.logs_menu(ctx, info, cid=channel.id)
 
     
-    def check_name(item):
+    def check_name(value):
+        item = str(value)
         item = item.lower()
         return item
     
@@ -131,7 +132,7 @@ class MureUT:
         return item
 
     def check_unturned(jdata, idorname):
-        item =  MureUT.check_name(idorname)
+        item = MureUT.check_name(idorname)
         for key, i in jdata.items():
             if idorname.isdigit():
                 if key == idorname:
