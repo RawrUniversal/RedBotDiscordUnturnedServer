@@ -259,8 +259,8 @@ class MureUT:
             em.add_field(name="Extra Info about the item: ", value="Heath: **{}**\nFood: **{}**\nWater **{}**\nVirus **{}**\nEnergy **{}**".format(i['fInfo']['Health'],
                           i['fInfo']['Food'], i['fInfo']['Water'], i['fInfo']['Virus'], i['fInfo']['Energy']), inline=False)
         if i['mInfo'] != None:
-            em.add_field(name="Extra Info about the item: ", value="Firerate: **{}**\nCalibers: **{}**\nRange: **{}**\nExplodes?: **{}**".format(i['mInfo']['Firerate'],
-                          i['mInfo']['Calibers'], i['mInfo']['Range'], i['mInfo']['Explode']), inline=False)
+            em.add_field(name="Extra Info about the item: ", value="Calibers: **{}**\nExplodes?: **{}**"
+                         .format(i['mInfo']['Calibers'], i['mInfo']['Explode']), inline=False)
         return em
     
     def generate_embed2(item_json):
