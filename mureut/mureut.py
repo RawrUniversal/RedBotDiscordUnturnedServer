@@ -382,6 +382,7 @@ class MureUT:
                 next_page = 0  # Loop around to the first item
             else:
                 next_page = page + 1
+            await self.bot.remove_reaction(message, "➡", ctx.message.author)
             return await self.logs_menu(ctx, info, cid=channel, message=message,
                                            page=next_page, timeout=timeout)
         elif react == "back":
@@ -390,6 +391,7 @@ class MureUT:
                 next_page = log.count('|') - 1  # Loop around to the last item
             else:
                 next_page = page - 1
+            await self.bot.remove_reaction(message, "⬅", ctx.message.author)
             return await self.logs_menu(ctx, info, cid=channel, message=message,
                                            page=next_page, timeout=timeout)
         else:
