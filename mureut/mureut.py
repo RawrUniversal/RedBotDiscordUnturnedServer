@@ -132,17 +132,19 @@ class MureUT:
         return item
 
     def check_unturned(jdata, idorname):
+        item = MureUT.check_name(idorname)
         for key, i in jdata.items():
             if idorname.isdigit():
                 if key == idorname:
                     return i
-            elif isinstance(item, str):
-                if MureUT.check_name(i["Name"]) == MureUT.check_name(idorname):
-                    return i
             else:
                 if isinstance(item, str):
-                    if MureUT.check_name(i["Name"]).find(MureUT.check_name(idorname)) != -1:
+                    if MureUT.check_name(i["Name"]) == item:
                         return i
+                    elif item in MureUT.check_name(i["Name"]):
+                        return i
+                    else:
+                        continue
         idorname = False
         return item
     
@@ -352,7 +354,7 @@ class MureUT:
                 log += meh + "\n|"
         if log.count('\n') == 0:
             return await self.bot.say("Nothing found!")
-        logs = list(MureUT.chunks(log.split('|'), 10))
+        logs = list(MureUT.chunks(log.split('|'), 10).append('|'))
         em = Embed(color=0x00F4FF,
                    title="Logs pages: {}/{} | Don't go too far foward or back!".format(page + 1, len(logs)), timestamp=datetime.now())
         try:
