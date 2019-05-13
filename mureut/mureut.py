@@ -143,9 +143,8 @@ class MureUT:
                         return i
                     elif item in MureUT.check_name(i["Name"]):
                         return i
-                    else:
-                        continue
-        idorname = False
+                continue
+        item = False
         return item
     
     
