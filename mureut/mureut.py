@@ -132,19 +132,18 @@ class MureUT:
         return item
 
     def check_unturned(jdata, idorname):
-        item = MureUT.check_name(idorname)
         for key, i in jdata.items():
             if idorname.isdigit():
                 if key == idorname:
                     return i
             elif isinstance(item, str):
-                if MureUT.check_name(i["Name"]) == item:
+                if MureUT.check_name(i["Name"]) == MureUT.check_name(idorname):
                     return i
             else:
                 if isinstance(item, str):
-                    if MureUT.check_name(i["Name"]).find(item) != -1:
+                    if MureUT.check_name(i["Name"]).find(MureUT.check_name(idorname)) != -1:
                         return i
-        item = False
+        idorname = False
         return item
     
     
