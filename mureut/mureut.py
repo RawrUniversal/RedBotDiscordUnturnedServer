@@ -137,10 +137,12 @@ class MureUT:
             if idorname.isdigit():
                 if key == idorname:
                     return i
+            elif isinstance(item, str):
+                if MureUT.check_name(i["Name"]) == item:
+                    return i
             else:
-                if isinstance(item, str):
-                    if MureUT.check_name(i["Name"]) == item:
-                        return i
+                if item in MureUT.check_name(i["Name"]):
+                    return i
         item = False
         return item
     
