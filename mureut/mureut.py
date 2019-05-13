@@ -141,8 +141,9 @@ class MureUT:
                 if MureUT.check_name(i["Name"]) == item:
                     return i
             else:
-                if item in MureUT.check_name(i["Name"]):
-                    return i
+                if isinstance(item, str):
+                    if item in MureUT.check_name(i["Name"]):
+                        return i
         item = False
         return item
     
