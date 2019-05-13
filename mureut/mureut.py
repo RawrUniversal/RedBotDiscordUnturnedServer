@@ -354,7 +354,8 @@ class MureUT:
                 log += meh + "\n|"
         if log.count('\n') == 0:
             return await self.bot.say("Nothing found!")
-        logs = list(MureUT.chunks(log.split('|'), 10).append('|'))
+        log = MureUT.chunks(log.split('|'), 10) + '|'
+        logs = list(MureUT.chunks(log.split('|'), 10))
         em = Embed(color=0x00F4FF,
                    title="Logs pages: {}/{} | Don't go too far foward or back!".format(page + 1, len(logs)), timestamp=datetime.now())
         try:
