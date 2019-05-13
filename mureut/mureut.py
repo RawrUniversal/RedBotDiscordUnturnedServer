@@ -142,7 +142,7 @@ class MureUT:
                     return i
             else:
                 if isinstance(item, str):
-                    if MureUT.check_name(i["Name"].find(item) != -1:
+                    if MureUT.check_name(i["Name"]).find(item) != -1:
                         return i
         item = False
         return item
