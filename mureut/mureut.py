@@ -257,6 +257,11 @@ class MureUT:
             item = "N/A"
         return item
     
+    def nosize(item):
+        if item == 0:
+            item = "N/A"
+        return item
+    
     def unturnedjson(i):
         em = Embed(color=MureUT.getraritycolor(MureUT.check_string(i["Rarity"])),title='{} ({})'.format(i["Name"],i["Id"]), timestamp=datetime.now())
         em.add_field(name="Current Buy-Sell price: **{}-{}**".format(MureUT.nocost(i["Buy"]),MureUT.nocost(i["Sell"])),
@@ -272,8 +277,11 @@ class MureUT:
             em.add_field(name="Extra Info about the item: ", value="Heath: **{}**\nFood: **{}**\nWater: **{}**\nVirus: **{}**\nEnergy: **{}**".format(i['fInfo']['Health'],
                           i['fInfo']['Food'], i['fInfo']['Water'], i['fInfo']['Virus'], i['fInfo']['Energy']), inline=False)
         if i['mInfo'] != None:
-            em.add_field(name="Extra Info about the item: ", value="Calibers: **{}**\nExplodes: **{}**"
-                         .format(i['mInfo']['Calibers'], i['mInfo']['Explode']), inline=False)
+            em.add_field(name="Extra Info about the item: ", value="Calibers: **{}**\nCapacity: **{}**\nExplodes: **{}**"
+                         .format(i['mInfo']['Calibers'], i['mInfo']['Capacity'], i['mInfo']['Explode']), inline=False)
+        if i['bInfo'] != None:
+            em.add_field(name="Extra Info about the item: ", value="Health: **{}**\nStorage Size: **{}**"
+                         .format(i['bInfo']['Health'], MureUT.nosize(i['bInfo']['Capacity'])), inline=False)
         em.set_thumbnail(url="https://i.imgur.com/pVJXblM.png")
         return em
     
