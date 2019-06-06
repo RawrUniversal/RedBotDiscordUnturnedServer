@@ -195,7 +195,7 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
-        if channel.id != 148002091011407872:
+        if channel.id != 148002091011407872 or channel.id != 353957542096928770:
             return
         if message.author.id != self.bot.user.id:
             if message.content.lower().startswith('you a thot') or 'thot-bot' in message.content.lower():
