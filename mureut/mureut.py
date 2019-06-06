@@ -281,7 +281,7 @@ class MureUT:
                          .format(i['mInfo']['Calibers'], i['mInfo']['Capacity'], i['mInfo']['Explode']), inline=False)
         if i['bInfo'] != None:
             em.add_field(name="Extra Info about the item: ", value="Health: **{}**\nStorage Size: **{}**"
-                         .format(i['bInfo']['Health'], MureUT.nosize(i['bInfo']['Capacity'])), inline=False)
+                         .format(i['bInfo']['Health'], MureUT.nosize(i['bInfo']['Size'])), inline=False)
         em.set_thumbnail(url="https://i.imgur.com/pVJXblM.png")
         return em
     
