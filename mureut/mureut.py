@@ -376,7 +376,11 @@ class MureUT:
             await self.bot.add_reaction(message, "❌")
             await self.bot.add_reaction(message, "➡")
         else:
-            message = await self.bot.edit_message(message, embed=em)
+            try:
+                message = await self.bot.edit_message(message, embed=em)
+            except HTTPException:
+                return await self.logs_menu(ctx, info, cid=channel, message=message,
+                    page=page, timeout=timeout)
         react = await self.bot.wait_for_reaction(
             message=message, user=ctx.message.author, timeout=timeout,
             emoji=["➡", "⬅", "❌"]
