@@ -378,7 +378,7 @@ class MureUT:
         else:
             try:
                 message = await self.bot.edit_message(message, embed=em)
-            except HTTPException:
+            except discord.HTTPException:
                 return await self.logs_menu(ctx, info, cid=channel, message=message,
                     page=page, timeout=timeout)
         react = await self.bot.wait_for_reaction(
