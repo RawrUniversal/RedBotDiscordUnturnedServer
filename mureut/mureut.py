@@ -365,7 +365,7 @@ class MureUT:
         em = Embed(color=0x00F4FF,
                    title="Logs pages: {}/{} | Don't go too far foward or back!".format(page + 1, len(logs)), timestamp=datetime.now())
         try:
-            log = '|'.join(logs[int(page)])
+            log = logs.join('|')
             em.add_field(name="Logs: ", value=''.join(logs[int(page)]))
         except IndexError:
             await self.bot.say("Nothing more found! | Don't go too far foward or back!")
