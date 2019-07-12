@@ -404,7 +404,7 @@ class MureUT:
         elif react == "back":
             next_page = 0
             if page == 0:
-                next_page = log.count('|') - 1  # Loop around to the last item
+                next_page = log.count('|')  # Loop around to the last item
             else:
                 next_page = page - 1
             await self.bot.remove_reaction(message, "⬅", ctx.message.author)
