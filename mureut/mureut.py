@@ -394,7 +394,7 @@ class MureUT:
         react = reacts[react.reaction.emoji]
         if react == "next":
             next_page = 0
-            if page == log.count('|') - 1:
+            if page == log.count('|'):
                 next_page = 0  # Loop around to the first item
             else:
                 next_page = page + 1
