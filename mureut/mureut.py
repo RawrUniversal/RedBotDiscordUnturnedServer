@@ -34,14 +34,6 @@ class MureUT:
             yield s[start:start+n]
 
     @commands.command()
-    async def steamstatus(self):
-        """Steam status command!"""
-        with urllib.request.urlopen("https://crowbar.steamstat.us/Barney") as url:
-            data = simplejson.load(url)
-            if data['success']:
-                await self.bot.say(embed=MureUT.embed_status(data))
-
-    @commands.command()
     async def unturned(self, *, idorname):
         """unturned items/vehicle command!"""
         base_dir = os.path.join("data", "red")
