@@ -39,6 +39,12 @@ class MureUT:
             yield s[start:start+n]
 
     @commands.command()
+    async def steamstatus(self):
+        """Steam status command!"""
+        data = simplejson.load(MureUT.create_new_status())
+        await self.bot.say(embed=MureUT.embed_status(data))
+            
+    @commands.command()
     async def unturned(self, *, idorname):
         """Unturned items command!"""
         base_dir = os.path.join("data", "red")
@@ -319,17 +325,18 @@ class MureUT:
     def embed_status(item_json):
         em = Embed(color=0x00F4FF,
                    title='Steam Status | {}'.format(
-                       item_json['services']['cms']['title']), timestamp=datetime.now())
+                       item_json['steam']['online']), timestamp=datetime.now())
 
         em.add_field(name="Current Steam Status: **Total Steam Players online: {}**".format(
-                        item_json['services']['online']['title']),
+                        item_json['steam']['online']),
                      value="Steam Store Status: **{}**\nSteam Community Status: : **{}**\nSteam WebAPI Status: **{}**"
                            "\nCSGO Matchmaking Scheduler Status:  **{}**\nCSGO Inventory Status: **{}**\n"
-                           "CSGO Sessions Logon Status: **{}**\n"
+                           "CSGO Sessions Logon Status: **{}**\nCSGO Total Players: **{}**\n"
                            "For more info on Steam's Status: [https://steamstat.us/](https://steamstat.us/)".format(
-                        item_json['services']['store']['title'], item_json['services']['community']['title'],
-                        item_json['services']['webapi']['title'], item_json['services']['csgo_mm_scheduler']['title'],
-                        item_json['services']['csgo_community']['title'], item_json['services']['csgo_sessions']['title']))
+                        item_json['steam']['store'], item_json['steam']['community'],
+                        item_json['steam']['webApi'], item_json['csgo']['services']['matchmakingScheduler'],
+                        item_json['csgo']['services']['playerInventories'], item_json['csgo']['services']['sessionsLogon'],
+                        item_json['csgo']['online']))
 
         em.set_thumbnail(url="https://steamstore-a.akamaihd.net/public/shared/images/responsive/share_steam_logo.png")
 
