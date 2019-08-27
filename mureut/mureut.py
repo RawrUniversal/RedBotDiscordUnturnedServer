@@ -29,13 +29,18 @@ class MureUT:
     def __init__(self, bot):
         self.bot = bot
 
+    ONLINE_USERS_URL = "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=0"
+    STORE_URL = "https://store.steampowered.com/"
+    COMMUNITY_URL = "https://steamcommunity.com/"
+    WEB_API_URL = "https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/"
+        
     def chunks(s, n):
         for start in range(0, len(s), n):
             yield s[start:start+n]
 
     @commands.command()
     async def unturned(self, *, idorname):
-        """unturned items/vehicle command!"""
+        """Unturned items command!"""
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "items.json")
         with open(config_path, encoding="utf-8") as item_ids:
@@ -190,10 +195,10 @@ class MureUT:
         if channel.id != 148002091011407872 or channel.id != 353957542096928770:
             return
         if message.author.id != self.bot.user.id:
-            if message.content.lower().startswith('you a thot') or 'thot-bot' in message.content.lower():
-                await self.bot.send_message(message.channel, 'NO! You are a thot!')
+            if message.content.lower().startswith('you a thot') or 'thotbot' in message.content.lower():
+                await self.bot.send_message(message.channel, 'NO! You are a THOT!')
             elif 'thot' in message.content.lower():
-                await self.bot.send_message(message.channel, 'Thot-Bot*')
+                await self.bot.send_message(message.channel, 'ThotBot*')
 
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
@@ -330,6 +335,59 @@ class MureUT:
 
         return em
 
+    def create_new_status():
+        """Creates status.json from scratch."""
+        API_KEY = 0
+        base_dir = os.path.join("data", "red")
+        config_path = os.path.join(base_dir, "apikey.json")
+        with open(config_path) as ids:
+            API_KEY = ids['key']
+        csgo_json = get_json("https://api.steampowered.com/ICSGOServers_730/GetGameServersStatus/v1/?key=" + API_KEY)["result"]
+
+        status = {
+            "steam": {
+                "online": get_json(ONLINE_USERS_URL)["response"]["player_count"],
+                "services": {
+                    "store": get_status_code(STORE_URL),
+                     "community": get_status_code(COMMUNITY_URL),
+                     "webApi": get_status_code(WEB_API_URL)
+                 }
+             },
+            "csgo": {
+                "online": csgo_json["matchmaking"]["online_players"],
+                "services": {
+                    "sessionsLogon": csgo_json["services"]["SessionsLogon"],
+                    "playerInventories": csgo_json["services"]["SteamCommunity"],
+                    "matchmakingScheduler": csgo_json["matchmaking"]["scheduler"]
+                },
+                "servers": {
+                }
+            }
+        }
+
+        # Capitalize csgo services values
+        status["csgo"]["services"] = {k: v.capitalize() for k, v in status["csgo"]["services"].items()}
+
+        # Fill csgo servers load values, also capitalized
+        status["csgo"]["servers"] = {k: v["load"].capitalize() for k, v in csgo_json["datacenters"].items()}
+        return status
+    
+
+    def get_json(url):
+        """Makes a request to a given URL and returns the response JSON data."""
+        response = requests.get(url)
+        return response.json()
+
+
+    def get_status_code(url):
+        """Makes a request to a given URL and returns the response status code."""
+        try:
+            response = requests.get(url, timeout=REQUESTS_TIMEOUT)
+        except requests.exceptions.RequestException as e:
+            return 503
+        return response.status_code
+    
+    
     async def logs_menu(self, ctx, info, cid=0,
                            message: discord.Message=None,
                            page=0, timeout: int=30):
