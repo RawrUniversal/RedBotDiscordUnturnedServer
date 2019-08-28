@@ -28,11 +28,6 @@ class MureUT:
 
     def __init__(self, bot):
         self.bot = bot
-
-    ONLINE_USERS_URL = "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=0"
-    STORE_URL = "https://store.steampowered.com/"
-    COMMUNITY_URL = "https://steamcommunity.com/"
-    WEB_API_URL = "https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/"
         
     def chunks(s, n):
         for start in range(0, len(s), n):
@@ -345,6 +340,10 @@ class MureUT:
     def create_new_status():
         """Creates status.json from scratch."""
         API_KEY = 0
+        ONLINE_USERS_URL = "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=0"
+        STORE_URL = "https://store.steampowered.com/"
+        COMMUNITY_URL = "https://steamcommunity.com/"
+        WEB_API_URL = "https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/"
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "apikey.json")
         with open(config_path) as ids:
