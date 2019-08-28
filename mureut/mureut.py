@@ -390,8 +390,8 @@ class MureUT:
         try:
             response = requests.get(url, timeout=3)
         except requests.exceptions.RequestException as e:
-            return 503
-        return response.status_code
+            return "service unavailable"
+        return response.reason
     
     
     async def logs_menu(self, ctx, info, cid=0,
