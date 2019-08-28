@@ -350,15 +350,15 @@ class MureUT:
         with open(config_path) as ids:
             jdata = json.load(ids)
             API_KEY = jdata['key']
-        csgo_json = get_json("https://api.steampowered.com/ICSGOServers_730/GetGameServersStatus/v1/?key=" + API_KEY)["result"]
+        csgo_json = MureUT.get_json("https://api.steampowered.com/ICSGOServers_730/GetGameServersStatus/v1/?key=" + API_KEY)["result"]
 
         status = {
             "steam": {
-                "online": get_json(ONLINE_USERS_URL)["response"]["player_count"],
+                "online": MureUT.get_json(ONLINE_USERS_URL)["response"]["player_count"],
                 "services": {
-                    "store": get_status_code(STORE_URL),
-                     "community": get_status_code(COMMUNITY_URL),
-                     "webApi": get_status_code(WEB_API_URL)
+                    "store": MureUT.get_status_code(STORE_URL),
+                     "community": MureUT.get_status_code(COMMUNITY_URL),
+                     "webApi": MureUT.get_status_code(WEB_API_URL)
                  }
              },
             "csgo": {
