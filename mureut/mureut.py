@@ -348,7 +348,8 @@ class MureUT:
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "apikey.json")
         with open(config_path) as ids:
-            API_KEY = ids['key']
+            jdata = json.load(ids)
+            API_KEY = jdata['key']
         csgo_json = get_json("https://api.steampowered.com/ICSGOServers_730/GetGameServersStatus/v1/?key=" + API_KEY)["result"]
 
         status = {
