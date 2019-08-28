@@ -389,7 +389,7 @@ class MureUT:
     def get_status_code(url):
         """Makes a request to a given URL and returns the response status code."""
         try:
-            response = requests.get(url, timeout=REQUESTS_TIMEOUT)
+            response = requests.get(url, timeout=3)
         except requests.exceptions.RequestException as e:
             return 503
         return response.status_code
