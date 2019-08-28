@@ -339,7 +339,7 @@ class MureUT:
     def create_new_status():
         """Creates status.json from scratch."""
         API_KEY = 0
-        ONLINE_USERS_URL = "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=0"
+        ONLINE_USERS_URL = "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=753"
         STORE_URL = "https://store.steampowered.com/"
         COMMUNITY_URL = "https://steamcommunity.com/"
         WEB_API_URL = "https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/"
