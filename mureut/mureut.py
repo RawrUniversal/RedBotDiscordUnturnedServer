@@ -327,8 +327,8 @@ class MureUT:
                            "\nCSGO Matchmaking Scheduler Status:  **{}**\nCSGO Inventory Status: **{}**\n"
                            "CSGO Sessions Logon Status: **{}**\nCSGO Total Players: **{}**\n"
                            "For more info on Steam's Status: [https://steamstat.us/](https://steamstat.us/)".format(
-                        item_json['steam']['store'], item_json['steam']['community'],
-                        item_json['steam']['webApi'], item_json['csgo']['services']['matchmakingScheduler'],
+                        item_json['steam']['services']['store'], item_json['steam']['services']['community'],
+                        item_json['steam']['services']['webApi'], item_json['csgo']['services']['matchmakingScheduler'],
                         item_json['csgo']['services']['playerInventories'], item_json['csgo']['services']['sessionsLogon'],
                         item_json['csgo']['online']))
 
