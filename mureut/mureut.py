@@ -36,8 +36,7 @@ class MureUT:
     @commands.command()
     async def steamstatus(self):
         """Steam status command!"""
-        data = simplejson.load(MureUT.create_new_status())
-        await self.bot.say(embed=MureUT.embed_status(data))
+        await self.bot.say(embed=MureUT.embed_status(MureUT.create_new_status()))
             
     @commands.command()
     async def unturned(self, *, idorname):
