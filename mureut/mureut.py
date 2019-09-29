@@ -9,6 +9,7 @@ from discord.ext import commands
 from discord import Embed
 import requests
 import json
+import time
 import os
 from datetime import datetime
 from random import randint
@@ -22,7 +23,7 @@ numbs = {
     "back": "⬅",
     "exit": "❌"
 }
-
+cooldown = 0
 
 class MureUT:
 
@@ -194,17 +195,22 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
-        if channel.id != 324195889977622530:
+        seconds = time.time()
+        if seconds - cooldown < 120:
             return
-        if message.content.
-        server = valve.source.a2s.ServerQuerier(["136.243.44.134",27015])
-        ping = server.ping()
-        if ping == 0 or ping == null:
-            await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
-            await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
-        else:
-            await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
-            await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
+        if channel.id != 576479100454305812 or channel.id != 576479543041458227 or channel.id != 623213672461893682:
+            return
+        if "server up" in message.content.lower() or "server down" in message.content.lower():
+            server = valve.source.a2s.ServerQuerier(["136.243.44.134",27015])
+            ping = server.ping()
+            if ping == 0 or ping == null:
+                await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
+                await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
+                cooldown = time.time()
+            else:
+                await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
+                await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
+                cooldown = time.time()
         
 
     def request_item_json_osbuddy(item):
