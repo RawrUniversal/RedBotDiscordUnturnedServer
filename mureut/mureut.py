@@ -200,7 +200,7 @@ class MureUT:
         if "channel id" in  message.content.lower():
             await self.bot.send_message(message.channel, channel.id)
             return
-        if channel.id == 623210115863937035 or channel.id == 324195889977622530:
+        if channel.id is 623210115863937035 or channel.id is 623213672461893682:
             if "server up" in message.content.lower() or "server down" in message.content.lower():
                 try:
                     querier = valve.source.BaseQuerier(('136.243.44.134', 27015))
