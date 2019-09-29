@@ -23,7 +23,7 @@ numbs = {
     "back": "⬅",
     "exit": "❌"
 }
-cooldown = 0
+cooldown = time.time() - 300
 
 class MureUT:
 
