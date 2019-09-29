@@ -23,7 +23,7 @@ numbs = {
     "back": "⬅",
     "exit": "❌"
 }
-cooldown = time.time()
+cooldown = {}
 
 class MureUT:
 
@@ -195,7 +195,7 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
-        if time.time() - cooldown > 5:
+        if time.time() - cooldown[channel.id] > 5:
             if channel.id != 576479100454305812 or channel.id != 623213672461893682:
                 return
         else:
@@ -207,11 +207,11 @@ class MureUT:
                 ping = server.ping()
                 await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
                 await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
-                cooldown = time.time()
+                cooldown[channel.id] = time.time()
             except:
                 await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
                 await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
-                cooldown = time.time()
+                cooldown[channel.id] = time.time()
         
 
     def request_item_json_osbuddy(item):
