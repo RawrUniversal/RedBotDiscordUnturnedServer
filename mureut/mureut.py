@@ -195,7 +195,7 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
-        if time.time() - cooldown[channel.id] > 5:
+        if channel.id not in cooldown or time.time() - cooldown[channel.id] > 5:
             if channel.id != 576479100454305812 or channel.id != 623213672461893682:
                 return
         else:
