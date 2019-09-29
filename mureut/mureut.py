@@ -23,7 +23,7 @@ numbs = {
     "back": "⬅",
     "exit": "❌"
 }
-cooldown = 0
+cooldown = time.time()
 
 class MureUT:
 
@@ -195,7 +195,7 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
-        if time.time() - cooldown > 120:
+        if time.time() - cooldown > 5:
             if channel.id != 576479100454305812 or channel.id != 623213672461893682:
                 return
         else:
