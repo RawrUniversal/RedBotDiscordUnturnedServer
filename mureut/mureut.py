@@ -195,6 +195,11 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
+        seconds = time.time()
+        if seconds - cooldown < 120:
+            return
+        if channel.id != 576479100454305812 or channel.id != 576479543041458227 or channel.id != 623213672461893682:
+            return
         if "server up" in message.content.lower() or "server down" in message.content.lower():
             try:
                 querier = valve.source.BaseQuerier(('136.243.44.134', 27015))
