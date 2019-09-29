@@ -15,8 +15,7 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
-import valve.source
-import valve.source.a2s
+import socket
 
 numbs = {
     "next": "➡",
@@ -193,6 +192,15 @@ class MureUT:
         item = False
         return item
     
+    def isOpen(ip,port):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            s.connect((ip, int(port)))
+            s.shutdown(2)
+            return True
+        except:
+            return False
+    
     async def listener(self, message):
         channel = message.channel
         if message.author.id == self.bot.user.id:
@@ -204,14 +212,12 @@ class MureUT:
             print("Nothing...")
         if channel.id == "623213672461893682" or channel.id == "576479100454305812" or channel.id == "576479543041458227":
             if "server up" in message.content.lower() or "server down" in message.content.lower():
-                try:
-                    with valve.source.a2s.ServerQuerier(['136.243.44.134',28015]) as server:
-                        info = server.info()
+                if MureUT.isOpen("136.243.44.134", 28015):
                     await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
                     await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
                     cooldown[channel.id] = time.time()
                     return
-                except:
+                else:
                     await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
                     await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
                     cooldown[channel.id] = time.time()
