@@ -14,6 +14,8 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
+import valve.source.a2s
+import valve.source.messages
 
 numbs = {
     "next": "➡",
@@ -192,13 +194,18 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
-        if channel.id != 148002091011407872 or channel.id != 353957542096928770:
+        if channel.id != 324195889977622530:
             return
-        if message.author.id != self.bot.user.id:
-            if message.content.lower().startswith('you a thot') or 'thotbot' in message.content.lower():
-                await self.bot.send_message(message.channel, 'NO! You are a THOT!')
-            elif 'thot' in message.content.lower():
-                await self.bot.send_message(message.channel, 'ThotBot*')
+        if message.content.
+        server = valve.source.a2s.ServerQuerier(["136.243.44.134",27015])
+        ping = server.ping()
+        if ping == 0 or ping == null:
+            await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
+            await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
+        else:
+            await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
+            await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
+        
 
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
