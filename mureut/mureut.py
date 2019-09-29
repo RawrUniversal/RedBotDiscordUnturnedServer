@@ -195,9 +195,10 @@ class MureUT:
 
     async def listener(self, message):
         channel = message.channel
-        if channel.id not in cooldown or time.time() - cooldown[channel.id] > 5:
-            if channel.id != 576479100454305812 or channel.id != 623213672461893682:
-                return
+        if channel.id != 576479100454305812 or channel.id != 623213672461893682:
+            return
+        if channel.id not in cooldown or time.time() - cooldown[channel.id] > 30:
+            cooldown[channel.id] = time.time() - 60
         else:
             return
         if "server up" in message.content.lower() or "server down" in message.content.lower():
@@ -353,7 +354,7 @@ class MureUT:
     def create_new_status():
         """Creates status.json from scratch."""
         API_KEY = 0
-        ONLINE_USERS_URL = "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=753"
+        ONLINE_USERS_URL = "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1"
         STORE_URL = "https://store.steampowered.com/"
         COMMUNITY_URL = "https://steamcommunity.com/"
         WEB_API_URL = "https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/"
