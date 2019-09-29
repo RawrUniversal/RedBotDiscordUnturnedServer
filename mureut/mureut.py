@@ -198,14 +198,14 @@ class MureUT:
         if message.author.id == self.bot.user.id:
             return
         try:
-            if time.time() - cooldown[channel.id] < 5:
+            if time.time() - cooldown[channel.id] < 10:
                 return
         except:
             print("Nothing...")
         if channel.id == "623213672461893682" or channel.id == "576479100454305812" or channel.id == "576479543041458227":
             if "server up" in message.content.lower() or "server down" in message.content.lower():
                 try:
-                    querier = valve.source.BaseQuerier(('136.243.44.134', 27015))
+                    querier = valve.source.BaseQuerier(('136.243.44.134', 28015))
                     server = valve.source.a2s.ServerQuerier(querier)
                     ping = server.ping()
                     await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
