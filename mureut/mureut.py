@@ -197,9 +197,10 @@ class MureUT:
         channel = message.channel
         if channel.id != 576479100454305812 or channel.id != 623213672461893682:
             return
-        if channel.id not in cooldown or time.time() - cooldown[channel.id] > 30:
-            cooldown[channel.id] = time.time() - 60
-        else:
+        if channel.id not in cooldown:
+            cooldown[channel.id] = time.time()
+            return
+        if time.time() - cooldown[channel.id] < 30:
             return
         if "server up" in message.content.lower() or "server down" in message.content.lower():
             try:
