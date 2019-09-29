@@ -197,10 +197,10 @@ class MureUT:
         channel = message.channel
         if message.author.id == self.bot.user.id:
             return
-        if "channel id" in  message.content.lower():
+        if "channel id" in  message.content.lower() and channel.id is 623213672461893682:
             await self.bot.send_message(message.channel, channel.id)
             return
-        if channel.id is 623210115863937035 or channel.id is 623213672461893682:
+        if channel.id is 623213672461893682:
             if "server up" in message.content.lower() or "server down" in message.content.lower():
                 try:
                     querier = valve.source.BaseQuerier(('136.243.44.134', 27015))
@@ -209,12 +209,13 @@ class MureUT:
                     await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
                     await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
                     cooldown[channel.id] = time.time()
+                    return
                 except:
                     await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
                     await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
                     cooldown[channel.id] = time.time()
+                    return
         
-
     def request_item_json_osbuddy(item):
         with urllib.request.urlopen("https://storage.googleapis.com/osbuddy-exchange/summary.json") as response:
             item_info = simplejson.load(response)
