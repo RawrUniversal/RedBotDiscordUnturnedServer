@@ -193,10 +193,9 @@ class MureUT:
         item = False
         return item
     
-    @commands.Cog.listener()
-    async def on_message(self, message):
+    async def listener(self, message):
         channel = message.channel
-        if channel.id != 576479100454305812 or channel.id != 623213672461893682:
+        if channel.id != '576479100454305812' or channel.id != '623213672461893682':
             return
         if channel.id not in cooldown:
             cooldown[channel.id] = time.time()
@@ -496,5 +495,5 @@ def setup(bot):
     global logger
     logger = logging.getLogger('bot')
     n = MureUT(bot)
-    bot.add_listener(n.on_message, 'on_message')
+    bot.add_listener(n.listener, "on_message")
     bot.add_cog(n)
