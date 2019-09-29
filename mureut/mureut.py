@@ -194,7 +194,7 @@ class MureUT:
         return item
     
     async def listener(self, message):
-        channel = message.server
+        channel = message.author.server
         if message.author.id == self.bot.user.id:
             return
         if channel.id == 623210115863937035 or channel.id == 324195889977622530:
