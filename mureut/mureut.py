@@ -197,16 +197,16 @@ class MureUT:
         channel = message.channel
         seconds = time.time()
         if "server up" in message.content.lower() or "server down" in message.content.lower():
-            server = valve.source.a2s.ServerQuerier(["136.243.44.134",27015])
-            ping = server.ping()
-            if ping == 0 or ping == null:
-                await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
-                await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
-                cooldown = time.time()
-            else:
+            try:
+                server = valve.source.a2s.ServerQuerier(["136.243.44.134",27015])
+                ping = server.ping()
                 await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
                 await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
                 cooldown = time.time()
+            except Error:
+                    await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
+                    await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
+                    cooldown = time.time()
         
 
     def request_item_json_osbuddy(item):
