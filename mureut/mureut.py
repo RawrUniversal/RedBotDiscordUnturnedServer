@@ -16,7 +16,7 @@ from random import randint
 import numpy
 import wargaming
 import valve.source.a2s
-import valve.source.messages
+import valve.source
 
 numbs = {
     "next": "➡",
@@ -198,7 +198,8 @@ class MureUT:
         seconds = time.time()
         if "server up" in message.content.lower() or "server down" in message.content.lower():
             try:
-                server = valve.source.a2s.ServerQuerier(["136.243.44.134",27015])
+                querier = valve.source.BaseQuerier(('136.243.44.134', 27015))
+                server = valve.source.a2s.ServerQuerier(querier)
                 ping = server.ping()
                 await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
                 await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
