@@ -194,8 +194,11 @@ class MureUT:
         return item
     
     async def listener(self, message):
-        channel = message.author.server
+        channel = message.channel
         if message.author.id == self.bot.user.id:
+            return
+        if "channel id" in  message.content.lower():
+            await self.bot.send_message(message.channel, channel.id)
             return
         if channel.id == 623210115863937035 or channel.id == 324195889977622530:
             if "server up" in message.content.lower() or "server down" in message.content.lower():
