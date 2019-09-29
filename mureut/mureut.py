@@ -205,9 +205,8 @@ class MureUT:
         if channel.id == "623213672461893682" or channel.id == "576479100454305812" or channel.id == "576479543041458227":
             if "server up" in message.content.lower() or "server down" in message.content.lower():
                 try:
-                    querier = valve.source.BaseQuerier(('136.243.44.134', 28015))
+                    querier = valve.source.BaseQuerier('136.243.44.134',28015)
                     server = valve.source.a2s.ServerQuerier(querier)
-                    ping = server.ping()
                     await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
                     await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
                     cooldown[channel.id] = time.time()
