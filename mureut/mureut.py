@@ -192,8 +192,9 @@ class MureUT:
 
         item = False
         return item
-
-    async def listener(self, message):
+    
+    @commands.Cog.listener()
+    async def on_message(self, message):
         channel = message.channel
         if channel.id != 576479100454305812 or channel.id != 623213672461893682:
             return
@@ -495,5 +496,5 @@ def setup(bot):
     global logger
     logger = logging.getLogger('bot')
     n = MureUT(bot)
-    bot.add_listener(n.listener, "on_message")
+    bot.add_listener(n.on_message, 'on_message')
     bot.add_cog(n)
