@@ -15,7 +15,8 @@ from datetime import datetime
 from random import randint
 import numpy
 import wargaming
-import valve
+import valve.source
+import valve.source.a2s
 
 numbs = {
     "next": "➡",
@@ -204,8 +205,7 @@ class MureUT:
         if channel.id == "623213672461893682" or channel.id == "576479100454305812" or channel.id == "576479543041458227":
             if "server up" in message.content.lower() or "server down" in message.content.lower():
                 try:
-                    querier = valve.source.BaseQuerier('136.243.44.134',28015)
-                    with valve.source.a2s.ServerQuerier(querier) as server:
+                    with valve.source.a2s.ServerQuerier(['136.243.44.134',28015]) as server:
                         info = server.info()
                     await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
                     await self.bot.send_message(message.channel, 'Check #servers or #change log for more information.')
