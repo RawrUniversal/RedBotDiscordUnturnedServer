@@ -194,10 +194,10 @@ class MureUT:
         return item
     
     async def listener(self, message):
-        channel = message.channel
+        channel = message.server
         if message.author.id == self.bot.user.id:
             return
-        if channel.id == 576479100454305812 or channel.id == 623213672461893682:
+        if channel.id == 623210115863937035 or channel.id == 324195889977622530:
             if "server up" in message.content.lower() or "server down" in message.content.lower():
                 try:
                     querier = valve.source.BaseQuerier(('136.243.44.134', 27015))
