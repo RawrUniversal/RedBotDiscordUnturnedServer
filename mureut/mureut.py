@@ -203,6 +203,7 @@ class MureUT:
     
     async def listener(self, message):
         channel = message.channel
+        server = author.server
         if message.author.id == self.bot.user.id:
             return
         try:
@@ -210,16 +211,21 @@ class MureUT:
                 return
         except:
             print("Nothing...")
-        if channel.id == "607499149574930435" or channel.id == "576479100454305812" or channel.id == "576479543041458227":
+        if channel.id == "576479100454305812" or channel.id == "576479543041458227":
             if "server" in message.content.lower() and ("up" in message.content.lower() or "down" in message.content.lower()):
+                servers = discord.utils.get(server.channels, id="579382010041204756")
+                change = discord.utils.get(server.channels, id="576485797205901328")
+                dev = discord.utils.get(server.channels, id="622308911260631071")
                 if MureUT.isOpen("136.243.44.134", 27015):
                     await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
-                    await self.bot.send_message(message.channel, 'Check #servers, #change log or #dev log for more information.')
+                    await self.bot.send_message(message.channel, 'Check {}, {} or {} for more information.'.format(
+                        servers.mention, change.mention, dev.mention))
                     cooldown[channel.id] = time.time()
                     return
                 else:
                     await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
-                    await self.bot.send_message(message.channel, 'Check #servers, #change log or #dev log for more information.')
+                    await self.bot.send_message(message.channel, 'Check {}, {} or {} for more information.'.format(
+                        servers.mention, change.mention, dev.mention))
                     cooldown[channel.id] = time.time()
                     return
         
