@@ -211,7 +211,7 @@ class MureUT:
         except:
             print("Nothing...")
         if channel.id == "607499149574930435" or channel.id == "576479100454305812" or channel.id == "576479543041458227":
-            if "server up" in message.content.lower() or "server down" in message.content.lower():
+            if "server" in message.content.lower() and ("up" in message.content.lower() or "down" in message.content.lower()):
                 if MureUT.isOpen("136.243.44.134", 27015):
                     await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
                     await self.bot.send_message(message.channel, 'Check #servers, #change log or #dev log for more information.')
