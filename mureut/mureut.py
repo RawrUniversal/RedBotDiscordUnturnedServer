@@ -16,7 +16,6 @@ from random import randint
 import numpy
 import wargaming
 import socket
-from pastebin import PastebinAPI
 
 numbs = {
     "next": "➡",
@@ -40,32 +39,6 @@ class MureUT:
     async def steamstatus(self):
         """Steam Status command!"""
         await self.bot.say(embed=MureUT.embed_status(MureUT.create_new_status()))
-           
-    @commands.command()
-    @checks.admin_or_permissions(administrator=True)
-    async def mods(self):
-        """Brads Mods List command!"""
-        base_dir = os.path.join("data", "red")
-        config_path = os.path.join(base_dir, "mods.json")
-        password = os.path.join(base_dir, "apikey.json")
-        await self.bot.say("Brads RPLife Mods:")
-        i = 0
-        link = ""
-        pass = ""
-        dev = ""
-        with open(config_path) as ids:
-            jdata = json.load(ids)
-            pass = jdata['password']
-            dev = jdata['devkey']
-        my_key = PastebinAPI.generate_user_key(dev, 'Me_Goes_RAWR', pass)
-        with open(config_path, encoding="utf-8") as item_ids:
-            jdata = json.load(item_ids)
-            link += jdata[i]
-        pblink = PastebinAPI.paste(dev, link, api_user_key = my_key, paste_name = 'Brads RPLife Mods',
-                   paste_format = None, paste_private = ‘unlisted’,
-                   paste_expire_date = ‘10M’)
-        await self.bot.say(pblink)
-        
             
     @commands.command()
     async def unturned(self, *, idorname):
