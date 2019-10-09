@@ -16,6 +16,7 @@ from random import randint
 import numpy
 import wargaming
 import socket
+from pastebin import PastebinAPI
 
 numbs = {
     "next": "➡",
@@ -37,12 +38,38 @@ class MureUT:
 
     @commands.command()
     async def steamstatus(self):
-        """Steam status command!"""
+        """Steam Status command!"""
         await self.bot.say(embed=MureUT.embed_status(MureUT.create_new_status()))
+           
+    @commands.command()
+    @checks.admin_or_permissions(administrator=True)
+    async def mods(self):
+        """Brads Mods List command!"""
+        base_dir = os.path.join("data", "red")
+        config_path = os.path.join(base_dir, "mods.json")
+        password = os.path.join(base_dir, "apikey.json")
+        await self.bot.say("Brads RPLife Mods:")
+        i = 0
+        link = ""
+        pass = ""
+        dev = ""
+        with open(config_path) as ids:
+            jdata = json.load(ids)
+            pass = jdata['password']
+            dev = jdata['devkey']
+        my_key = PastebinAPI.generate_user_key(dev, 'Me_Goes_RAWR', pass)
+        with open(config_path, encoding="utf-8") as item_ids:
+            jdata = json.load(item_ids)
+            link += jdata[i]
+        pblink = PastebinAPI.paste(dev, link, api_user_key = my_key, paste_name = 'Brads RPLife Mods',
+                   paste_format = None, paste_private = ‘unlisted’,
+                   paste_expire_date = ‘10M’)
+        await self.bot.say(pblink)
+        
             
     @commands.command()
     async def unturned(self, *, idorname):
-        """Unturned items command!"""
+        """Unturned Items command!"""
         base_dir = os.path.join("data", "red")
         config_path = os.path.join(base_dir, "items.json")
         with open(config_path, encoding="utf-8") as item_ids:
@@ -213,19 +240,14 @@ class MureUT:
             print("Nothing...")
         if channel.id == "576479100454305812" or channel.id == "576479543041458227":
             if "server" in message.content.lower() and ("up" in message.content.lower() or "down" in message.content.lower()):
-                servers = discord.utils.get(server.channels, id="579382010041204756")
-                change = discord.utils.get(server.channels, id="576485797205901328")
-                dev = discord.utils.get(server.channels, id="622308911260631071")
-                if MureUT.isOpen("136.243.44.134", 27015):
+                if MureUT.isOpen("89.34.97.144", 27015):
                     await self.bot.send_message(message.channel, 'The server is currently online. Join if you would like.')
-                    await self.bot.send_message(message.channel, 'Check {}, {} or {} for more information.'.format(
-                        servers.mention, change.mention, dev.mention))
+                    await self.bot.send_message(message.channel, 'Check #news, #dev log or #change log for more information.')
                     cooldown[channel.id] = time.time()
                     return
                 else:
                     await self.bot.send_message(message.channel, 'The server is currently offline. Please wait for it to come back up.')
-                    await self.bot.send_message(message.channel, 'Check {}, {} or {} for more information.'.format(
-                        servers.mention, change.mention, dev.mention))
+                    await self.bot.send_message(message.channel, 'Check #news, #dev log or #change log for more information.')
                     cooldown[channel.id] = time.time()
                     return
         
@@ -262,7 +284,7 @@ class MureUT:
                         item_json2['item']['day180']['change'], item_json2['item']['members'].capitalize()))
         em.set_thumbnail(url=item_json2['item']['icon_large'])
         return em
-
+    
     def getraritycolor(item):
         if item == "Uncommon":
             item = 0x1f8b4c
