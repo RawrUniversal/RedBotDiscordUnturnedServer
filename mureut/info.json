@@ -1,8 +1,8 @@
 {
     "AUTHOR" : "Me_Goes_RAWR",
-    "SHORT" : "For MureGaming unturned server",
-    "DESCRIPTION" : "For MureGaming unturned server",
+    "SHORT" : "For RawrBot!",
+    "DESCRIPTION" : "For RawrBot",
     "DISABLED" : false,
     "NAME" : "MureUT",
-    "INSTALL_MSG" : "For MureGaming unturned server!"
+    "INSTALL_MSG" : "For RawrBot!"
 }
