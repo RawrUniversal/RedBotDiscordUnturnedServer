@@ -82,6 +82,18 @@ class MureUT:
         em.set_footer(text="Stats last updated: {}".format(str(datetime.fromtimestamp(pdata[aid]['stats_updated_at']))))
         await self.bot.say(embed=em)
 
+    @commands.command(pass_context=True, no_pm=True)
+    @checks.admin_or_permissions(administrator=True)
+    async def unbanall(ctx, *, member):
+	banned_users = await ctx.guild.bans()
+	
+	member_name, member_discriminator = member.split('#')
+	for ban_entry in banned_users:
+		user = ban_entry.user
+		
+		if (user.name, user.discriminator) == (member_name, member_discriminator):
+ 			await ctx.guild.unban(user)
+ 			await ctx.channel.send(f"Unbanned: {user.mention}")
 
     @commands.command()
     async def osrs(self, *, itemid):
